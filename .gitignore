@@ -1,0 +1,15 @@
+# OS-specific files
+.directory
+Thumbs.db
+desktop.ini
+Desktop.ini
+.DS_Store
+
+# Temporary files
+*.~swp
+*.swp
+*.tmp
+*.bkp
+
+# Python byte code
+*.pyc

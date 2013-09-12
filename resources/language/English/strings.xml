@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+    <!-- settings -->
+    <string id="30001">Account</string>
+    <string id="30002">Warning: Login credentials will not be saved in encrypted form!</string>
+    <string id="30003">Username</string>
+    <string id="30004">Password</string>
+    
+    <string id="30050">Contents</string>
+    <string id="30051">Image Quality</string>
+    <string id="30052">HD (MP4/MOV)</string>
+    <string id="30053">Mobile (MP4)</string>
+    <string id="30054">Use audio version</string>
+    
+    <string id="30100">No login data found!</string>
+    <string id="30101">You need to configure your login credentials[CR]before you can use this add-on.</string>
+    <string id="30102">Login failed!</string>
+    <string id="30103">Could not log into your Massengeschmack account,[CR]please check your login credentials!</string>
+    <string id="30104">Probing login data…</string>
+</strings>

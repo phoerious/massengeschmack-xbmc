@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+    <!-- settings -->
+    <string id="30001">Konto</string>
+    <string id="30002">Warnung: Login-Daten werden nicht in verschlüsselter Form gespeichert!</string>
+    <string id="30003">Benutzername</string>
+    <string id="30004">Passwort</string>
+    
+    <string id="30050">Inhalte</string>
+    <string id="30051">Bild-Qualität</string>
+    <string id="30052">HD (MP4/MOV)</string>
+    <string id="30053">Mobil (MP4)</string>
+    <string id="30054">Verwende Audio-Version</string>
+</strings>
