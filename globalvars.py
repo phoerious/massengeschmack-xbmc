@@ -28,7 +28,8 @@ ADDON_ICON        = ADDON.getAddonInfo('icon')
 ADDON_VERSION     = ADDON.getAddonInfo('version')
 ADDON_BASE_PATH   = ADDON.getAddonInfo('path')
 ADDON_HANDLE      = int(sys.argv[1])
-ADDON_ARGS        = urlparse.parse_qs(sys.argv[2])
+ADDON_ARGS        = dict(urlparse.parse_qsl(sys.argv[2][1:]))
 
-HTTP_USER_AGENT = 'Massengeschmack XBMC add-on v' + ADDON_VERSION
+#HTTP_USER_AGENT = 'Massengeschmack XBMC add-on v' + ADDON_VERSION
+HTTP_USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0'
 HTTP_BASE_URI   = 'https://massengeschmack.tv/'

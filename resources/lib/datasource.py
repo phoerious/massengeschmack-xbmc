@@ -17,6 +17,9 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import xbmcgui
+import urllib
+from globalvars import *
+import resources.lib
 from resources.lib.listing import *
 
 class DataSource:
@@ -29,9 +32,8 @@ class DataSource:
             # Fernsehkritik-TV
             ListItem(
                 ADDON.getLocalizedString(30200),
-                '',
+                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv',
                 ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
-                ADDON_BASE_PATH + '/resources/assets/logo-fktv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30200),
@@ -45,9 +47,8 @@ class DataSource:
             # Pantoffel-TV
             ListItem(
                 ADDON.getLocalizedString(30210),
-                '',
+                'plugin://' + ADDON_ID + '/?cmd=list&module=ptv',
                 ADDON_BASE_PATH + '/resources/assets/banner-ptv.png',
-                ADDON_BASE_PATH + '/resources/assets/logo-ptv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-ptv.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30210),
@@ -61,9 +62,8 @@ class DataSource:
             # Pressesch(l)au
             ListItem(
                 ADDON.getLocalizedString(30220),
-                '',
+                'plugin://' + ADDON_ID + '/?cmd=list&module=ps',
                 ADDON_BASE_PATH + '/resources/assets/banner-ps.png',
-                ADDON_BASE_PATH + '/resources/assets/logo-ps.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-ps.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30220),
@@ -77,9 +77,8 @@ class DataSource:
             # Massengeschmack-TV
             ListItem(
                 ADDON.getLocalizedString(30230),
-                '',
+                'plugin://' + ADDON_ID + '/?cmd=list&module=mgtv',
                 ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
-                ADDON_BASE_PATH + '/resources/assets/logo-mgtv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30230),
@@ -94,7 +93,148 @@ class DataSource:
 
 class FKTVDataSource(DataSource):
     def getListItems(self):
-        pass
+        audioOnly = ADDON.getSetting('content.audioOnly')
+        
+        quality = None
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'best'
+            else:
+                quality = 'mobile'
+        
+        submodule = None
+        if 'submodule' in ADDON_ARGS and ADDON_ARGS['submodule'] in self.__urls[quality]:
+            submodule = ADDON_ARGS['submodule']
+        
+        if None == submodule:
+            return self.__getBaseList()
+        
+        data      = resources.lib.parseRSSFeed(self.__urls[quality][submodule], True)
+        listItems = []
+        
+        for i in data:
+            iconimage = self.__thumbnailURLs['episodes'].format(i['subtitle'].replace(' ', '').lower())
+            metaData  = {
+                'Title'    : i['title'],
+                'Genre'    : ADDON.getLocalizedString(30201),
+                'Date'     : resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y'),
+                'Country'  : ADDON.getLocalizedString(30232),
+                'Plot'     : i['description'],
+                'Duration' : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+            
+            listItems.append(
+                ListItem(
+                    i['title'],
+                    'plugin://' + ADDON_ID + '/?cmd=play&url=' + urllib.quote(i['url']) +
+                        '&name=' + urllib.quote(i['title']) + '&iconimage=' + urllib.quote(iconimage) +
+                        '&metadata=' + resources.lib.dictUrlEncode(metaData) +
+                        '&streaminfo=' + resources.lib.dictUrlEncode(streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+        
+        return listItems
+        
+    def __getBaseList(self):
+        return [
+            # All
+            ListItem(
+                ADDON.getLocalizedString(30300),
+                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=all',
+                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30300),
+                    'Country': ADDON.getLocalizedString(30202),
+                    'Plot': ADDON.getLocalizedString(30350)
+                }
+            ),
+            # Episodes
+            ListItem(
+                ADDON.getLocalizedString(30301),
+                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=episodes',
+                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30301),
+                    'Country': ADDON.getLocalizedString(30202),
+                    'Plot': ADDON.getLocalizedString(30351)
+                }
+            ),
+            # Postecke
+            ListItem(
+                ADDON.getLocalizedString(30352),
+                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=postecke',
+                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30352),
+                    'Country': ADDON.getLocalizedString(30202),
+                    'Plot': ADDON.getLocalizedString(30353)
+                }
+            ),
+            # Interviews
+            ListItem(
+                ADDON.getLocalizedString(30302),
+                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=interviews',
+                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30302),
+                    'Country': ADDON.getLocalizedString(30202),
+                    'Plot': ADDON.getLocalizedString(30354)
+                }
+            ),
+            # Extras
+            ListItem(
+                ADDON.getLocalizedString(30303),
+                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=extras',
+                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30303),
+                    'Country': ADDON.getLocalizedString(30202),
+                    'Plot': ADDON.getLocalizedString(30355)
+                }
+            )
+        ]
+    
+    __urls = {
+        'best' : {
+            'all'        : HTTP_BASE_URI + 'feed/1-4x1-3x1-2x1-1/hd.xml',
+            'episodes'   : HTTP_BASE_URI + 'feed/1-1/hd.xml',
+            'postecke'   : HTTP_BASE_URI + 'feed/1-2/hd.xml',
+            'interviews' : HTTP_BASE_URI + 'feed/1-3/hd.xml',
+            'extras'     : HTTP_BASE_URI + 'feed/1-4/hd.xml'
+        },
+        'mobile' : {
+            'all'        : HTTP_BASE_URI + 'feed/1-4x1-3x1-2x1-1/mobile.xml',
+            'episodes'   : HTTP_BASE_URI + 'feed/1-1/mobile.xml',
+            'postecke'   : HTTP_BASE_URI + 'feed/1-2/mobile.xml',
+            'interviews' : HTTP_BASE_URI + 'feed/1-3/mobile.xml',
+            'extras'     : HTTP_BASE_URI + 'feed/1-4/mobile.xml'
+        },
+        'audio' : {
+            'all'        : HTTP_BASE_URI + 'feed/1-4x1-3x1-2x1-1/audio.xml',
+            'episodes'   : HTTP_BASE_URI + 'feed/1-1/audio.xml',
+            'postecke'   : HTTP_BASE_URI + 'feed/1-2/audio.xml',
+            'interviews' : HTTP_BASE_URI + 'feed/1-3/audio.xml',
+            'extras'     : HTTP_BASE_URI + 'feed/1-4/audio.xml'
+        }
+    }
+    __thumbnailURLs = {
+        'episodes' : 'http://fernsehkritik.tv/images/magazin/{0}@2x.jpg'
+    }
 
 def createDataSource(module=''):
     """

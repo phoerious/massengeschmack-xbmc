@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
-    <!-- settings -->
+    <!-- Settings -->
     <string id="30001">Account</string>
     <string id="30002">Warning: Login credentials will not be saved in encrypted form!</string>
     <string id="30003">Username</string>
@@ -12,7 +12,7 @@
     <string id="30053">Mobile (MP4)</string>
     <string id="30054">Use audio version</string>
     
-    <!-- application start up -->
+    <!-- Application start up -->
     <string id="30100">No login data found!</string>
     <string id="30101">You need to configure your login credentials[CR]before you can use this add-on.</string>
     <string id="30102">Login failed!</string>
@@ -40,6 +40,25 @@
     <string id="30232">Germany</string>
     <string id="30233">Massengeschmack-TV is the satirical answer to all the scripted reality shows on the major TV networks. Obviously inspired by “The Office” and “Stromberg”, the series depicts the daily routine at the Alsterfilm studio.[CR][CR]Additionally to the comedy series, certain videos and uncategorized extras about the Massengeschmack network are published under the label “Massengeschmack-TV“, too.</string>
     
-    <!-- runtime error messages -->
+    <!-- Listings (general) -->
+    <string id="30300">All</string>
+    <string id="30301">Episodes</string>
+    <string id="30302">Interviews</string>
+    <string id="30302">Extras</string>
+    
+    <!-- Listings (show-specific) -->
+    <string id="30350">All Fernsehkritik-TV extras, including Postecke, uncut interview and other extras.</string>
+    <string id="30351">Regular Fernsehkritik-TV episodes.</string>
+    <string id="30352">Postecke</string>
+    <string id="30353">Postecke is a video podcast where Holger reads and answers letters from Fernsehkritik-TV viewers.</string>
+    <string id="30354">Uncut interviews.</string>
+    <string id="30355">Various extras.</string>
+    
+    <string id="30360">Das Studio</string>
+    <string id="30361">Massengeschmack Internal</string>
+    
+    <!-- Runtime error messages -->
     <string id="39901">Invalid internal command![CR]This is probably a bug. You should report it if it happens more often.</string>
+    <string id="39902">Request failed!</string>
+    <string id="39903">Could not fetch RSS feed, maybe the network is down?</string>
 </strings>

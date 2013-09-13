@@ -19,8 +19,6 @@
 import xbmc
 import xbmcplugin
 import xbmcgui
-import json
-import urllib
 
 from globalvars import *
 
@@ -54,37 +52,40 @@ class Listing:
         xbmcplugin.setContent(ADDON_HANDLE, 'tvshows')
     
     def __addDir(self, listItem):
-        xbmcListItem = xbmcgui.ListItem(listItem.getData('name'), iconImage=listItem.getData('thumbnail'), thumbnailImage=listItem.getData('banner'))
-        xbmcListItem.setInfo(type='Video', infoLabels=listItem.getData('metaData'))
+        xbmcListItem = xbmcgui.ListItem(listItem.getData('name'), iconImage=listItem.getData('thumbnail'), thumbnailImage=listItem.getData('thumbnail'))
+        xbmcListItem.setInfo(type='video', infoLabels=listItem.getData('metaData'))
         xbmcListItem.setProperty('fanart_image', listItem.getData('fanart'))
+        xbmcListItem.addStreamInfo('video', listItem.getData('streamInfo'))
         xbmcplugin.addDirectoryItem(ADDON_HANDLE, url=listItem.getData('url'), listitem=xbmcListItem, isFolder=listItem.getData('isFolder'))
 
 
 class ListItem:
-    def __init__(self, name='', url='', banner='', thumbnail='', fanart='', metaData={}, isFolder=True):
+    def __init__(self, name='', url='', thumbnail='', fanart='', metaData={}, streamInfo={}, isFolder=True):
         """
         Generate list item from given parameters.
         
         @type name: str
-        @param name: the display name of the list item
-        @type url: str
-        @param url: the addon URL this item points to (should not be a real Internet URL)
-        @type thumbnail: str
-        @param thumbnail: the path/URL to a thumbnail image
-        @type fanart: str
-        @param fanart: the path/URL to a fanart image
-        @type metaData: dict
-        @param metaData: meta data for this list item as passed to xbmcgui.ListItem()
-        @type isFolder: bool
-        @param isFolder: True if this item is a folder
+        @param name      : the display name of the list item
+        @type  url       : str
+        @param url       : the addon URL this item points to (should not be a real Internet URL)
+        @type  thumbnail : str
+        @param thumbnail : the path/URL to a thumbnail image
+        @type  fanart    : str
+        @param fanart    : the path/URL to a fanart image
+        @type  metaData  : dict
+        @param metaData  : meta data for this list item as passed to xbmcgui.ListItem()
+        @type streamInfo : dict
+        @param streamInfo: stream information for passing to xbmcgui.ListeItem.addStreamInfo()
+        @type  isFolder  : bool
+        @param isFolder  : True if this item is a folder
         """
         self.__data = {
             'name'      : name,
             'url'       : url,
             'thumbnail' : thumbnail,
-            'banner'    : banner,
             'fanart'    : fanart,
             'metaData'  : metaData,
+            'streamInfo': streamInfo,
             'isFolder'  : isFolder
         }
     
@@ -111,34 +112,3 @@ class ListItem:
             return self.__data[key]
         
         return ''
-    
-    def getURLData(self, key):
-        """
-        Get specific URL encoded data from this list item.
-        
-        @type key: str
-        @param key: which data to retrieve (name, url, iconImage, metaData)
-        @return str: the data or '' if nothing has been set of key is invalid
-                     (non-string data will be JSON encoded)
-        """
-        
-        if key in self.__data:
-            if type(self.__data[key]) == dict:
-                return urllib.quote(self.__JSONEncode(self.__data[key]))
-            if type(self.__data[key]) == bool:
-                return '1' if True == self.__data[key] else '0'
-            
-            return urllib.quote(self.__data[key])
-        
-        return ''
-    
-    def getJSONMetaDataString(self):
-        """
-        Return a JSON encoded string of all meta data.
-        
-        @return: the encoded data
-        """
-        return self.__JSONEncode(self.metaData)
-    
-    def __JSONEncode(self, data):
-        return json.dumps(data, separators=(',', ':'))

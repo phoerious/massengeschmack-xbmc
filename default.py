@@ -41,6 +41,8 @@ if not ok:
     ADDON.openSettings()
     exit()
 
+print ADDON_ARGS
+
 # analyze URL
 if not 'cmd' in ADDON_ARGS:
     ADDON_ARGS['cmd'] = 'list'
@@ -54,23 +56,27 @@ if 'list' == ADDON_ARGS['cmd']:
     listing.show()
     
 elif 'play' == ADDON_ARGS['cmd']:
-    name      = ''
-    iconImage = ''
-    metaData  = {}
+    name       = ''
+    iconImage  = ''
+    metaData   = {}
+    streamInfo = {}
     if 'name' in ADDON_ARGS:
         name = ADDON_ARGS['name']
     if 'iconimage' in ADDON_ARGS:
-        iconImage = ADDON_ARGS['iconimage']
+        iconImage = ADDON_ARGS['iconimage']    
     if 'metadata' in ADDON_ARGS:
         metaData = json.loads(ADDON_ARGS['metadata'])
+    if 'streaminfo' in ADDON_ARGS:
+        streamInfo = json.loads(ADDON_ARGS['streaminfo'])
     
-    listitem = xbmc.ListItem(name, iconImage)
+    listitem = xbmcgui.ListItem(name, iconImage=iconImage, thumbnailImage=iconImage)
     listitem.setInfo('video', metaData)
-    playlist = xbmc.PlayList()
+    listitem.addStreamInfo('video', streamInfo)
+    playlist = xbmc.PlayList(1)
     playlist.clear()
     playlist.add(ADDON_ARGS['url'], listitem)
     xbmc.Player().play(playlist)
     playlist.clear()
     
 else:
-    raise RuntimeError(ADDON_ARGS['cmd'] + ': ' + ADDON.getLocalizedString(39901))
+    raise RuntimeError(ADDON_ARGS['cmd'] + ': ' + ADDON.getLocalizedString(39901)) 
