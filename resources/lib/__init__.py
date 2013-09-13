@@ -171,3 +171,23 @@ def dictUrlEncode(data):
     @param data: the data structure
     """
     return urllib.quote(json.dumps(data, separators=(',', ':')))
+
+def assemblePlayURL(url, name='', iconImage='', metaData={}, streamInfo={}):
+    """
+    Assemble a plugin:// URL with a play command for a given URL.
+    
+    @type url: str
+    @param url: the real URL of the media file
+    @type name: str
+    @param name: a nice human-readable name
+    @type iconImage: str
+    @param iconImage: a URL to a thumbnail image
+    @type metaData: dict
+    @param metaData: metaData for the media file
+    @type streamInfo: dict
+    @param: streamInfo: technical info about the stream (such as the duration or resolution)
+    """
+    return 'plugin://' + ADDON_ID + '/?cmd=play&url=' + urllib.quote(url) + \
+           '&name=' + urllib.quote(name) + '&iconimage=' + urllib.quote(iconImage) + \
+           '&metadata=' + dictUrlEncode(metaData) + \
+           '&streaminfo=' + dictUrlEncode(streamInfo)

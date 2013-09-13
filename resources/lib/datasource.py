@@ -128,7 +128,6 @@ class FKTVDataSource(DataSource):
         
         for i in data:
             iconimage = self.__getThumbnailURL(i['guid'])
-            print iconimage
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],
@@ -146,10 +145,7 @@ class FKTVDataSource(DataSource):
             listItems.append(
                 ListItem(
                     i['title'],
-                    'plugin://' + ADDON_ID + '/?cmd=play&url=' + urllib.quote(i['url']) +
-                        '&name=' + urllib.quote(i['title']) + '&iconimage=' + urllib.quote(iconimage) +
-                        '&metadata=' + resources.lib.dictUrlEncode(metaData) +
-                        '&streaminfo=' + resources.lib.dictUrlEncode(streamInfo),
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
                     ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                     metaData,
