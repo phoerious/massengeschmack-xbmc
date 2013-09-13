@@ -115,14 +115,17 @@ class FKTVDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__thumbnailURLs['episodes'].format(i['subtitle'].replace(' ', '').lower())
+            iconimage = self.__getThumbnailURL(i['guid'])
+            print iconimage
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
-                'Title'    : i['title'],
-                'Genre'    : ADDON.getLocalizedString(30201),
-                'Date'     : resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y'),
-                'Country'  : ADDON.getLocalizedString(30232),
-                'Plot'     : i['description'],
-                'Duration' : int(i['duration']) / 60
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30201),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30232),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
             }
             streamInfo = {
                 'duration' : i['duration']
@@ -136,7 +139,7 @@ class FKTVDataSource(DataSource):
                         '&metadata=' + resources.lib.dictUrlEncode(metaData) +
                         '&streaminfo=' + resources.lib.dictUrlEncode(streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                    ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                     metaData,
                     streamInfo,
                     False
@@ -144,7 +147,20 @@ class FKTVDataSource(DataSource):
             )
         
         return listItems
+    
+    def __getThumbnailURL(self, guid):
+        basePath1 = 'http://fernsehkritik.tv/images/magazin/'
+        basePath2 = 'http://massengeschmack.tv/img/mag/'
         
+        if 'fktv' == guid[0:4]:
+            return basePath1 + 'folge' + guid[4:] + '@2x.jpg'
+        if 'postecke' == guid[0:8]:
+            return basePath2 + 'postecke.jpg'
+        if 'interview-' == guid[0:10]:
+            return basePath2 + guid[10:] + '.jpg'
+        
+        return basePath2 + guid + '.jpg'
+    
     def __getBaseList(self):
         return [
             # All
@@ -211,21 +227,21 @@ class FKTVDataSource(DataSource):
     
     __urls = {
         'best' : {
-            'all'        : HTTP_BASE_URI + 'feed/1-4x1-3x1-2x1-1/hd.xml',
+            'all'        : HTTP_BASE_URI + 'feed/1-1x1-2x1-3x1-4/hd.xml',
             'episodes'   : HTTP_BASE_URI + 'feed/1-1/hd.xml',
             'postecke'   : HTTP_BASE_URI + 'feed/1-2/hd.xml',
             'interviews' : HTTP_BASE_URI + 'feed/1-3/hd.xml',
             'extras'     : HTTP_BASE_URI + 'feed/1-4/hd.xml'
         },
         'mobile' : {
-            'all'        : HTTP_BASE_URI + 'feed/1-4x1-3x1-2x1-1/mobile.xml',
+            'all'        : HTTP_BASE_URI + 'feed/1-1x1-2x1-3x1-4/mobile.xml',
             'episodes'   : HTTP_BASE_URI + 'feed/1-1/mobile.xml',
             'postecke'   : HTTP_BASE_URI + 'feed/1-2/mobile.xml',
             'interviews' : HTTP_BASE_URI + 'feed/1-3/mobile.xml',
             'extras'     : HTTP_BASE_URI + 'feed/1-4/mobile.xml'
         },
         'audio' : {
-            'all'        : HTTP_BASE_URI + 'feed/1-4x1-3x1-2x1-1/audio.xml',
+            'all'        : HTTP_BASE_URI + 'feed/1-1x1-2x1-3x1-4/audio.xml',
             'episodes'   : HTTP_BASE_URI + 'feed/1-1/audio.xml',
             'postecke'   : HTTP_BASE_URI + 'feed/1-2/audio.xml',
             'interviews' : HTTP_BASE_URI + 'feed/1-3/audio.xml',
