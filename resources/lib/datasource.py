@@ -256,9 +256,6 @@ class FKTVDataSource(DataSource):
             'extras'     : HTTP_BASE_URI + 'feed/1-4/audio.xml'
         }
     }
-    __thumbnailURLs = {
-        'episodes' : 'http://fernsehkritik.tv/images/magazin/{0}@2x.jpg'
-    }
 
 
 def createDataSource(module=''):
