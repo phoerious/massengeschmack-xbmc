@@ -26,7 +26,6 @@ class DataSource:
     def getListItems(self):
         """
         Generate a list of ListeItem objects for the current data source.
-        @abstract
         """
         return [
             # Fernsehkritik-TV
@@ -224,7 +223,7 @@ class FKTVDataSource(DataSource):
             # Extras
             ListItem(
                 ADDON.getLocalizedString(30303),
-                resources.lib.assembleListURL('fktv', 'extras'),
+                resources.lib.assembleListURL('fktv', 'extras') ,
                 ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
