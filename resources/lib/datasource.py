@@ -90,6 +90,18 @@ class DataSource:
                 }
             ),
         ]
+    
+    def getContentMode(self):
+        """
+        Get the view mode for the listing content.
+        
+        Content mode is usually either 'tvshows' or 'episodes', but can
+        also be any other valid value for xbmcplugin.setContent().
+        
+        @return content mode
+        """
+        return 'tvshows'
+
 
 class FKTVDataSource(DataSource):
     def getListItems(self):
@@ -148,6 +160,12 @@ class FKTVDataSource(DataSource):
         
         return listItems
     
+    def getContentMode(self):
+        if 'submodule' in ADDON_ARGS:
+            return 'episodes'
+        
+        return 'tvshows'
+    
     def __getThumbnailURL(self, guid):
         basePath1 = 'http://fernsehkritik.tv/images/magazin/'
         basePath2 = 'http://massengeschmack.tv/img/mag/'
@@ -171,7 +189,6 @@ class FKTVDataSource(DataSource):
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30300),
-                    'Country': ADDON.getLocalizedString(30202),
                     'Plot': ADDON.getLocalizedString(30350)
                 }
             ),
@@ -183,7 +200,6 @@ class FKTVDataSource(DataSource):
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30301),
-                    'Country': ADDON.getLocalizedString(30202),
                     'Plot': ADDON.getLocalizedString(30351)
                 }
             ),
@@ -195,7 +211,6 @@ class FKTVDataSource(DataSource):
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30352),
-                    'Country': ADDON.getLocalizedString(30202),
                     'Plot': ADDON.getLocalizedString(30353)
                 }
             ),
@@ -207,7 +222,6 @@ class FKTVDataSource(DataSource):
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30302),
-                    'Country': ADDON.getLocalizedString(30202),
                     'Plot': ADDON.getLocalizedString(30354)
                 }
             ),
@@ -219,7 +233,6 @@ class FKTVDataSource(DataSource):
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30303),
-                    'Country': ADDON.getLocalizedString(30202),
                     'Plot': ADDON.getLocalizedString(30355)
                 }
             )
@@ -251,6 +264,7 @@ class FKTVDataSource(DataSource):
     __thumbnailURLs = {
         'episodes' : 'http://fernsehkritik.tv/images/magazin/{0}@2x.jpg'
     }
+
 
 def createDataSource(module=''):
     """

@@ -30,6 +30,8 @@ class Listing:
         @type source: DataSource
         @param source: the data source object
         """
+        self.__source = source
+        
         items = source.getListItems()
         for i in items:
             self.__addDir(i)
@@ -48,8 +50,8 @@ class Listing:
         @type id: int
         @param id: the view mode ID from the current skin
         """
+        xbmcplugin.setContent(ADDON_HANDLE, self.__source.getContentMode())
         xbmc.executebuiltin('Container.SetViewMode(' + str(id) + ')')
-        xbmcplugin.setContent(ADDON_HANDLE, 'tvshows')
     
     def __addDir(self, listItem):
         xbmcListItem = xbmcgui.ListItem(listItem.getData('name'), iconImage=listItem.getData('thumbnail'), thumbnailImage=listItem.getData('thumbnail'))
