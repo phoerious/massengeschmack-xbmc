@@ -20,7 +20,7 @@ import xbmc
 import xbmcgui
 import xbmcaddon
 import xbmcplugin
-import urllib2
+import json
 
 from globalvars import *
 import resources.lib as lib
@@ -28,7 +28,7 @@ import resources.lib as lib
 ok = True
 
 # show warning and open settings if login data have not been configured or if the credentials are invalid
-if '' == ADDON.getSetting('account.username').strip() or '' == ADDON.getSetting('account.password').strip():
+if '' == ADDON.getSetting('account.username') or '' == ADDON.getSetting('account.password'):
     dialog = xbmcgui.Dialog()
     dialog.ok(ADDON.getLocalizedString(30100), ADDON.getLocalizedString(30101))
     ok = False
@@ -39,8 +39,38 @@ elif not lib.probeLoginCrendentials(ADDON.getSetting('account.username'), ADDON.
     
 if not ok:
     ADDON.openSettings()
-else:
-    xbmcplugin.endOfDirectory(ADDON_HANDLE)
-    xbmcplugin.setContent(ADDON_HANDLE, 'movies')
-    xbmc.executebuiltin('Container.SetViewMode(503)')
+    exit()
 
+# analyze URL
+if not 'cmd' in ADDON_ARGS:
+    ADDON_ARGS['cmd'] = 'list'
+
+if 'list' == ADDON_ARGS['cmd']:
+    listing    = lib.Listing()
+    datasource = lib.datasource.createDataSource()
+    if 'module' in ADDON_ARGS:
+        datasource = lib.datasource.createDataSource(ADDON_ARGS['module'])
+    listing.generate(datasource)
+    listing.show()
+    
+elif 'play' == ADDON_ARGS['cmd']:
+    name      = ''
+    iconImage = ''
+    metaData  = {}
+    if 'name' in ADDON_ARGS:
+        name = ADDON_ARGS['name']
+    if 'iconimage' in ADDON_ARGS:
+        iconImage = ADDON_ARGS['iconimage']
+    if 'metadata' in ADDON_ARGS:
+        metaData = json.loads(ADDON_ARGS['metadata'])
+    
+    listitem = xbmc.ListItem(name, iconImage)
+    listitem.setInfo('video', metaData)
+    playlist = xbmc.PlayList()
+    playlist.clear()
+    playlist.add(ADDON_ARGS['url'], listitem)
+    xbmc.Player().play(playlist)
+    playlist.clear()
+    
+else:
+    raise RuntimeError(ADDON_ARGS['cmd'] + ': ' + ADDON.getLocalizedString(39901))

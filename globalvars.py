@@ -17,14 +17,18 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import xbmcaddon
+import urlparse
 import sys
 
 # globals
-ADDON             = xbmcaddon.Addon(id='plugin.video.massengeschmack')
+ADDON_ID          = 'plugin.video.massengeschmack'
+ADDON             = xbmcaddon.Addon(id=ADDON_ID)
 ADDON_NAME        = ADDON.getAddonInfo('name')
 ADDON_ICON        = ADDON.getAddonInfo('icon')
 ADDON_VERSION     = ADDON.getAddonInfo('version')
+ADDON_BASE_PATH   = ADDON.getAddonInfo('path')
 ADDON_HANDLE      = int(sys.argv[1])
+ADDON_ARGS        = urlparse.parse_qs(sys.argv[2])
 
 HTTP_USER_AGENT = 'Massengeschmack XBMC add-on v' + ADDON_VERSION
 HTTP_BASE_URI   = 'https://massengeschmack.tv/'

@@ -12,9 +12,13 @@
     <string id="30053">Mobile (MP4)</string>
     <string id="30054">Use audio version</string>
     
+    <!-- application start up -->
     <string id="30100">No login data found!</string>
     <string id="30101">You need to configure your login credentials[CR]before you can use this add-on.</string>
     <string id="30102">Login failed!</string>
     <string id="30103">Could not log into your Massengeschmack account,[CR]please check your login credentials!</string>
     <string id="30104">Probing login data…</string>
+    
+    <!-- runtime error messages -->
+    <string id="39901">Invalid internal command![CR]This is probably a bug. You should report it if it happens more often.</string>
 </strings>

@@ -16,22 +16,42 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+import xbmcgui
+from resources.lib.listing import *
+
 class DataSource:
-    def getListItems():
+    def getListItems(self):
         """
         Generate a list of ListeItem objects for the current data source.
         @abstract
         """
-        raise NotImplementedError()
+        return [
+            ListItem(
+                'Fernsehkritik-TV', '',
+                ADDON_BASE_PATH + '/resources/assets/logo-fktv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.png'
+            ),
+            ListItem(
+                'Pantoffel-TV', '',
+                ADDON_BASE_PATH + '/resources/assets/logo-ptv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-ptv.png'
+            ),
+        ]
 
+class FKTVDataSource(DataSource):
+    def getListItems(self):
+        pass
 
-def createDataSource(magazine=''):
+def createDataSource(module=''):
     """
     Create a data source object based on the magazine name.
     If left empty, an overview data source will be generated.
     
-    @type magazine: str
-    @keyword magazine: the magazine name (fktv, ptv, pschlau, mgtv, ...)
+    @type module: str
+    @keyword module: the magazine name (fktv, ptv, pschlau, mgtv, ...)
     @return: DataSource instance
     """
-    return DataSource()
+    if 'fktv' == module:
+        return FKTVDataSource()
+    else:
+        return DataSource()

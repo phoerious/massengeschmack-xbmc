@@ -20,8 +20,8 @@ import xbmcgui
 import urllib2
 
 from globalvars import *
-from resources.lib.listing import Listing
-from resources.lib.datasource import DataSource
+from resources.lib.listing import Listing, ListItem
+from resources.lib.datasource import DataSource, FKTVDataSource
 
 # helper functions
 
