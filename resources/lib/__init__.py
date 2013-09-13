@@ -172,6 +172,30 @@ def dictUrlEncode(data):
     """
     return urllib.quote(json.dumps(data, separators=(',', ':')))
 
+def assembleListURL(module=None, submodule=None, mode=None):
+    """
+    Assemble a plugin:// url with a list command.
+    
+    @type module: str
+    @param module: the name of the module to list
+    @type submodule: str
+    @param submodule: the name of the sub module to list (requires module to be set)
+    @type mode: str
+    @param mode: a mode for a submodule (requires submodule to be set)
+    """
+    url = 'plugin://' + ADDON_ID + '/?cmd=list'
+    if None == module:
+        return url
+    
+    url += '&module=' + urllib.quote(module)
+    if None != submodule:
+        url += '&submodule=' + urllib.quote(submodule)
+    if None != submodule and None != mode:
+        url += '&mode=' + urllib.quote(mode)
+    
+    return url
+    
+
 def assemblePlayURL(url, name='', iconImage='', metaData={}, streamInfo={}):
     """
     Assemble a plugin:// URL with a play command for a given URL.

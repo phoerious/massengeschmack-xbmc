@@ -32,7 +32,7 @@ class DataSource:
             # Fernsehkritik-TV
             ListItem(
                 ADDON.getLocalizedString(30200),
-                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv',
+                resources.lib.assembleListURL('fktv'),
                 ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
@@ -47,7 +47,7 @@ class DataSource:
             # Pantoffel-TV
             ListItem(
                 ADDON.getLocalizedString(30210),
-                'plugin://' + ADDON_ID + '/?cmd=list&module=ptv',
+                resources.lib.assembleListURL('ptv'),
                 ADDON_BASE_PATH + '/resources/assets/banner-ptv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-ptv.jpg',
                 {
@@ -62,7 +62,7 @@ class DataSource:
             # Pressesch(l)au
             ListItem(
                 ADDON.getLocalizedString(30220),
-                'plugin://' + ADDON_ID + '/?cmd=list&module=ps',
+                resources.lib.assembleListURL('ps'),
                 ADDON_BASE_PATH + '/resources/assets/banner-ps.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-ps.jpg',
                 {
@@ -77,7 +77,7 @@ class DataSource:
             # Massengeschmack-TV
             ListItem(
                 ADDON.getLocalizedString(30230),
-                'plugin://' + ADDON_ID + '/?cmd=list&module=mgtv',
+                resources.lib.assembleListURL('mgtv'),
                 ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
                 {
@@ -180,7 +180,7 @@ class FKTVDataSource(DataSource):
             # All
             ListItem(
                 ADDON.getLocalizedString(30300),
-                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=all',
+                resources.lib.assembleListURL('fktv', 'all'),
                 ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
@@ -191,7 +191,7 @@ class FKTVDataSource(DataSource):
             # Episodes
             ListItem(
                 ADDON.getLocalizedString(30301),
-                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=episodes',
+                resources.lib.assembleListURL('fktv', 'episodes'),
                 ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
@@ -202,7 +202,7 @@ class FKTVDataSource(DataSource):
             # Postecke
             ListItem(
                 ADDON.getLocalizedString(30352),
-                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=postecke',
+                resources.lib.assembleListURL('fktv', 'postecke'),
                 ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
@@ -213,7 +213,7 @@ class FKTVDataSource(DataSource):
             # Interviews
             ListItem(
                 ADDON.getLocalizedString(30302),
-                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=interviews',
+                resources.lib.assembleListURL('fktv', 'interviews'),
                 ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
@@ -224,7 +224,7 @@ class FKTVDataSource(DataSource):
             # Extras
             ListItem(
                 ADDON.getLocalizedString(30303),
-                'plugin://' + ADDON_ID + '/?cmd=list&module=fktv&submodule=extras',
+                resources.lib.assembleListURL('fktv', 'extras'),
                 ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
                 ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
                 {
