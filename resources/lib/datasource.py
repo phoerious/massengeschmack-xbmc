@@ -170,6 +170,10 @@ class FKTVDataSource(DataSource):
         if 'postecke' == guid[0:8]:
             return basePath2 + 'postecke.jpg'
         if 'interview-' == guid[0:10]:
+            if 'remote' == guid[10:]:
+                # ugly fix for single episode
+                return basePath2 + 'remotecontrol.jpg'
+            
             return basePath2 + guid[10:] + '.jpg'
         
         return basePath2 + guid + '.jpg'
