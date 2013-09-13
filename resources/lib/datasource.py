@@ -26,15 +26,69 @@ class DataSource:
         @abstract
         """
         return [
+            # Fernsehkritik-TV
             ListItem(
-                'Fernsehkritik-TV', '',
+                ADDON.getLocalizedString(30200),
+                '',
+                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
                 ADDON_BASE_PATH + '/resources/assets/logo-fktv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.png'
+                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30200),
+                    'Director':'Holger Kreymeier, Nils Beckmann, Daniel Gusy',
+                    'Genre': ADDON.getLocalizedString(30201),
+                    'Premiered':'07.04.2007',
+                    'Country': ADDON.getLocalizedString(30202),
+                    'Plot': ADDON.getLocalizedString(30203)
+                }
             ),
+            # Pantoffel-TV
             ListItem(
-                'Pantoffel-TV', '',
+                ADDON.getLocalizedString(30210),
+                '',
+                ADDON_BASE_PATH + '/resources/assets/banner-ptv.png',
                 ADDON_BASE_PATH + '/resources/assets/logo-ptv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-ptv.png'
+                ADDON_BASE_PATH + '/resources/assets/fanart-ptv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30210),
+                    'Director':'Holger Kreymeier, Jenny von Gagern, Steven Gräwe, Michael Stock',
+                    'Genre': ADDON.getLocalizedString(30211),
+                    'Premiered':'17.06.2013',
+                    'Country': ADDON.getLocalizedString(30212),
+                    'Plot': ADDON.getLocalizedString(30213)
+                }
+            ),
+            # Pressesch(l)au
+            ListItem(
+                ADDON.getLocalizedString(30220),
+                '',
+                ADDON_BASE_PATH + '/resources/assets/banner-ps.png',
+                ADDON_BASE_PATH + '/resources/assets/logo-ps.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-ps.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30220),
+                    'Director':'Holger Kreymeier, Steven Gräwe, Daniel Gusy',
+                    'Genre': ADDON.getLocalizedString(30221),
+                    'Premiered':'01.08.2013',
+                    'Country': ADDON.getLocalizedString(30222),
+                    'Plot': ADDON.getLocalizedString(30223)
+                }
+            ),
+            # Massengeschmack-TV
+            ListItem(
+                ADDON.getLocalizedString(30230),
+                '',
+                ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
+                ADDON_BASE_PATH + '/resources/assets/logo-mgtv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30230),
+                    'Director':'Holger Kreymeier',
+                    'Genre': ADDON.getLocalizedString(30231),
+                    'Premiered':'05.08.2013',
+                    'Country': ADDON.getLocalizedString(30232),
+                    'Plot': ADDON.getLocalizedString(30233)
+                }
             ),
         ]
 

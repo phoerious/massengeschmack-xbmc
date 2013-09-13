@@ -40,9 +40,8 @@ class Listing:
         """
         Show the listing after it has been generated.
         """
-        xbmcplugin.endOfDirectory(ADDON_HANDLE)
-        xbmcplugin.setContent(ADDON_HANDLE, 'movies')
         self.setViewMode(503)
+        xbmcplugin.endOfDirectory(ADDON_HANDLE)
     
     def setViewMode(self, id):
         """
@@ -52,16 +51,17 @@ class Listing:
         @param id: the view mode ID from the current skin
         """
         xbmc.executebuiltin('Container.SetViewMode(' + str(id) + ')')
+        xbmcplugin.setContent(ADDON_HANDLE, 'tvshows')
     
     def __addDir(self, listItem):
-        xbmcListItem = xbmcgui.ListItem(listItem.getData('name'), iconImage=listItem.getData('thumbnail'), thumbnailImage=listItem.getData('thumbnail'))
-        xbmcListItem.setInfo(type='video', infoLabels=listItem.getData('metaData'))
+        xbmcListItem = xbmcgui.ListItem(listItem.getData('name'), iconImage=listItem.getData('thumbnail'), thumbnailImage=listItem.getData('banner'))
+        xbmcListItem.setInfo(type='Video', infoLabels=listItem.getData('metaData'))
         xbmcListItem.setProperty('fanart_image', listItem.getData('fanart'))
         xbmcplugin.addDirectoryItem(ADDON_HANDLE, url=listItem.getData('url'), listitem=xbmcListItem, isFolder=listItem.getData('isFolder'))
 
 
 class ListItem:
-    def __init__(self, name='', url='', thumbnail='', fanart='', metaData={}, isFolder=True):
+    def __init__(self, name='', url='', banner='', thumbnail='', fanart='', metaData={}, isFolder=True):
         """
         Generate list item from given parameters.
         
@@ -82,6 +82,7 @@ class ListItem:
             'name'      : name,
             'url'       : url,
             'thumbnail' : thumbnail,
+            'banner'    : banner,
             'fanart'    : fanart,
             'metaData'  : metaData,
             'isFolder'  : isFolder
