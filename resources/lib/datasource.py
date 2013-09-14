@@ -262,6 +262,79 @@ class FKTVDataSource(DataSource):
     }
 
 
+class PTVDataSource(DataSource):
+    def getListItems(self):
+        audioOnly = ADDON.getSetting('content.audioOnly')
+        
+        quality = None
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'best'
+            else:
+                quality = 'mobile'
+        
+        data      = resources.lib.parseRSSFeed(self.__urls[quality]['all'], True)
+        listItems = []
+        
+        for i in data:
+            iconimage = self.__getThumbnailURL(i['guid'])
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30211),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30232),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+            
+            listItems.append(
+                ListItem(
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/assets/fanart-ptv.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+        
+        return listItems
+    
+    def getContentMode(self):
+        return 'episodes'
+    
+    def __getThumbnailURL(self, guid):
+        episodeNumber = '1'
+        if 'ptv-pilot' == guid[:9]:
+            if 'ptv-pilot' != guid:
+                # if not very first episode
+                episodeNumber= guid[9:]
+        else:
+            episodeNumber = guid[4:]
+            
+        return 'http://pantoffel.tv/img/thumbs/ptv' + episodeNumber + '_shot1@2x.jpg'
+    
+    __urls = {
+        'best' : {
+            'all' : HTTP_BASE_URI + 'feed/2-1/hd.xml'
+        },
+        'mobile' : {
+            'all' : HTTP_BASE_URI + 'feed/2-1/mobile.xml'
+        },
+        'audio' : {
+            'all' : HTTP_BASE_URI + 'feed/2-1/audio.xml'
+        }
+    }
+
+
 def createDataSource(module=''):
     """
     Create a data source object based on the magazine name.
@@ -273,5 +346,7 @@ def createDataSource(module=''):
     """
     if 'fktv' == module:
         return FKTVDataSource()
+    elif 'ptv' == module:
+        return PTVDataSource()
     else:
         return DataSource()
