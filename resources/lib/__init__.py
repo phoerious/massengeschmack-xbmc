@@ -59,7 +59,7 @@ def probeLoginCrendentials(username, password):
     
     ok = False
     passwordManager = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    passwordManager.add_password(None, HTTP_BASE_URI, username, password)
+    passwordManager.add_password(None, HTTP_BASE_FEED_URI, username, password)
     authHandler = urllib2.HTTPBasicAuthHandler(passwordManager)
     opener = urllib2.build_opener(authHandler)
     urllib2.install_opener(opener)
@@ -68,7 +68,7 @@ def probeLoginCrendentials(username, password):
         dialog.update(50)
     
     try:
-        handle = openHTTPConnection(HTTP_BASE_URI + 'feed/all/hd.xml')
+        handle = openHTTPConnection(HTTP_BASE_FEED_URI + 'all/hd.xml')
     except IOError, e:
         pass
     else:
@@ -80,6 +80,9 @@ def probeLoginCrendentials(username, password):
         del dialog
     
     return ok
+
+# Feed cache
+__fetchedFeeds = {}
 
 def parseRSSFeed(feed, fetch=False):
     """
@@ -122,13 +125,15 @@ def parseRSSFeed(feed, fetch=False):
     @return a list of dicts with the parsed feed data
     """
     if fetch:
-        response = None
-        try:
-            response = openHTTPConnection(feed)
-        except IOError, e:
-            xbmcgui.Dialog().ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39903) + '[CR]Error: {0}'.format(e.strerror))
-            return domDict
-        feed = response.read()
+        if not feed in __fetchedFeeds:
+            response = None
+            try:
+                response = openHTTPConnection(feed)
+            except IOError, e:
+                xbmcgui.Dialog().ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39903) + '[CR]Error: {0}'.format(e.strerror))
+                return domDict
+            __fetchedFeeds[feed] = response.read()
+        feed = __fetchedFeeds[feed]
     
     dom = minidom.parseString(feed)
     

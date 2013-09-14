@@ -239,25 +239,25 @@ class FKTVDataSource(DataSource):
     
     __urls = {
         'best' : {
-            'all'        : HTTP_BASE_URI + 'feed/1-1x1-2x1-3x1-4/hd.xml',
-            'episodes'   : HTTP_BASE_URI + 'feed/1-1/hd.xml',
-            'postecke'   : HTTP_BASE_URI + 'feed/1-2/hd.xml',
-            'interviews' : HTTP_BASE_URI + 'feed/1-3/hd.xml',
-            'extras'     : HTTP_BASE_URI + 'feed/1-4/hd.xml'
+            'all'        : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4/hd.xml',
+            'episodes'   : HTTP_BASE_FEED_URI + '1-1/hd.xml',
+            'postecke'   : HTTP_BASE_FEED_URI + '1-2/hd.xml',
+            'interviews' : HTTP_BASE_FEED_URI + '1-3/hd.xml',
+            'extras'     : HTTP_BASE_FEED_URI + '1-4/hd.xml'
         },
         'mobile' : {
-            'all'        : HTTP_BASE_URI + 'feed/1-1x1-2x1-3x1-4/mobile.xml',
-            'episodes'   : HTTP_BASE_URI + 'feed/1-1/mobile.xml',
-            'postecke'   : HTTP_BASE_URI + 'feed/1-2/mobile.xml',
-            'interviews' : HTTP_BASE_URI + 'feed/1-3/mobile.xml',
-            'extras'     : HTTP_BASE_URI + 'feed/1-4/mobile.xml'
+            'all'        : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4/mobile.xml',
+            'episodes'   : HTTP_BASE_FEED_URI + '1-1/mobile.xml',
+            'postecke'   : HTTP_BASE_FEED_URI + '1-2/mobile.xml',
+            'interviews' : HTTP_BASE_FEED_URI + '1-3/mobile.xml',
+            'extras'     : HTTP_BASE_FEED_URI + '1-4/mobile.xml'
         },
         'audio' : {
-            'all'        : HTTP_BASE_URI + 'feed/1-1x1-2x1-3x1-4/audio.xml',
-            'episodes'   : HTTP_BASE_URI + 'feed/1-1/audio.xml',
-            'postecke'   : HTTP_BASE_URI + 'feed/1-2/audio.xml',
-            'interviews' : HTTP_BASE_URI + 'feed/1-3/audio.xml',
-            'extras'     : HTTP_BASE_URI + 'feed/1-4/audio.xml'
+            'all'        : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4/audio.xml',
+            'episodes'   : HTTP_BASE_FEED_URI + '1-1/audio.xml',
+            'postecke'   : HTTP_BASE_FEED_URI + '1-2/audio.xml',
+            'interviews' : HTTP_BASE_FEED_URI + '1-3/audio.xml',
+            'extras'     : HTTP_BASE_FEED_URI + '1-4/audio.xml'
         }
     }
 
@@ -324,13 +324,13 @@ class PTVDataSource(DataSource):
     
     __urls = {
         'best' : {
-            'all' : HTTP_BASE_URI + 'feed/2-1/hd.xml'
+            'all' : HTTP_BASE_FEED_URI + '2-1/hd.xml'
         },
         'mobile' : {
-            'all' : HTTP_BASE_URI + 'feed/2-1/mobile.xml'
+            'all' : HTTP_BASE_FEED_URI + '2-1/mobile.xml'
         },
         'audio' : {
-            'all' : HTTP_BASE_URI + 'feed/2-1/audio.xml'
+            'all' : HTTP_BASE_FEED_URI + '2-1/audio.xml'
         }
     }
 
@@ -391,13 +391,13 @@ class PSDataSource(DataSource):
     
     __urls = {
         'best' : {
-            'all' : HTTP_BASE_URI + 'feed/3-1/hd.xml'
+            'all' : HTTP_BASE_FEED_URI + '3-1/hd.xml'
         },
         'mobile' : {
-            'all' : HTTP_BASE_URI + 'feed/3-1/mobile.xml'
+            'all' : HTTP_BASE_FEED_URI + '3-1/mobile.xml'
         },
         'audio' : {
-            'all' : HTTP_BASE_URI + 'feed/3-1/audio.xml'
+            'all' : HTTP_BASE_FEED_URI + '3-1/audio.xml'
         }
     }
 
@@ -506,19 +506,19 @@ class MGTVDataSource(DataSource):
     
     __urls = {
         'best' : {
-            'all'      : HTTP_BASE_URI + 'feed/0-1x0-2x/hd.xml',
-            'internal' : HTTP_BASE_URI + 'feed/0-1/hd.xml',
-            'studio'   : HTTP_BASE_URI + 'feed/0-2/hd.xml'
+            'all'      : HTTP_BASE_FEED_URI + '0-1x0-2x/hd.xml',
+            'internal' : HTTP_BASE_FEED_URI + '0-1/hd.xml',
+            'studio'   : HTTP_BASE_FEED_URI + '0-2/hd.xml'
         },
         'mobile' : {
-            'all'      : HTTP_BASE_URI + 'feed/0-1x0-2x/mobile.xml',
-            'internal' : HTTP_BASE_URI + 'feed/0-1/mobile.xml',
-            'studio'   : HTTP_BASE_URI + 'feed/0-2/mobile.xml'
+            'all'      : HTTP_BASE_FEED_URI + '0-1x0-2x/mobile.xml',
+            'internal' : HTTP_BASE_FEED_URI + '0-1/mobile.xml',
+            'studio'   : HTTP_BASE_FEED_URI + '0-2/mobile.xml'
         },
         'audio' : {
-            'all'      : HTTP_BASE_URI + 'feed/0-1x0-2x/audio.xml',
-            'internal' : HTTP_BASE_URI + 'feed/0-1/audio.xml',
-            'studio'   : HTTP_BASE_URI + 'feed/0-2/audio.xml'
+            'all'      : HTTP_BASE_FEED_URI + '0-1x0-2x/audio.xml',
+            'internal' : HTTP_BASE_FEED_URI + '0-1/audio.xml',
+            'studio'   : HTTP_BASE_FEED_URI + '0-2/audio.xml'
         }
     }
 
