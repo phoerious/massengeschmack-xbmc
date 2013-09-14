@@ -10,7 +10,7 @@
     <string id="30051">Image Quality</string>
     <string id="30052">HD (MP4/MOV)</string>
     <string id="30053">Mobile (MP4)</string>
-    <string id="30054">Use audio version</string>
+    <string id="30054">Use audio version (may not be available for all contents)</string>
     
     <!-- Application start up -->
     <string id="30100">No login data found!</string>
