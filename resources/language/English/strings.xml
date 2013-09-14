@@ -18,6 +18,7 @@
     <string id="30102">Login failed!</string>
     <string id="30103">Could not log into your Massengeschmack account,[CR]please check your login credentials!</string>
     <string id="30104">Probing login data…</string>
+    <string id="30105">Your login credentials for these contents are invalid,[CR]maybe you didn't subscribe to them?</string>
     
     <!-- Magazine descriptions -->
     <string id="30200">Fernsehkritik-TV</string>
@@ -60,8 +61,9 @@
     <string id="30363">Massengeschmack Internal</string>
     <string id="30364">Massengeschmack announcements and uncategorized extras.</string>
     
-    <!-- Runtime error messages -->
+    <!-- General runtime error messages -->
     <string id="39901">Invalid internal command![CR]This is probably a bug. You should report it if it happens more often.</string>
     <string id="39902">Request failed!</string>
-    <string id="39903">Could not fetch RSS feed, maybe the network is down?</string>
+    <string id="39903">Could not complete request, maybe the network is down?</string>
+    <string id="39904">Could not complete request, server replied:</string>
 </strings>
