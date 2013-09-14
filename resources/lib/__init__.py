@@ -169,7 +169,10 @@ def parseRSSFeed(feed, fetch=False):
             try:
                 response = openHTTPConnection(feed)
             except urllib2.HTTPError, e:
-                xbmcgui.Dialog().ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39904) + '[CR]Error: {0} {1}'.format(e.code, e.reason))
+                if 401 == e.code:
+                    xbmcgui.Dialog().ok(ADDON.getLocalizedString(30102), ADDON.getLocalizedString(30105))
+                else:
+                    xbmcgui.Dialog().ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39904) + '[CR]Error: {0} {1}'.format(e.code, e.reason))
             except urllib2.URLError, e:
                 xbmcgui.Dialog().ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39903) + '[CR]Error: {0}'.format(e.reason))
                 return domDict
