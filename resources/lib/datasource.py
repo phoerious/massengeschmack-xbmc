@@ -335,6 +335,73 @@ class PTVDataSource(DataSource):
     }
 
 
+class PSDataSource(DataSource):
+    def getListItems(self):
+        audioOnly = ADDON.getSetting('content.audioOnly')
+        
+        quality = None
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'best'
+            else:
+                quality = 'mobile'
+        
+        data      = resources.lib.parseRSSFeed(self.__urls[quality]['all'], True)
+        listItems = []
+        
+        for i in data:
+            iconimage = self.__getThumbnailURL(i['guid'])
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30221),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30232),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+            
+            listItems.append(
+                ListItem(
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/assets/fanart-ps.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+        
+        return listItems
+    
+    def getContentMode(self):
+        return 'episodes'
+    
+    def __getThumbnailURL(self, guid):
+        if 'ps-pilot' == guid:
+            guid = 'ps1'
+        return 'http://massengeschmack.tv/img/ps/' + guid + '.jpg'
+    
+    __urls = {
+        'best' : {
+            'all' : HTTP_BASE_URI + 'feed/3-1/hd.xml'
+        },
+        'mobile' : {
+            'all' : HTTP_BASE_URI + 'feed/3-1/mobile.xml'
+        },
+        'audio' : {
+            'all' : HTTP_BASE_URI + 'feed/3-1/audio.xml'
+        }
+    }
+
+
 def createDataSource(module=''):
     """
     Create a data source object based on the magazine name.
@@ -348,5 +415,7 @@ def createDataSource(module=''):
         return FKTVDataSource()
     elif 'ptv' == module:
         return PTVDataSource()
+    elif 'ps' == module:
+        return PSDataSource()
     else:
         return DataSource()
