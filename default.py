@@ -41,8 +41,6 @@ if not ok:
     ADDON.openSettings()
     exit()
 
-print ADDON_ARGS
-
 # analyze URL
 if not 'cmd' in ADDON_ARGS:
     ADDON_ARGS['cmd'] = 'list'
@@ -63,7 +61,7 @@ elif 'play' == ADDON_ARGS['cmd']:
     if 'name' in ADDON_ARGS:
         name = ADDON_ARGS['name']
     if 'iconimage' in ADDON_ARGS:
-        iconImage = ADDON_ARGS['iconimage']    
+        iconImage = ADDON_ARGS['iconimage']
     if 'metadata' in ADDON_ARGS:
         metaData = json.loads(ADDON_ARGS['metadata'])
     if 'streaminfo' in ADDON_ARGS:
