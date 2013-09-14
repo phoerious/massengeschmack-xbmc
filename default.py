@@ -47,9 +47,11 @@ if not 'cmd' in ADDON_ARGS:
 
 if 'list' == ADDON_ARGS['cmd']:
     listing    = lib.Listing()
-    datasource = lib.datasource.createDataSource()
+    datasource = None
     if 'module' in ADDON_ARGS:
         datasource = lib.datasource.createDataSource(ADDON_ARGS['module'])
+    else:
+        datasource = lib.datasource.createDataSource()
     listing.generate(datasource)
     listing.show()
     
