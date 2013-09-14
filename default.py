@@ -25,7 +25,7 @@ import json
 from globalvars import *
 import resources.lib as lib
 
-# show warning and open settings if login data have not been configured or if the credentials are invalid
+# show warning and open settings if login data have not been configured
 if '' == ADDON.getSetting('account.username') or '' == ADDON.getSetting('account.password'):
     dialog = xbmcgui.Dialog()
     dialog.ok(ADDON.getLocalizedString(30100), ADDON.getLocalizedString(30101))
@@ -33,21 +33,20 @@ if '' == ADDON.getSetting('account.username') or '' == ADDON.getSetting('account
     exit(1)
 
 lib.installHTTPLoginData(ADDON.getSetting('account.username'), ADDON.getSetting('account.password'))
-response = lib.probeLoginCrendentials(not 'cmd' in ADDON_ARGS)
-if 200 != response['code']:
-    dialog = xbmcgui.Dialog()
-    if -1 == response['code']:
-        dialog.ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39903) + '[CR]Error: {0}'.format(response['reason']))
-    elif 401 == response['code']:
-        if not 'cmd' in ADDON_ARGS:
-            # if we're on the start page
+
+# if we're on the start page, verify login data first
+if not 'cmd' in ADDON_ARGS:
+    response = lib.probeLoginCrendentials(True)
+    if 200 != response['code']:
+        dialog = xbmcgui.Dialog()
+        if -1 == response['code']:
+            dialog.ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39903) + '[CR]Error: {0}'.format(response['reason']))
+        elif 401 == response['code']:
             dialog.ok(ADDON.getLocalizedString(30102), ADDON.getLocalizedString(30103))
             ADDON.openSettings()
         else:
-            dialog.ok(ADDON.getLocalizedString(30102), ADDON.getLocalizedString(30105))
-    else:
-        dialog.ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39904) + '[CR]Error: {0} {1}'.format(response['code'], response['reason']))
-    exit(1)
+            dialog.ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39904) + '[CR]Error: {0} {1}'.format(response['code'], response['reason']))
+        exit(1)
 
 # analyze URL
 if not 'cmd' in ADDON_ARGS:
