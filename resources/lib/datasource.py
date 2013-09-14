@@ -402,6 +402,127 @@ class PSDataSource(DataSource):
     }
 
 
+class MGTVDataSource(DataSource):
+    def getListItems(self):
+        audioOnly = ADDON.getSetting('content.audioOnly')
+        
+        quality = None
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'best'
+            else:
+                quality = 'mobile'
+        
+        submodule = None
+        if 'submodule' in ADDON_ARGS and ADDON_ARGS['submodule'] in self.__urls[quality]:
+            submodule = ADDON_ARGS['submodule']
+        
+        if None == submodule:
+            return self.__getBaseList()
+        
+        data      = resources.lib.parseRSSFeed(self.__urls[quality][submodule], True)
+        listItems = []
+        
+        for i in data:
+            iconimage = self.__getThumbnailURL(i['guid'])
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30231),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30232),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+            
+            listItems.append(
+                ListItem(
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+        
+        return listItems
+    
+    def getContentMode(self):
+        if 'submodule' in ADDON_ARGS:
+            return 'episodes'
+        
+        return 'tvshows'
+    
+    def __getThumbnailURL(self, guid):
+        if 'studio-' == guid[:7]:
+            return 'http://massengeschmack.tv/img/mag/studio' + guid[7:] + '.jpg'
+        
+        return 'http://massengeschmack.tv/img/mgfeedlogo.jpg'
+    
+    def __getBaseList(self):
+        return [
+            # All
+            ListItem(
+                ADDON.getLocalizedString(30300),
+                resources.lib.assembleListURL('mgtv', 'all'),
+                ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30300),
+                    'Plot': ADDON.getLocalizedString(30361)
+                }
+            ),
+            # Das Studio
+            ListItem(
+                ADDON.getLocalizedString(30360),
+                resources.lib.assembleListURL('mgtv', 'studio'),
+                ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30360),
+                    'Plot': ADDON.getLocalizedString(30362)
+                }
+            ),
+            # Massengeschmack Internal
+            ListItem(
+                ADDON.getLocalizedString(30363),
+                resources.lib.assembleListURL('mgtv', 'internal'),
+                ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30363),
+                    'Plot': ADDON.getLocalizedString(30364)
+                }
+            )
+        ]
+    
+    __urls = {
+        'best' : {
+            'all'      : HTTP_BASE_URI + 'feed/0-1x0-2x/hd.xml',
+            'internal' : HTTP_BASE_URI + 'feed/0-1/hd.xml',
+            'studio'   : HTTP_BASE_URI + 'feed/0-2/hd.xml'
+        },
+        'mobile' : {
+            'all'      : HTTP_BASE_URI + 'feed/0-1x0-2x/mobile.xml',
+            'internal' : HTTP_BASE_URI + 'feed/0-1/mobile.xml',
+            'studio'   : HTTP_BASE_URI + 'feed/0-2/mobile.xml'
+        },
+        'audio' : {
+            'all'      : HTTP_BASE_URI + 'feed/0-1x0-2x/audio.xml',
+            'internal' : HTTP_BASE_URI + 'feed/0-1/audio.xml',
+            'studio'   : HTTP_BASE_URI + 'feed/0-2/audio.xml'
+        }
+    }
+
+
 def createDataSource(module=''):
     """
     Create a data source object based on the magazine name.
@@ -417,5 +538,7 @@ def createDataSource(module=''):
         return PTVDataSource()
     elif 'ps' == module:
         return PSDataSource()
+    elif 'mgtv' == module:
+        return MGTVDataSource()
     else:
         return DataSource()

@@ -55,7 +55,10 @@
     <string id="30355">Various extras.</string>
     
     <string id="30360">Das Studio</string>
-    <string id="30361">Massengeschmack Internal</string>
+    <string id="30361">All Massengeschmack-TV episodes, including “Das Studio” and any extras.</string>
+    <string id="30362">“Das Studio” is the Massengeschmack-TV reality TV show. It is guaranteed to be fake and scripted!</string>
+    <string id="30363">Massengeschmack Internal</string>
+    <string id="30364">Massengeschmack announcements and uncategorized extras.</string>
     
     <!-- Runtime error messages -->
     <string id="39901">Invalid internal command![CR]This is probably a bug. You should report it if it happens more often.</string>
