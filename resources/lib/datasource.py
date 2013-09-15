@@ -202,6 +202,17 @@ class FKTVDataSource(DataSource):
                     'Plot': ADDON.getLocalizedString(30351)
                 }
             ),
+            # Sendeschluss
+            ListItem(
+                ADDON.getLocalizedString(30356),
+                resources.lib.assembleListURL('fktv', 'sendeschluss'),
+                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30356),
+                    'Plot': ADDON.getLocalizedString(30357)
+                }
+            ),
             # Postecke
             ListItem(
                 ADDON.getLocalizedString(30352),
@@ -239,25 +250,28 @@ class FKTVDataSource(DataSource):
     
     __urls = {
         'best' : {
-            'all'        : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4/hd.xml',
-            'episodes'   : HTTP_BASE_FEED_URI + '1-1/hd.xml',
-            'postecke'   : HTTP_BASE_FEED_URI + '1-2/hd.xml',
-            'interviews' : HTTP_BASE_FEED_URI + '1-3/hd.xml',
-            'extras'     : HTTP_BASE_FEED_URI + '1-4/hd.xml'
+            'all'          : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4x1-5/hd.xml',
+            'episodes'     : HTTP_BASE_FEED_URI + '1-1/hd.xml',
+            'postecke'     : HTTP_BASE_FEED_URI + '1-2/hd.xml',
+            'interviews'   : HTTP_BASE_FEED_URI + '1-3/hd.xml',
+            'extras'       : HTTP_BASE_FEED_URI + '1-4/hd.xml',
+            'sendeschluss' : HTTP_BASE_FEED_URI + '1-5/hd.xml'
         },
         'mobile' : {
-            'all'        : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4/mobile.xml',
-            'episodes'   : HTTP_BASE_FEED_URI + '1-1/mobile.xml',
-            'postecke'   : HTTP_BASE_FEED_URI + '1-2/mobile.xml',
-            'interviews' : HTTP_BASE_FEED_URI + '1-3/mobile.xml',
-            'extras'     : HTTP_BASE_FEED_URI + '1-4/mobile.xml'
+            'all'          : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4x1-5/mobile.xml',
+            'episodes'     : HTTP_BASE_FEED_URI + '1-1/mobile.xml',
+            'postecke'     : HTTP_BASE_FEED_URI + '1-2/mobile.xml',
+            'interviews'   : HTTP_BASE_FEED_URI + '1-3/mobile.xml',
+            'extras'       : HTTP_BASE_FEED_URI + '1-4/mobile.xml',
+            'sendeschluss' : HTTP_BASE_FEED_URI + '1-5/mobile.xml'
         },
         'audio' : {
-            'all'        : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4/audio.xml',
-            'episodes'   : HTTP_BASE_FEED_URI + '1-1/audio.xml',
-            'postecke'   : HTTP_BASE_FEED_URI + '1-2/audio.xml',
-            'interviews' : HTTP_BASE_FEED_URI + '1-3/audio.xml',
-            'extras'     : HTTP_BASE_FEED_URI + '1-4/audio.xml'
+            'all'          : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4x1-5/audio.xml',
+            'episodes'     : HTTP_BASE_FEED_URI + '1-1/audio.xml',
+            'postecke'     : HTTP_BASE_FEED_URI + '1-2/audio.xml',
+            'interviews'   : HTTP_BASE_FEED_URI + '1-3/audio.xml',
+            'extras'       : HTTP_BASE_FEED_URI + '1-4/audio.xml',
+            'sendeschluss' : HTTP_BASE_FEED_URI + '1-5/audio.xml'
         }
     }
 

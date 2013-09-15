@@ -59,7 +59,7 @@ def openHTTPConnection(uri, requestMethod='GET'):
         request = urllib2.Request(uri)
     
     request.add_header('User-Agent', HTTP_USER_AGENT)
-    return urllib2.urlopen(request)
+    return urllib2.urlopen(request, None, HTTP_TIMEOUT)
 
 def installHTTPLoginData(username, password):
     """
@@ -190,13 +190,13 @@ def parseRSSFeed(feed, fetch=False):
         duration = datetime.timedelta(hours=h, minutes=m, seconds=s).seconds
         
         data.append({
-            'title'       : parser.unescape(node.getElementsByTagName('title')[0].firstChild.nodeValue),
-            'subtitle'    : parser.unescape(node.getElementsByTagName('itunes:subtitle')[0].firstChild.nodeValue),
-            'pubdate'     : parser.unescape(node.getElementsByTagName('pubDate')[0].firstChild.nodeValue),
-            'description' : parser.unescape(node.getElementsByTagName('description')[0].firstChild.nodeValue),
-            'link'        : parser.unescape(node.getElementsByTagName('link')[0].firstChild.nodeValue),
-            'guid'        : parser.unescape(node.getElementsByTagName('guid')[0].firstChild.nodeValue),
-            'url'         : parser.unescape(node.getElementsByTagName('enclosure')[0].getAttribute('url')),
+            'title'       : parser.unescape(node.getElementsByTagName('title')[0].firstChild.nodeValue).encode('utf-8'),
+            'subtitle'    : parser.unescape(node.getElementsByTagName('itunes:subtitle')[0].firstChild.nodeValue).encode('utf-8'),
+            'pubdate'     : parser.unescape(node.getElementsByTagName('pubDate')[0].firstChild.nodeValue).encode('utf-8'),
+            'description' : parser.unescape(node.getElementsByTagName('description')[0].firstChild.nodeValue).encode('utf-8'),
+            'link'        : parser.unescape(node.getElementsByTagName('link')[0].firstChild.nodeValue).encode('utf-8'),
+            'guid'        : parser.unescape(node.getElementsByTagName('guid')[0].firstChild.nodeValue).encode('utf-8'),
+            'url'         : parser.unescape(node.getElementsByTagName('enclosure')[0].getAttribute('url')).encode('utf-8'),
             'duration'    : duration
         })
     
@@ -260,6 +260,7 @@ def assemblePlayURL(url, name='', iconImage='', metaData={}, streamInfo={}):
     @type streamInfo: dict
     @param: streamInfo: technical info about the stream (such as the duration or resolution)
     """
+    print name
     return 'plugin://' + ADDON_ID + '/?cmd=play&url=' + urllib.quote(url) + \
            '&name=' + urllib.quote(name) + '&iconimage=' + urllib.quote(iconImage) + \
            '&metadata=' + dictUrlEncode(metaData) + \
