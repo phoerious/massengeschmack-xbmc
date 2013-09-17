@@ -49,8 +49,8 @@ class DataSource(object):
                 FKTVDataSource.id,
                 ADDON.getLocalizedString(30200),
                 resources.lib.assembleListURL(FKTVDataSource.module),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + FKTVDataSource.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + FKTVDataSource.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + FKTVDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + FKTVDataSource.module + '.jpg',
                 FKTVDataSource.showMetaData
             ),
             # Pantoffel-TV
@@ -58,8 +58,8 @@ class DataSource(object):
                 PTVDataSource.id,
                 ADDON.getLocalizedString(30210),
                 resources.lib.assembleListURL(PTVDataSource.module),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + PTVDataSource.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + PTVDataSource.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + PTVDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + PTVDataSource.module + '.jpg',
                 PTVDataSource.showMetaData
             ),
             # Pressesch(l)au
@@ -67,8 +67,8 @@ class DataSource(object):
                 PSDataSource.id,
                 ADDON.getLocalizedString(30220),
                 resources.lib.assembleListURL(PSDataSource.module),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + PSDataSource.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + PSDataSource.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + PSDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + PSDataSource.module + '.jpg',
                 PSDataSource.showMetaData
             ),
             # Massengeschmack-TV
@@ -76,8 +76,8 @@ class DataSource(object):
                 MGTVDataSource.id,
                 ADDON.getLocalizedString(30230),
                 resources.lib.assembleListURL(MGTVDataSource.module),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + MGTVDataSource.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + MGTVDataSource.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + MGTVDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + MGTVDataSource.module + '.jpg',
                 MGTVDataSource.showMetaData
             ),
         ]
@@ -204,7 +204,7 @@ class FKTVDataSource(DataSource):
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                    ADDON_BASE_PATH + '/resources/media/fanart-fktv.jpg',
                     metaData,
                     streamInfo,
                     False
@@ -243,8 +243,8 @@ class FKTVDataSource(DataSource):
                 self.id,
                 ADDON.getLocalizedString(30300),
                 resources.lib.assembleListURL(self.module, 'all'),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30300),
                     'Plot': ADDON.getLocalizedString(30350)
@@ -255,8 +255,8 @@ class FKTVDataSource(DataSource):
                 self.id,
                 ADDON.getLocalizedString(30301),
                 resources.lib.assembleListURL(self.module, 'episodes'),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30301),
                     'Plot': ADDON.getLocalizedString(30351)
@@ -267,8 +267,8 @@ class FKTVDataSource(DataSource):
                 self.id,
                 ADDON.getLocalizedString(30356),
                 resources.lib.assembleListURL(self.module, 'sendeschluss'),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30356),
                     'Plot': ADDON.getLocalizedString(30357)
@@ -279,8 +279,8 @@ class FKTVDataSource(DataSource):
                 self.id,
                 ADDON.getLocalizedString(30352),
                 resources.lib.assembleListURL(self.module, 'postecke'),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30352),
                     'Plot': ADDON.getLocalizedString(30353)
@@ -291,8 +291,8 @@ class FKTVDataSource(DataSource):
                 self.id,
                 ADDON.getLocalizedString(30302),
                 resources.lib.assembleListURL(self.module, 'interviews'),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30302),
                     'Plot': ADDON.getLocalizedString(30354)
@@ -303,8 +303,8 @@ class FKTVDataSource(DataSource):
                 self.id,
                 ADDON.getLocalizedString(30303),
                 resources.lib.assembleListURL(self.module, 'extras') ,
-                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30303),
                     'Plot': ADDON.getLocalizedString(30355)
@@ -375,7 +375,7 @@ class PTVDataSource(DataSource):
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/assets/fanart-ptv.jpg',
+                    ADDON_BASE_PATH + '/resources/media/fanart-ptv.jpg',
                     metaData,
                     streamInfo,
                     False
@@ -461,7 +461,7 @@ class PSDataSource(DataSource):
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/assets/fanart-ps.jpg',
+                    ADDON_BASE_PATH + '/resources/media/fanart-ps.jpg',
                     metaData,
                     streamInfo,
                     False
@@ -554,7 +554,7 @@ class MGTVDataSource(DataSource):
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                    ADDON_BASE_PATH + '/resources/media/fanart-mgtv.jpg',
                     metaData,
                     streamInfo,
                     False
@@ -582,8 +582,8 @@ class MGTVDataSource(DataSource):
                 self.id,
                 ADDON.getLocalizedString(30300),
                 resources.lib.assembleListURL(self.module, 'all'),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30300),
                     'Plot': ADDON.getLocalizedString(30361)
@@ -594,8 +594,8 @@ class MGTVDataSource(DataSource):
                 self.id,
                 ADDON.getLocalizedString(30360),
                 resources.lib.assembleListURL(self.module, 'studio'),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30360),
                     'Plot': ADDON.getLocalizedString(30362)
@@ -606,8 +606,8 @@ class MGTVDataSource(DataSource):
                 self.id,
                 ADDON.getLocalizedString(30363),
                 resources.lib.assembleListURL(self.module, 'internal'),
-                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30363),
                     'Plot': ADDON.getLocalizedString(30364)
