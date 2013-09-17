@@ -22,71 +22,63 @@ from globalvars import *
 import resources.lib
 from resources.lib.listing import *
 
-class DataSource:
+class DataSource(object):
+    id = -1
+    """Numeric ID of the show."""
+    
+    moduleName = ''
+    """Internal module name."""
+    
+    showMetaData = {
+        'Title'     : None,
+        'Director'  : None,
+        'Genre'     : None,
+        'Premiered' : None,
+        'Country'   : None,
+        'Plot'      : None
+    }
+    """Global meta data for the show."""
+    
     def getListItems(self):
         """
-        Generate a list of ListeItem objects for the current data source.
+        Generate a list of ListItem objects for the current data source.
         """
         return [
             # Fernsehkritik-TV
             ListItem(
+                FKTVDataSource.id,
                 ADDON.getLocalizedString(30200),
-                resources.lib.assembleListURL('fktv'),
-                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
-                {
-                    'Title': ADDON.getLocalizedString(30200),
-                    'Director':'Holger Kreymeier, Nils Beckmann, Daniel Gusy',
-                    'Genre': ADDON.getLocalizedString(30201),
-                    'Premiered':'07.04.2007',
-                    'Country': ADDON.getLocalizedString(30202),
-                    'Plot': ADDON.getLocalizedString(30203)
-                }
+                resources.lib.assembleListURL(FKTVDataSource.module),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + FKTVDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + FKTVDataSource.module + '.jpg',
+                FKTVDataSource.showMetaData
             ),
             # Pantoffel-TV
             ListItem(
+                PTVDataSource.id,
                 ADDON.getLocalizedString(30210),
-                resources.lib.assembleListURL('ptv'),
-                ADDON_BASE_PATH + '/resources/assets/banner-ptv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-ptv.jpg',
-                {
-                    'Title': ADDON.getLocalizedString(30210),
-                    'Director':'Holger Kreymeier, Jenny von Gagern, Steven Gräwe, Michael Stock',
-                    'Genre': ADDON.getLocalizedString(30211),
-                    'Premiered':'17.06.2013',
-                    'Country': ADDON.getLocalizedString(30212),
-                    'Plot': ADDON.getLocalizedString(30213)
-                }
+                resources.lib.assembleListURL(PTVDataSource.module),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + PTVDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + PTVDataSource.module + '.jpg',
+                PTVDataSource.showMetaData
             ),
             # Pressesch(l)au
             ListItem(
+                PSDataSource.id,
                 ADDON.getLocalizedString(30220),
-                resources.lib.assembleListURL('ps'),
-                ADDON_BASE_PATH + '/resources/assets/banner-ps.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-ps.jpg',
-                {
-                    'Title': ADDON.getLocalizedString(30220),
-                    'Director':'Holger Kreymeier, Steven Gräwe, Daniel Gusy',
-                    'Genre': ADDON.getLocalizedString(30221),
-                    'Premiered':'01.08.2013',
-                    'Country': ADDON.getLocalizedString(30222),
-                    'Plot': ADDON.getLocalizedString(30223)
-                }
+                resources.lib.assembleListURL(PSDataSource.module),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + PSDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + PSDataSource.module + '.jpg',
+                PSDataSource.showMetaData
             ),
             # Massengeschmack-TV
             ListItem(
+                MGTVDataSource.id,
                 ADDON.getLocalizedString(30230),
-                resources.lib.assembleListURL('mgtv'),
-                ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
-                {
-                    'Title': ADDON.getLocalizedString(30230),
-                    'Director':'Holger Kreymeier',
-                    'Genre': ADDON.getLocalizedString(30231),
-                    'Premiered':'05.08.2013',
-                    'Country': ADDON.getLocalizedString(30232),
-                    'Plot': ADDON.getLocalizedString(30233)
-                }
+                resources.lib.assembleListURL(MGTVDataSource.module),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + MGTVDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + MGTVDataSource.module + '.jpg',
+                MGTVDataSource.showMetaData
             ),
         ]
     
@@ -100,9 +92,74 @@ class DataSource:
         @return content mode
         """
         return 'tvshows'
+    
+    def _buildFeedURL(self, ids, quality):
+        """
+        Build a feed URL which points to an RSS feed filtered by the given IDs.
+        
+        This method relies on self.id being set properly in derived classes.
+        
+        @protected
+        
+        @type ids: list
+        @param ids: a list of numeric IDs of all sub shows to filter by
+        @type quality: str
+        @param quality: the movie quality (either 'hd', 'mobile' or 'audio')
+        """
+        url = HTTP_BASE_FEED_URI
+        
+        first = True
+        for i in ids:
+            if not first:
+                url += 'x'
+            first = False
+            url += str(self.id) + '-' + str(i)
+            
+        url += '/' + quality + '.xml'
+        
+        return url
 
 
 class FKTVDataSource(DataSource):
+    id           = 1
+    module       = 'fktv'
+    showMetaData = {
+        'Title'    : ADDON.getLocalizedString(30200),
+        'Director' :'Holger Kreymeier, Nils Beckmann, Daniel Gusy',
+        'Genre'    : ADDON.getLocalizedString(30201),
+        'Premiered':'07.04.2007',
+        'Country'  : ADDON.getLocalizedString(30202),
+        'Plot'     : ADDON.getLocalizedString(30203)
+    }
+    
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all'          : DataSource._buildFeedURL(self, [1, 2, 3, 4, 5], 'hd'),
+                'episodes'     : DataSource._buildFeedURL(self, [1], 'hd'),
+                'postecke'     : DataSource._buildFeedURL(self, [2], 'hd'),
+                'interviews'   : DataSource._buildFeedURL(self, [3], 'hd'),
+                'extras'       : DataSource._buildFeedURL(self, [4], 'hd'),
+                'sendeschluss' : DataSource._buildFeedURL(self, [5], 'hd')
+            },
+            'mobile' : {
+                'all'          : DataSource._buildFeedURL(self, [1, 2, 3, 4, 5], 'mobile'),
+                'episodes'     : DataSource._buildFeedURL(self, [1], 'mobile'),
+                'postecke'     : DataSource._buildFeedURL(self, [2], 'mobile'),
+                'interviews'   : DataSource._buildFeedURL(self, [3], 'mobile'),
+                'extras'       : DataSource._buildFeedURL(self, [4], 'mobile'),
+                'sendeschluss' : DataSource._buildFeedURL(self, [5], 'mobile')
+            },
+            'audio' : {
+                'all'          : DataSource._buildFeedURL(self, [1, 2, 3, 4, 5], 'audio'),
+                'episodes'     : DataSource._buildFeedURL(self, [1], 'audio'),
+                'postecke'     : DataSource._buildFeedURL(self, [2], 'audio'),
+                'interviews'   : DataSource._buildFeedURL(self, [3], 'audio'),
+                'extras'       : DataSource._buildFeedURL(self, [4], 'audio'),
+                'sendeschluss' : DataSource._buildFeedURL(self, [5], 'audio')
+            }
+        }
+    
     def getListItems(self):
         audioOnly = ADDON.getSetting('content.audioOnly')
         
@@ -111,7 +168,7 @@ class FKTVDataSource(DataSource):
             quality = 'audio'
         else:
             if 0 == int(ADDON.getSetting('content.quality')):
-                quality = 'best'
+                quality = 'hd'
             else:
                 quality = 'mobile'
         
@@ -143,6 +200,7 @@ class FKTVDataSource(DataSource):
             
             listItems.append(
                 ListItem(
+                    self.id,
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
@@ -182,10 +240,11 @@ class FKTVDataSource(DataSource):
         return [
             # All
             ListItem(
+                self.id,
                 ADDON.getLocalizedString(30300),
-                resources.lib.assembleListURL('fktv', 'all'),
-                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                resources.lib.assembleListURL(self.module, 'all'),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30300),
                     'Plot': ADDON.getLocalizedString(30350)
@@ -193,10 +252,11 @@ class FKTVDataSource(DataSource):
             ),
             # Episodes
             ListItem(
+                self.id,
                 ADDON.getLocalizedString(30301),
-                resources.lib.assembleListURL('fktv', 'episodes'),
-                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                resources.lib.assembleListURL(self.module, 'episodes'),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30301),
                     'Plot': ADDON.getLocalizedString(30351)
@@ -204,10 +264,11 @@ class FKTVDataSource(DataSource):
             ),
             # Sendeschluss
             ListItem(
+                self.id,
                 ADDON.getLocalizedString(30356),
-                resources.lib.assembleListURL('fktv', 'sendeschluss'),
-                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                resources.lib.assembleListURL(self.module, 'sendeschluss'),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30356),
                     'Plot': ADDON.getLocalizedString(30357)
@@ -215,10 +276,11 @@ class FKTVDataSource(DataSource):
             ),
             # Postecke
             ListItem(
+                self.id,
                 ADDON.getLocalizedString(30352),
-                resources.lib.assembleListURL('fktv', 'postecke'),
-                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                resources.lib.assembleListURL(self.module, 'postecke'),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30352),
                     'Plot': ADDON.getLocalizedString(30353)
@@ -226,10 +288,11 @@ class FKTVDataSource(DataSource):
             ),
             # Interviews
             ListItem(
+                self.id,
                 ADDON.getLocalizedString(30302),
-                resources.lib.assembleListURL('fktv', 'interviews'),
-                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                resources.lib.assembleListURL(self.module, 'interviews'),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30302),
                     'Plot': ADDON.getLocalizedString(30354)
@@ -237,46 +300,44 @@ class FKTVDataSource(DataSource):
             ),
             # Extras
             ListItem(
+                self.id,
                 ADDON.getLocalizedString(30303),
-                resources.lib.assembleListURL('fktv', 'extras') ,
-                ADDON_BASE_PATH + '/resources/assets/banner-fktv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-fktv.jpg',
+                resources.lib.assembleListURL(self.module, 'extras') ,
+                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30303),
                     'Plot': ADDON.getLocalizedString(30355)
                 }
             )
         ]
-    
-    __urls = {
-        'best' : {
-            'all'          : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4x1-5/hd.xml',
-            'episodes'     : HTTP_BASE_FEED_URI + '1-1/hd.xml',
-            'postecke'     : HTTP_BASE_FEED_URI + '1-2/hd.xml',
-            'interviews'   : HTTP_BASE_FEED_URI + '1-3/hd.xml',
-            'extras'       : HTTP_BASE_FEED_URI + '1-4/hd.xml',
-            'sendeschluss' : HTTP_BASE_FEED_URI + '1-5/hd.xml'
-        },
-        'mobile' : {
-            'all'          : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4x1-5/mobile.xml',
-            'episodes'     : HTTP_BASE_FEED_URI + '1-1/mobile.xml',
-            'postecke'     : HTTP_BASE_FEED_URI + '1-2/mobile.xml',
-            'interviews'   : HTTP_BASE_FEED_URI + '1-3/mobile.xml',
-            'extras'       : HTTP_BASE_FEED_URI + '1-4/mobile.xml',
-            'sendeschluss' : HTTP_BASE_FEED_URI + '1-5/mobile.xml'
-        },
-        'audio' : {
-            'all'          : HTTP_BASE_FEED_URI + '1-1x1-2x1-3x1-4x1-5/audio.xml',
-            'episodes'     : HTTP_BASE_FEED_URI + '1-1/audio.xml',
-            'postecke'     : HTTP_BASE_FEED_URI + '1-2/audio.xml',
-            'interviews'   : HTTP_BASE_FEED_URI + '1-3/audio.xml',
-            'extras'       : HTTP_BASE_FEED_URI + '1-4/audio.xml',
-            'sendeschluss' : HTTP_BASE_FEED_URI + '1-5/audio.xml'
-        }
-    }
 
 
 class PTVDataSource(DataSource):
+    id           = 2
+    module       = 'ptv'
+    showMetaData = {
+        'Title'    : ADDON.getLocalizedString(30210),
+        'Director' :'Holger Kreymeier, Jenny von Gagern, Steven Gräwe, Michael Stock',
+        'Genre'    : ADDON.getLocalizedString(30211),
+        'Premiered':'17.06.2013',
+        'Country'  : ADDON.getLocalizedString(30212),
+        'Plot'     : ADDON.getLocalizedString(30213)
+    }
+    
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'hd'),
+            },
+            'mobile' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'mobile'),
+            },
+            'audio' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'audio'),
+            }
+        }
+    
     def getListItems(self):
         audioOnly = ADDON.getSetting('content.audioOnly')
         
@@ -285,7 +346,7 @@ class PTVDataSource(DataSource):
             quality = 'audio'
         else:
             if 0 == int(ADDON.getSetting('content.quality')):
-                quality = 'best'
+                quality = 'hd'
             else:
                 quality = 'mobile'
         
@@ -310,6 +371,7 @@ class PTVDataSource(DataSource):
             
             listItems.append(
                 ListItem(
+                    self.id,
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
@@ -335,21 +397,33 @@ class PTVDataSource(DataSource):
             episodeNumber = guid[4:]
             
         return 'http://pantoffel.tv/img/thumbs/ptv' + episodeNumber + '_shot1@2x.jpg'
-    
-    __urls = {
-        'best' : {
-            'all' : HTTP_BASE_FEED_URI + '2-1/hd.xml'
-        },
-        'mobile' : {
-            'all' : HTTP_BASE_FEED_URI + '2-1/mobile.xml'
-        },
-        'audio' : {
-            'all' : HTTP_BASE_FEED_URI + '2-1/audio.xml'
-        }
-    }
 
 
 class PSDataSource(DataSource):
+    id           = 3
+    module       = 'ps'
+    showMetaData = {
+        'Title'     : ADDON.getLocalizedString(30220),
+        'Director'  :'Holger Kreymeier, Steven Gräwe, Daniel Gusy',
+        'Genre'     : ADDON.getLocalizedString(30221),
+        'Premiered' :'01.08.2013',
+        'Country'   : ADDON.getLocalizedString(30222),
+        'Plot'      : ADDON.getLocalizedString(30223)
+    }
+    
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'hd'),
+            },
+            'mobile' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'mobile'),
+            },
+            'audio' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'audio'),
+            }
+        }
+    
     def getListItems(self):
         audioOnly = ADDON.getSetting('content.audioOnly')
         
@@ -358,7 +432,7 @@ class PSDataSource(DataSource):
             quality = 'audio'
         else:
             if 0 == int(ADDON.getSetting('content.quality')):
-                quality = 'best'
+                quality = 'hd'
             else:
                 quality = 'mobile'
         
@@ -383,6 +457,7 @@ class PSDataSource(DataSource):
             
             listItems.append(
                 ListItem(
+                    self.id,
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
@@ -402,21 +477,39 @@ class PSDataSource(DataSource):
         if 'ps-pilot' == guid:
             guid = 'ps1'
         return 'http://massengeschmack.tv/img/ps/' + guid + '.jpg'
-    
-    __urls = {
-        'best' : {
-            'all' : HTTP_BASE_FEED_URI + '3-1/hd.xml'
-        },
-        'mobile' : {
-            'all' : HTTP_BASE_FEED_URI + '3-1/mobile.xml'
-        },
-        'audio' : {
-            'all' : HTTP_BASE_FEED_URI + '3-1/audio.xml'
-        }
-    }
 
 
 class MGTVDataSource(DataSource):
+    id           = 0
+    module       = 'mgtv'
+    showMetaData = {
+        'Title'     : ADDON.getLocalizedString(30230),
+        'Director'  :'Holger Kreymeier',
+        'Genre'     : ADDON.getLocalizedString(30231),
+        'Premiered' :'05.08.2013',
+        'Country'   : ADDON.getLocalizedString(30232),
+        'Plot'      : ADDON.getLocalizedString(30233)
+    }
+    
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all'      : DataSource._buildFeedURL(self, [1, 2], 'hd'),
+                'internal' : DataSource._buildFeedURL(self, [1], 'hd'),
+                'studio'   : DataSource._buildFeedURL(self, [2], 'hd')
+            },
+            'mobile' : {
+                'all'      : DataSource._buildFeedURL(self, [1, 2], 'mobile'),
+                'internal' : DataSource._buildFeedURL(self, [1], 'mobile'),
+                'studio'   : DataSource._buildFeedURL(self, [2], 'mobile')
+            },
+            'audio' : {
+                'all'      : DataSource._buildFeedURL(self, [1, 2], 'audio'),
+                'internal' : DataSource._buildFeedURL(self, [1], 'audio'),
+                'studio'   : DataSource._buildFeedURL(self, [2], 'audio')
+            }
+        }
+    
     def getListItems(self):
         audioOnly = ADDON.getSetting('content.audioOnly')
         
@@ -425,7 +518,7 @@ class MGTVDataSource(DataSource):
             quality = 'audio'
         else:
             if 0 == int(ADDON.getSetting('content.quality')):
-                quality = 'best'
+                quality = 'hd'
             else:
                 quality = 'mobile'
         
@@ -457,6 +550,7 @@ class MGTVDataSource(DataSource):
             
             listItems.append(
                 ListItem(
+                    self.id,
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
@@ -485,10 +579,11 @@ class MGTVDataSource(DataSource):
         return [
             # All
             ListItem(
+                self.id,
                 ADDON.getLocalizedString(30300),
-                resources.lib.assembleListURL('mgtv', 'all'),
-                ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                resources.lib.assembleListURL(self.module, 'all'),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30300),
                     'Plot': ADDON.getLocalizedString(30361)
@@ -496,10 +591,11 @@ class MGTVDataSource(DataSource):
             ),
             # Das Studio
             ListItem(
+                self.id,
                 ADDON.getLocalizedString(30360),
-                resources.lib.assembleListURL('mgtv', 'studio'),
-                ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                resources.lib.assembleListURL(self.module, 'studio'),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30360),
                     'Plot': ADDON.getLocalizedString(30362)
@@ -507,34 +603,17 @@ class MGTVDataSource(DataSource):
             ),
             # Massengeschmack Internal
             ListItem(
+                self.id,
                 ADDON.getLocalizedString(30363),
-                resources.lib.assembleListURL('mgtv', 'internal'),
-                ADDON_BASE_PATH + '/resources/assets/banner-mgtv.png',
-                ADDON_BASE_PATH + '/resources/assets/fanart-mgtv.jpg',
+                resources.lib.assembleListURL(self.module, 'internal'),
+                ADDON_BASE_PATH + '/resources/assets/banner-' + self.module + '.png',
+                ADDON_BASE_PATH + '/resources/assets/fanart-' + self.module + '.jpg',
                 {
                     'Title': ADDON.getLocalizedString(30363),
                     'Plot': ADDON.getLocalizedString(30364)
                 }
             )
         ]
-    
-    __urls = {
-        'best' : {
-            'all'      : HTTP_BASE_FEED_URI + '0-1x0-2x/hd.xml',
-            'internal' : HTTP_BASE_FEED_URI + '0-1/hd.xml',
-            'studio'   : HTTP_BASE_FEED_URI + '0-2/hd.xml'
-        },
-        'mobile' : {
-            'all'      : HTTP_BASE_FEED_URI + '0-1x0-2x/mobile.xml',
-            'internal' : HTTP_BASE_FEED_URI + '0-1/mobile.xml',
-            'studio'   : HTTP_BASE_FEED_URI + '0-2/mobile.xml'
-        },
-        'audio' : {
-            'all'      : HTTP_BASE_FEED_URI + '0-1x0-2x/audio.xml',
-            'internal' : HTTP_BASE_FEED_URI + '0-1/audio.xml',
-            'studio'   : HTTP_BASE_FEED_URI + '0-2/audio.xml'
-        }
-    }
 
 
 def createDataSource(module=''):

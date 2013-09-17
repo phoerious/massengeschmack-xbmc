@@ -62,11 +62,13 @@ class Listing:
 
 
 class ListItem:
-    def __init__(self, name='', url='', thumbnail='', fanart='', metaData={}, streamInfo={}, isFolder=True):
+    def __init__(self, id=0, name='', url='', thumbnail='', fanart='', metaData={}, streamInfo={}, isFolder=True):
         """
         Generate list item from given parameters.
         
-        @type name: str
+        @type id         : int
+        @param id        : numeric ID of the listed show
+        @type name       : str
         @param name      : the display name of the list item
         @type  url       : str
         @param url       : the addon URL this item points to (should not be a real Internet URL)
@@ -82,6 +84,7 @@ class ListItem:
         @param isFolder  : True if this item is a folder
         """
         self.__data = {
+            'id'        : id,
             'name'      : name,
             'url'       : url,
             'thumbnail' : thumbnail,
@@ -97,7 +100,7 @@ class ListItem:
         
         @type key: str
         @param key: the name of the data record
-        @type value: mixed
+        @type value: int|str|dict
         @param value: the data (either a string, a dict or a bool)
         """
         self.__data[key] = value
