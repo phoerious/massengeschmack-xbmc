@@ -69,33 +69,38 @@ def installHTTPLoginData(username, password):
     @type password: str
     """
     passwordManager = urllib2.HTTPPasswordMgrWithDefaultRealm()
-    passwordManager.add_password(None, HTTP_BASE_FEED_URI, username, password)
+    passwordManager.add_password(None, HTTP_BASE_URI, username, password)
     authHandler = urllib2.HTTPBasicAuthHandler(passwordManager)
     opener      = urllib2.build_opener(authHandler)
     urllib2.install_opener(opener)
 
-def probeLoginCrendentials(showDialog=False):
+def fetchSubscriptions(showDialog=False):
     """
-    Test if the given login credentials are correct by sending a test request.
+    Test if the given login credentials are correct and get a list of subscriptions
+    (numeric IDs) in case the login data were correct.
     
     Login data need to be installed beforehand using installHTTPLoginData().
     Returns a dict of the following structure:
     
     {
-        'code': HTTP response code,
-        'reason': error description if code is not 200
+        'code'          : HTTP response code,
+        'reason'        : error description if code is not 200,
+        'subscriptions' : [ list of numeric IDs of subscribed shows ]
     }
     
     If a network error occurs, code is -1 and reason contains an error description.
+    If the login fails, 'subscription' will contain an empty list-
     
     @type showDialog: bool
     @param showDialog: whether to show a progress dialog while testing
-    @return: dict of return HTTP status code and an error description if applicable
+    @return: dict of return HTTP status code, an error description if applicable and the
+             subscriptions if login was successful
     """
     
     response = {
-        'code'   : 200,
-        'reason' : ''
+        'code'          : 200,
+        'reason'        : '',
+        'subscriptions' : []
     }
     
     if showDialog:
@@ -104,7 +109,7 @@ def probeLoginCrendentials(showDialog=False):
         dialog.update(50)
     
     try:
-        handle = openHTTPConnection(HTTP_BASE_FEED_URI + '0-1/mobile.xml', 'HEAD')
+        handle = openHTTPConnection(HTTP_BASE_URI + 'api/?action=listSubscriptionsID')
     except urllib2.HTTPError, e:
         response['code']   = e.code
         response['reason'] = e.reason
@@ -112,6 +117,7 @@ def probeLoginCrendentials(showDialog=False):
         response['code']   = -1
         response['reason'] = e.reason
     else:
+        response['subscriptions'] = json.loads(handle.read())
         handle.close()
     
     if showDialog:
@@ -120,7 +126,41 @@ def probeLoginCrendentials(showDialog=False):
     
     return response
 
-# Feed cache
+# subscriptions cache
+__subscriptions = None
+
+def cacheSubscriptions(subscriptions):
+    """
+    Cache active subscriptions to the add-on settings.
+    
+    @type subscriptions: list
+    @param subscriptions: list of numeric IDs for all active subscriptions
+    """
+    __subscriptions = subscriptions
+    ADDON.setSetting('account.subscriptions', json.dumps(subscriptions))
+
+def getSubscriptions():
+    """
+    Return a list with numeric IDs for all active subscriptions.
+    
+    This method will only read from the cache. It won't fetch any new data
+    from the server. Use fetchSubscriptions() for that and then write
+    the fetched data to the cache using cacheSubscriptions().
+    
+    @return list of subscriptions
+    """
+    subscriptions = []
+    if None == __subscriptions:
+        tmp = ADDON.getSetting('account.subscriptions')
+        if '' != tmp:
+            subscriptions = json.loads(tmp)
+    else:
+        subscriptions == __subscriptions
+    
+    return subscriptions
+
+
+# feed cache
 __fetchedFeeds = {}
 
 def parseRSSFeed(feed, fetch=False):
@@ -260,7 +300,6 @@ def assemblePlayURL(url, name='', iconImage='', metaData={}, streamInfo={}):
     @type streamInfo: dict
     @param: streamInfo: technical info about the stream (such as the duration or resolution)
     """
-    print name
     return 'plugin://' + ADDON_ID + '/?cmd=play&url=' + urllib.quote(url) + \
            '&name=' + urllib.quote(name) + '&iconimage=' + urllib.quote(iconImage) + \
            '&metadata=' + dictUrlEncode(metaData) + \

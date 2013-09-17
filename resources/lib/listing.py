@@ -19,8 +19,10 @@
 import xbmc
 import xbmcplugin
 import xbmcgui
+import json
 
 from globalvars import *
+import resources.lib
 
 class Listing:
     def generate(self, source):
@@ -31,10 +33,11 @@ class Listing:
         @param source: the data source object
         """
         self.__source = source
-        
-        items = source.getListItems()
+        items         = source.getListItems()
+        subscriptions = resources.lib.getSubscriptions()
         for i in items:
-            self.__addDir(i)
+            if i.getData('id') in subscriptions:
+                self.__addDir(i)
     
     def show(self):
         """

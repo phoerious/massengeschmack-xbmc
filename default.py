@@ -36,7 +36,7 @@ lib.installHTTPLoginData(ADDON.getSetting('account.username'), ADDON.getSetting(
 
 # if we're on the start page, verify login data first
 if not 'cmd' in ADDON_ARGS:
-    response = lib.probeLoginCrendentials(True)
+    response = lib.fetchSubscriptions(True)
     if 200 != response['code']:
         dialog = xbmcgui.Dialog()
         if -1 == response['code']:
@@ -47,6 +47,10 @@ if not 'cmd' in ADDON_ARGS:
         else:
             dialog.ok(ADDON.getLocalizedString(39902), ADDON.getLocalizedString(39904) + '[CR]Error: {0} {1}'.format(response['code'], response['reason']))
         exit(1)
+    
+    # if all went well, cache subscriptions
+    lib.cacheSubscriptions(response['subscriptions'])
+
 
 # analyze URL
 if not 'cmd' in ADDON_ARGS:
