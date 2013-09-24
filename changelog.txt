@@ -1,2 +1,5 @@
+0.1.1
+ - Fix date parsing issue occurring on some platforms
+
 0.1.0
  - First testing release
