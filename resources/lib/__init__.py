@@ -20,8 +20,9 @@ import xbmcgui
 import urllib
 import urllib2
 import email.utils
-import datetime
 import json
+import time
+from datetime import datetime, tzinfo, timedelta
 from xml.dom import minidom
 from HTMLParser import HTMLParser
 
@@ -227,7 +228,7 @@ def parseRSSFeed(feed, fetch=False):
         # convert duration string to seconds
         duration = node.getElementsByTagName('itunes:duration')[0].firstChild.nodeValue
         h, m, s  = map(int, duration.split(':'))
-        duration = datetime.timedelta(hours=h, minutes=m, seconds=s).seconds
+        duration = timedelta(hours=h, minutes=m, seconds=s).seconds
         
         data.append({
             'title'       : parser.unescape(node.getElementsByTagName('title')[0].firstChild.nodeValue).encode('utf-8'),
@@ -242,15 +243,41 @@ def parseRSSFeed(feed, fetch=False):
     
     return data
 
-def parseUTCDateString(date):
+class TZOffset(tzinfo):
+    """Represent fixed timezone offset east from UTC."""
+    
+    def __init__(self, offset):
+        self.__offset = timedelta(minutes=offset)
+    
+    def utcoffset(self, dt):
+        return self.__offset
+    
+    def dst(self, dt):
+        return timedelta(0)
+
+def parseUTCDateString(datestr):
     """
     Parse an RFC 2822 date format to a datetime object.
     
-    @type date: str
-    @param date: the date string
+    @type datestr: str
+    @param datestr: the date string
     @return a datetime object
     """
-    return datetime.datetime.fromtimestamp(email.utils.mktime_tz(email.utils.parsedate_tz(date)))
+    # work around Python bug
+    date   = None
+    format = '%a, %d %b %y %H:%M:%S'
+    try:
+        date = datetime.strptime(datestr[:-6], format)
+    except TypeError:
+        date = datetime(*(time.strptime(datestr[:-6], format)[0:6]))
+    
+    # add timezone info which isn't possible using %z in Python 2
+    offset  = int(datestr[-5:-2]) * 60
+    offset += int(datestr[-5:-4] + '1') * int(datestr[-2:])
+    offset = TZOffset(offset)
+    date = date.replace(tzinfo=offset)
+    
+    return date
 
 def dictUrlEncode(data):
     """
