@@ -80,6 +80,24 @@ class DataSource(object):
                 ADDON_BASE_PATH + '/resources/media/fanart-' + MGTVDataSource.module + '.jpg',
                 MGTVDataSource.showMetaData
             ),
+            # Pasch-TV
+            ListItem(
+                PaschTVDataSource.id,
+                ADDON.getLocalizedString(30240),
+                resources.lib.assembleListURL(PaschTVDataSource.module),
+                ADDON_BASE_PATH + '/resources/media/banner-' + PaschTVDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + PaschTVDataSource.module + '.jpg',
+                PaschTVDataSource.showMetaData
+            ),
+            # Netzprediger
+            ListItem(
+                NetzpredigerDataSource.id,
+                ADDON.getLocalizedString(30250),
+                resources.lib.assembleListURL(NetzpredigerDataSource.module),
+                ADDON_BASE_PATH + '/resources/media/banner-' + NetzpredigerDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + NetzpredigerDataSource.module + '.jpg',
+                NetzpredigerDataSource.showMetaData
+            ),
         ]
     
     def getContentMode(self):
@@ -204,7 +222,7 @@ class FKTVDataSource(DataSource):
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/media/fanart-fktv.jpg',
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                     metaData,
                     streamInfo,
                     False
@@ -375,7 +393,7 @@ class PTVDataSource(DataSource):
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/media/fanart-ptv.jpg',
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                     metaData,
                     streamInfo,
                     False
@@ -461,7 +479,7 @@ class PSDataSource(DataSource):
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/media/fanart-ps.jpg',
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                     metaData,
                     streamInfo,
                     False
@@ -554,7 +572,7 @@ class MGTVDataSource(DataSource):
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/media/fanart-mgtv.jpg',
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
                     metaData,
                     streamInfo,
                     False
@@ -615,6 +633,162 @@ class MGTVDataSource(DataSource):
             )
         ]
 
+class PaschTVDataSource(DataSource):
+    id           = 4
+    module       = 'paschtv'
+    showMetaData = {
+        'Title'    : ADDON.getLocalizedString(30240),
+        'Director' :'Holger Kreymeier,',
+        'Genre'    : ADDON.getLocalizedString(30241),
+        'Premiered':'10.10.2013',
+        'Country'  : ADDON.getLocalizedString(30242),
+        'Plot'     : ADDON.getLocalizedString(30243)
+    }
+    
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'hd'),
+            },
+            'mobile' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'mobile'),
+            },
+            'audio' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'audio'),
+            }
+        }
+    
+    def getListItems(self):
+        audioOnly = ADDON.getSetting('content.audioOnly')
+        
+        quality = None
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'hd'
+            else:
+                quality = 'mobile'
+        
+        data      = resources.lib.parseRSSFeed(self.__urls[quality]['all'], True)
+        listItems = []
+        
+        for i in data:
+            iconimage = self.__getThumbnailURL(i['guid'])
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30241),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30242),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+            
+            listItems.append(
+                ListItem(
+                    self.id,
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+        
+        return listItems
+    
+    def getContentMode(self):
+        return 'episodes'
+    
+    def __getThumbnailURL(self, guid):
+        return 'http://massengeschmack.tv/img/mag/' + guid + '.jpg'
+
+class NetzpredigerDataSource(DataSource):
+    id           = 5
+    module       = 'netzprediger'
+    showMetaData = {
+        'Title'    : ADDON.getLocalizedString(30250),
+        'Director' :'Holger Kreymeier,',
+        'Genre'    : ADDON.getLocalizedString(30251),
+        'Premiered':'10.10.2013',
+        'Country'  : ADDON.getLocalizedString(30252),
+        'Plot'     : ADDON.getLocalizedString(30253)
+    }
+    
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'hd'),
+            },
+            'mobile' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'mobile'),
+            },
+            'audio' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'audio'),
+            }
+        }
+    
+    def getListItems(self):
+        audioOnly = ADDON.getSetting('content.audioOnly')
+        
+        quality = None
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'hd'
+            else:
+                quality = 'mobile'
+        
+        data      = resources.lib.parseRSSFeed(self.__urls[quality]['all'], True)
+        listItems = []
+        
+        for i in data:
+            iconimage = self.__getThumbnailURL(i['guid'])
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30251),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30252),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+            
+            listItems.append(
+                ListItem(
+                    self.id,
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+        
+        return listItems
+    
+    def getContentMode(self):
+        return 'episodes'
+    
+    def __getThumbnailURL(self, guid):
+        name    = guid[:12]
+        episode = guid[13:]
+        return 'http://massengeschmack.tv/img/mag/' + name + episode + '.jpg'
+
 
 def createDataSource(module=''):
     """
@@ -622,7 +796,7 @@ def createDataSource(module=''):
     If left empty, an overview data source will be generated.
     
     @type module: str
-    @keyword module: the magazine name (fktv, ptv, ps, mgtv, ...)
+    @keyword module: the magazine name (fktv, ptv, ps, mgtv, paschtv, netzprediger)
     @return: DataSource instance
     """
     if 'fktv' == module:
@@ -633,5 +807,9 @@ def createDataSource(module=''):
         return PSDataSource()
     elif 'mgtv' == module:
         return MGTVDataSource()
+    elif 'paschtv' == module:
+        return PaschTVDataSource()
+    elif 'netzprediger' == module:
+        return NetzpredigerDataSource()
     else:
         return DataSource()
