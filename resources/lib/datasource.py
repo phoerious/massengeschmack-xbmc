@@ -71,15 +71,6 @@ class DataSource(object):
                 ADDON_BASE_PATH + '/resources/media/fanart-' + PSDataSource.module + '.jpg',
                 PSDataSource.showMetaData
             ),
-            # Massengeschmack-TV
-            ListItem(
-                MGTVDataSource.id,
-                ADDON.getLocalizedString(30230),
-                resources.lib.assembleListURL(MGTVDataSource.module),
-                ADDON_BASE_PATH + '/resources/media/banner-' + MGTVDataSource.module + '.png',
-                ADDON_BASE_PATH + '/resources/media/fanart-' + MGTVDataSource.module + '.jpg',
-                MGTVDataSource.showMetaData
-            ),
             # Pasch-TV
             ListItem(
                 PaschTVDataSource.id,
@@ -97,6 +88,15 @@ class DataSource(object):
                 ADDON_BASE_PATH + '/resources/media/banner-' + NetzpredigerDataSource.module + '.png',
                 ADDON_BASE_PATH + '/resources/media/fanart-' + NetzpredigerDataSource.module + '.jpg',
                 NetzpredigerDataSource.showMetaData
+            ),
+            # Massengeschmack-TV
+            ListItem(
+                MGTVDataSource.id,
+                ADDON.getLocalizedString(30230),
+                resources.lib.assembleListURL(MGTVDataSource.module),
+                ADDON_BASE_PATH + '/resources/media/banner-' + MGTVDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + MGTVDataSource.module + '.jpg',
+                MGTVDataSource.showMetaData
             ),
         ]
     
