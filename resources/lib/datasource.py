@@ -708,6 +708,8 @@ class PaschTVDataSource(DataSource):
         return 'episodes'
     
     def __getThumbnailURL(self, guid):
+        if 'pasch2' == guid:
+            guid = 'paschtv2'
         return 'http://massengeschmack.tv/img/mag/' + guid + '.jpg'
 
 class NetzpredigerDataSource(DataSource):
