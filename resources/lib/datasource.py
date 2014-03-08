@@ -245,6 +245,8 @@ class FKTVDataSource(DataSource):
         if 'fktv' == guid[0:4]:
             return basePath1 + 'folge' + guid[4:] + '@2x.jpg'
         elif 'postecke' == guid[0:8]:
+            if 128 < int(guid[8:]):
+                return basePath3 + guid + '.jpg'
             return basePath2 + 'postecke.jpg'
         elif 'interview-' == guid[0:10]:
             if 'remote' == guid[10:]:
