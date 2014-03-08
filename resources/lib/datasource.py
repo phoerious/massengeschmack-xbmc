@@ -242,19 +242,25 @@ class FKTVDataSource(DataSource):
         basePath2 = 'http://massengeschmack.tv/img/mag/'
         basePath3 = 'http://dl.massengeschmack.tv/img/mag/'
         
-        if 'fktv' == guid[0:4]:
+        if 'fktv' == guid[:4]:
+            # if new Postecke or new FKTV episode
+            if -1 != guid[4:].find('-') or 128 < int(guid[4:]):
+                return basePath3 + guid + '.jpg'
             return basePath1 + 'folge' + guid[4:] + '@2x.jpg'
-        elif 'postecke' == guid[0:8]:
+        elif 'postecke' == guid[:8]:
+            # if newer Postecke
             if 128 < int(guid[8:]):
                 return basePath3 + guid + '.jpg'
             return basePath2 + 'postecke.jpg'
-        elif 'interview-' == guid[0:10]:
+        elif 'interview-' == guid[:10]:
+            # ugly fixes for single episodes
             if 'remote' == guid[10:]:
-                # ugly fix for single episode
                 return basePath2 + 'remotecontrol.jpg'
+            elif 'weber' == guid[10:]:
+                return basePath3 + 'interview-' + guid[10:] + '.jpg'
             
             return basePath2 + guid[10:] + '.jpg'
-        elif 'sendeschluss' == guid[0:12] and 14 < int(guid[12:]):
+        elif 'sendeschluss' == guid[:12] and 14 < int(guid[12:]):
             return basePath3 + guid + '.jpg'
         
         return basePath2 + guid + '.jpg'
