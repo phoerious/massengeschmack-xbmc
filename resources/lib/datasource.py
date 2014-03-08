@@ -240,17 +240,20 @@ class FKTVDataSource(DataSource):
     def __getThumbnailURL(self, guid):
         basePath1 = 'http://fernsehkritik.tv/images/magazin/'
         basePath2 = 'http://massengeschmack.tv/img/mag/'
+        basePath3 = 'http://dl.massengeschmack.tv/img/mag/'
         
         if 'fktv' == guid[0:4]:
             return basePath1 + 'folge' + guid[4:] + '@2x.jpg'
-        if 'postecke' == guid[0:8]:
+        elif 'postecke' == guid[0:8]:
             return basePath2 + 'postecke.jpg'
-        if 'interview-' == guid[0:10]:
+        elif 'interview-' == guid[0:10]:
             if 'remote' == guid[10:]:
                 # ugly fix for single episode
                 return basePath2 + 'remotecontrol.jpg'
             
             return basePath2 + guid[10:] + '.jpg'
+        elif 'sendeschluss' == guid[0:12] and 14 < int(guid[12:]):
+            return basePath3 + guid + '.jpg'
         
         return basePath2 + guid + '.jpg'
     
