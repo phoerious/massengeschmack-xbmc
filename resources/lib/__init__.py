@@ -265,7 +265,7 @@ def parseUTCDateString(datestr):
     """
     # work around Python bug
     date   = None
-    format = '%a, %d %b %y %H:%M:%S'
+    format = '%a, %d %b %Y %H:%M:%S'
     try:
         date = datetime.strptime(datestr[:-6], format)
     except TypeError:
