@@ -417,15 +417,19 @@ class PTVDataSource(DataSource):
         return 'episodes'
     
     def __getThumbnailURL(self, guid):
-        episodeNumber = '1'
-        if 'ptv-pilot' == guid[:9]:
-            if 'ptv-pilot' != guid:
-                # if not very first episode
-                episodeNumber= guid[9:]
-        else:
-            episodeNumber = guid[4:]
+        # if old PTV episode
+        if 13 > int(guid[4:]):
+            episodeNumber = '1'
+            if 'ptv-pilot' == guid[:9]:
+                if 'ptv-pilot' != guid:
+                    # if not very first episode
+                    episodeNumber= guid[9:]
+            else:
+                episodeNumber = guid[4:]
             
-        return 'http://pantoffel.tv/img/thumbs/ptv' + episodeNumber + '_shot1@2x.jpg'
+            return 'http://pantoffel.tv/img/thumbs/ptv' + episodeNumber + '_shot1@2x.jpg'
+        
+        return 'http://dl.massengeschmack.tv/img/mag/' + guid + '.jpg'
 
 
 class PSDataSource(DataSource):
@@ -599,10 +603,11 @@ class MGTVDataSource(DataSource):
         return 'tvshows'
     
     def __getThumbnailURL(self, guid):
-        if 'studio-' == guid[:7]:
-            return 'http://massengeschmack.tv/img/mag/studio' + guid[7:] + '.jpg'
+        # if 'studio-' == guid[:7]:
+        #     return 'http://massengeschmack.tv/img/mag/studio' + guid[7:] + '.jpg'
         
-        return 'http://massengeschmack.tv/img/mgfeedlogo.jpg'
+        # return 'http://massengeschmack.tv/img/mgfeedlogo.jpg'
+        return 'http://dl.massengeschmack.tv/img/mag/' + guid + '.jpg'
     
     def __getBaseList(self):
         return [
@@ -798,9 +803,13 @@ class NetzpredigerDataSource(DataSource):
         return 'episodes'
     
     def __getThumbnailURL(self, guid):
-        name    = guid[:12]
-        episode = guid[13:]
-        return 'http://massengeschmack.tv/img/mag/' + name + episode + '.jpg'
+        # if old Netzprediger episode
+        if 6 > int(guid[13:]):
+            name    = guid[:12]
+            episode = guid[13:]
+            return 'http://massengeschmack.tv/img/mag/' + name + episode + '.jpg'
+        
+        return 'http://dl.massengeschmack.tv/img/mag/' + guid + '.jpg'
 
 
 def createDataSource(module=''):
