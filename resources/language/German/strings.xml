@@ -51,6 +51,11 @@
     <string id="30252">Deutschland</string>
     <string id="30253">Netzprediger ist ein Online-Magazin über das Internet mit all seinen hellen und dunklen Seiten: Spaß, Betrug und Absurditäten, aufgedeckt von Moderator Nils Beckmann.</string>
     
+    <string id="30260">Asynchron</string>
+    <string id="30261">Filme, Serien</string>
+    <string id="30262">Germany</string>
+    <string id="30263">Asynchron beschäftigt sich mit der Synchronisation von Serien und Filmen. Wie gut sind die Sprecher? Wie nah am Original sind die Dialoge?</string>
+    
     <!-- Listings (general) -->
     <string id="30300">Alle</string>
     <string id="30301">Folgen</string>

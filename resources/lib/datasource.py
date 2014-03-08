@@ -89,6 +89,15 @@ class DataSource(object):
                 ADDON_BASE_PATH + '/resources/media/fanart-' + NetzpredigerDataSource.module + '.jpg',
                 NetzpredigerDataSource.showMetaData
             ),
+            # Asynchron
+            ListItem(
+                AsynchronDataSource.id,
+                ADDON.getLocalizedString(30260),
+                resources.lib.assembleListURL(AsynchronDataSource.module),
+                ADDON_BASE_PATH + '/resources/media/banner-' + AsynchronDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + AsynchronDataSource.module + '.jpg',
+                AsynchronDataSource.showMetaData
+            ),
             # Massengeschmack-TV
             ListItem(
                 MGTVDataSource.id,
@@ -733,7 +742,7 @@ class NetzpredigerDataSource(DataSource):
     module       = 'netzprediger'
     showMetaData = {
         'Title'    : ADDON.getLocalizedString(30250),
-        'Director' :'Holger Kreymeier,',
+        'Director' :'Holger Kreymeier',
         'Genre'    : ADDON.getLocalizedString(30251),
         'Premiered':'10.10.2013',
         'Country'  : ADDON.getLocalizedString(30252),
@@ -833,5 +842,111 @@ def createDataSource(module=''):
         return PaschTVDataSource()
     elif 'netzprediger' == module:
         return NetzpredigerDataSource()
+    else:
+        return DataSource()
+
+class AsynchronDataSource(DataSource):
+    id           = 6
+    module       = 'asynchron'
+    showMetaData = {
+        'Title'    : ADDON.getLocalizedString(30260),
+        'Director' :'Evgenij Cernov',
+        'Genre'    : ADDON.getLocalizedString(30261),
+        'Premiered':'26.02.2014',
+        'Country'  : ADDON.getLocalizedString(30262),
+        'Plot'     : ADDON.getLocalizedString(30263)
+    }
+    
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'hd'),
+            },
+            'mobile' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'mobile'),
+            },
+            'audio' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'audio'),
+            }
+        }
+    
+    def getListItems(self):
+        audioOnly = ADDON.getSetting('content.audioOnly')
+        
+        quality = None
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'hd'
+            else:
+                quality = 'mobile'
+        
+        data      = resources.lib.parseRSSFeed(self.__urls[quality]['all'], True)
+        listItems = []
+        
+        for i in data:
+            iconimage = self.__getThumbnailURL(i['guid'])
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30261),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30262),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+            
+            listItems.append(
+                ListItem(
+                    self.id,
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+        
+        return listItems
+    
+    def getContentMode(self):
+        return 'episodes'
+    
+    def __getThumbnailURL(self, guid):
+        if '1' == guid[10:]:
+            return 'http://dl.massengeschmack.tv/img/screens/' + guid + '.jpg'
+        return 'http://dl.massengeschmack.tv/img/mag/' + guid + '.jpg'
+
+
+def createDataSource(module=''):
+    """
+    Create a data source object based on the magazine name.
+    If left empty, an overview data source will be generated.
+    
+    @type module: str
+    @keyword module: the magazine name (fktv, ptv, ps, mgtv, paschtv, netzprediger)
+    @return: DataSource instance
+    """
+    if 'fktv' == module:
+        return FKTVDataSource()
+    elif 'ptv' == module:
+        return PTVDataSource()
+    elif 'ps' == module:
+        return PSDataSource()
+    elif 'mgtv' == module:
+        return MGTVDataSource()
+    elif 'paschtv' == module:
+        return PaschTVDataSource()
+    elif 'netzprediger' == module:
+        return NetzpredigerDataSource()
+    elif 'asynchron' == module:
+        return AsynchronDataSource()
     else:
         return DataSource()
