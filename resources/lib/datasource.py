@@ -919,7 +919,7 @@ def createDataSource(module=''):
     If left empty, an overview data source will be generated.
     
     @type module: str
-    @keyword module: the magazine name (fktv, ptv, ps, mgtv, paschtv, netzprediger)
+    @keyword module: the magazine name (fktv, ptv, ps, mgtv, paschtv, netzprediger, asynchron)
     @return: DataSource instance
     """
     if 'fktv' == module:
