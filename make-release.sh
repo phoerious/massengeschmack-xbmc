@@ -35,7 +35,14 @@ fi
 
 # Update manifest
 echo -e "${_CLR_GREEN}Stashing working directory...${_CLR_NONE}"
-git stash
+
+changesStashed=true
+if [ -z $(git status --porcelain) ]; then
+    changesStashed=false
+else
+    git stash
+fi
+
 echo -e "${_CLR_GREEN}Updating manifest...${_CLR_NONE}"
 manifest=$(< addon.xml)
 echo "$manifest" | sed 's/ name="Massengeschmack" version="[^"]\+" / name="Massengeschmack" version="'"${VERSION_NUMBER}"'" /' > addon.xml
@@ -71,8 +78,10 @@ git commit -m "Update changelog -cl"
 echo -e "${_CLR_GREEN}Tagging release...${_CLR_NONE}"
 git tag -a "v${VERSION_NUMBER}" -m "Version ${VERSION_NUMBER} (${VERSION_DESC})"
 
-echo -e "${_CLR_GREEN}Re-applying and popping stash...${_CLR_NONE}"
-git stash pop
+if $changesStashed; then
+    echo -e "${_CLR_GREEN}Re-applying and popping stash...${_CLR_NONE}"
+    git stash pop
+fi
 
 # Export ZIP file
 filename="plugin.video.massengeschmack-${VERSION_NUMBER}.zip"
