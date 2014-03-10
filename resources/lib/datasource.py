@@ -516,9 +516,15 @@ class PSDataSource(DataSource):
         return 'episodes'
     
     def __getThumbnailURL(self, guid):
+        baseURL = 'http://dl.massengeschmack.tv/img/mag/'
+        
         if 'ps-pilot' == guid:
             guid = 'ps1'
-        return 'http://massengeschmack.tv/img/ps/' + guid + '.jpg'
+        
+        if 11 > int(guid[2:]):
+            baseURL = 'http://massengeschmack.tv/img/ps/'
+        
+        return baseURL + guid + '.jpg'
 
 
 class MGTVDataSource(DataSource):
@@ -733,9 +739,15 @@ class PaschTVDataSource(DataSource):
         return 'episodes'
     
     def __getThumbnailURL(self, guid):
+        baseURL = 'http://dl.massengeschmack.tv/img/mag/'
+        
+        if 6 > int(guid[5:]):
+            baseURL = 'http://massengeschmack.tv/img/mag/'
+        
         if 'pasch2' == guid:
             guid = 'paschtv2'
-        return 'http://massengeschmack.tv/img/mag/' + guid + '.jpg'
+        
+        return baseURL + guid + '.jpg'
 
 class NetzpredigerDataSource(DataSource):
     id           = 5
