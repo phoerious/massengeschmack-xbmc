@@ -85,8 +85,8 @@ class DataSource(object):
                 NetzpredigerDataSource.id,
                 ADDON.getLocalizedString(30250),
                 resources.lib.assembleListURL(NetzpredigerDataSource.module),
-                ADDON_BASE_PATH + '/resources/media/banner-' + NetzpredigerDataSource.module + '.png',
-                ADDON_BASE_PATH + '/resources/media/fanart-' + NetzpredigerDataSource.module + '.jpg',
+                ADDON_BASE_PATH + '/resources/media/banner-' + NetzpredigerDataSource.module + '_20140310.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + NetzpredigerDataSource.module + '_20140310.jpg',
                 NetzpredigerDataSource.showMetaData
             ),
             # Asynchron
