@@ -811,7 +811,7 @@ class NetzpredigerDataSource(DataSource):
                     i['title'],
                     resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
                     iconimage,
-                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '_20140310.jpg',
                     metaData,
                     streamInfo,
                     False
