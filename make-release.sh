@@ -10,12 +10,17 @@ _CLR_GREEN='\e[1;32m'
 _CLR_RED='\e[1;31m'
 _CLR_NONE='\e[0m'
 
+if $(git tag | grep -q "^v${VERSION_NUMBER}$"); then
+    echo -e "${_CLR_RED}Version '${VERSION_NUMBER}' already exists, please choose another or exit with Ctrl+C.${_CLR_NONE}" >&2
+    VERSION_NUMBER=""
+fi
+
 while [[ "" == $VERSION_NUMBER ]]; do
     echo -n "Please enter the version number: "
     read VERSION_NUMBER
     
     if $(git tag | grep -q "^v${VERSION_NUMBER}$"); then
-        echo "Version '${VERSION_NUMBER}' already exists, please choose another or exit with Ctrl+C." >&2
+        echo -e "${_CLR_RED}Version '${VERSION_NUMBER}' already exists, please choose another or exit with Ctrl+C.${_CLR_NONE}" >&2
         VERSION_NUMBER=""
     fi
 done
