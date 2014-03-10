@@ -833,30 +833,6 @@ class NetzpredigerDataSource(DataSource):
         return 'http://dl.massengeschmack.tv/img/mag/' + guid + '.jpg'
 
 
-def createDataSource(module=''):
-    """
-    Create a data source object based on the magazine name.
-    If left empty, an overview data source will be generated.
-    
-    @type module: str
-    @keyword module: the magazine name (fktv, ptv, ps, mgtv, paschtv, netzprediger)
-    @return: DataSource instance
-    """
-    if 'fktv' == module:
-        return FKTVDataSource()
-    elif 'ptv' == module:
-        return PTVDataSource()
-    elif 'ps' == module:
-        return PSDataSource()
-    elif 'mgtv' == module:
-        return MGTVDataSource()
-    elif 'paschtv' == module:
-        return PaschTVDataSource()
-    elif 'netzprediger' == module:
-        return NetzpredigerDataSource()
-    else:
-        return DataSource()
-
 class AsynchronDataSource(DataSource):
     id           = 6
     module       = 'asynchron'
