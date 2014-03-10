@@ -48,10 +48,10 @@ manifest=$(< addon.xml)
 echo "$manifest" | sed 's/ name="Massengeschmack" version="[^"]\+" / name="Massengeschmack" version="'"${VERSION_NUMBER}"'" /' > addon.xml
 
 # Update changelog
-echo "${_CLR_GREEN}Updating changelog...${_CLR_NONE}"
+echo -e "${_CLR_GREEN}Updating changelog...${_CLR_NONE}"
 changelog=$(git log $(git describe --tags --abbrev=0)..HEAD --oneline -E -i --grep=" +cl$" --format=" - %s") | grep -Ev " -cl"
 if [[ "" == $changelog ]]; then
-    echo "${_CLR_RED}No commits marked for changelog inclusion, trying to assemble changelog automatically...${_CLR_NONE}" >&2
+    echo -e "${_CLR_RED}No commits marked for changelog inclusion, trying to assemble changelog automatically...${_CLR_NONE}" >&2
     changelog=$(git log $(git describe --tags --abbrev=0)..HEAD --oneline -E -i --grep="^(Add|Fix|Update|Remove) " --format=" - %s") | grep -Ev " -cl"
 fi
 
