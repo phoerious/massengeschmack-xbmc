@@ -60,7 +60,10 @@ class Listing:
         xbmcListItem = xbmcgui.ListItem(listItem.getData('name'), iconImage=listItem.getData('thumbnail'), thumbnailImage=listItem.getData('thumbnail'))
         xbmcListItem.setInfo(type='video', infoLabels=listItem.getData('metaData'))
         xbmcListItem.setProperty('fanart_image', listItem.getData('fanart'))
-        xbmcListItem.addStreamInfo('video', listItem.getData('streamInfo'))
+        # fix for XBMC4Xbox
+        if hasattr(xbmcListItem, 'addStreamInfo'):
+            xbmcListItem.addStreamInfo('video', listItem.getData('streamInfo'))
+        
         xbmcplugin.addDirectoryItem(ADDON_HANDLE, url=listItem.getData('url'), listitem=xbmcListItem, isFolder=listItem.getData('isFolder'))
 
 
