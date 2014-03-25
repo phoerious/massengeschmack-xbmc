@@ -17,6 +17,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import xbmcaddon
+import xbmc
 import urlparse
 import sys
 import json
@@ -35,3 +36,5 @@ HTTP_USER_AGENT      = 'Massengeschmack XBMC add-on v' + ADDON_VERSION
 HTTP_TIMEOUT         = 20
 HTTP_BASE_URI        = 'https://massengeschmack.tv/'
 HTTP_BASE_FEED_URI   = HTTP_BASE_URI + 'feed/'
+
+IS_XBOX = bool(xbmc.getCondVisibility("System.Platform.xbox"))

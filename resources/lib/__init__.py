@@ -315,8 +315,8 @@ def parseUTCDateString(datestr):
     # add timezone info which isn't possible using %z in Python 2
     offset  = int(datestr[-5:-2]) * 60
     offset += int(datestr[-5:-4] + '1') * int(datestr[-2:])
-    offset = TZOffset(offset)
-    date = date.replace(tzinfo=offset)
+    offset  = TZOffset(offset)
+    date    = date.replace(tzinfo=offset)
     
     return date
 
@@ -326,8 +326,25 @@ def dictUrlEncode(data):
     
     @type data: dict
     @param data: the data structure
+    @return URL encoded string
     """
     return urllib.quote(json.dumps(data, separators=(',', ':')))
+
+def getPluginBaseURL():
+    """
+    Return the base plugin:// URL for this plugin (may be different on different platforms)
+    
+    @return the URL string
+    """
+    
+    url = 'plugin://'
+    
+    if IS_XBOX:
+        url += ADDON_NAME
+    else:
+        url += ADDON_ID
+    
+    return url
 
 def assembleListURL(module=None, submodule=None, mode=None):
     """
@@ -339,8 +356,11 @@ def assembleListURL(module=None, submodule=None, mode=None):
     @param submodule: the name of the sub module to list (requires module to be set)
     @type mode: str
     @param mode: a mode for a submodule (requires submodule to be set)
+    @return the URL
     """
-    url = 'plugin://' + ADDON_ID + '/?cmd=list'
+    
+    url = getPluginBaseURL() + '/?cmd=list'
+    
     if None == module:
         return url
     
@@ -371,7 +391,7 @@ def assemblePlayURL(url, name='', iconImage='', metaData={}, streamInfo={}):
     if '#' == url or '' == url:
         return '#'
     
-    return 'plugin://' + ADDON_ID + '/?cmd=play&url=' + urllib.quote(url) + \
-           '&name=' + urllib.quote(name) + '&iconimage=' + urllib.quote(iconImage) + \
-           '&metadata=' + dictUrlEncode(metaData) + \
-           '&streaminfo=' + dictUrlEncode(streamInfo)
+    return getPluginBaseURL() + '/?cmd=play&url=' + urllib.quote(url) + \
+          '&name=' + urllib.quote(name) + '&iconimage=' + urllib.quote(iconImage) + \
+          '&metadata=' + dictUrlEncode(metaData) + \
+          '&streaminfo=' + dictUrlEncode(streamInfo)
