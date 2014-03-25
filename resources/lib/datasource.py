@@ -18,6 +18,7 @@
 
 import xbmcgui
 import urllib
+import datetime
 from globalvars import *
 import resources.lib
 from resources.lib.listing import *
@@ -107,6 +108,15 @@ class DataSource(object):
                 ADDON_BASE_PATH + '/resources/media/fanart-' + MGTVDataSource.module + '.jpg',
                 MGTVDataSource.showMetaData
             ),
+            # Live
+            ListItem(
+                LiveDataSource.id,
+                ADDON.getLocalizedString(30270),
+                resources.lib.assembleListURL(LiveDataSource.module),
+                ADDON_BASE_PATH + '/resources/media/banner-' + LiveDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + LiveDataSource.module + '.jpg',
+                LiveDataSource.showMetaData
+            ),
         ]
     
     def getContentMode(self):
@@ -146,6 +156,150 @@ class DataSource(object):
         
         return url
 
+
+class LiveDataSource(DataSource):
+    id           = -9999
+    module       = 'live'
+    showMetaData = {
+        'Title'    : ADDON.getLocalizedString(30270),
+        'Country'  : ADDON.getLocalizedString(30271),
+        'Plot'     : ADDON.getLocalizedString(30272)
+    }
+    
+    def __init__(self):
+        self.__shows    = resources.lib.getLiveShows()
+        self.__current  = []
+        self.__upcoming = []
+        self.__isLive   = False
+        
+        for i in self.__shows:
+            if i['isLive']:
+                self.__isLive = True
+                self.__current.append(i)
+            else:
+                self.__upcoming.append(i)
+    
+    def getListItems(self):
+        listItems = []
+        
+        if [] != self.__current:
+            listItems.append(
+                ListItem(
+                    self.id,
+                    ADDON.getLocalizedString(30273),
+                    '#',
+                    ADDON_BASE_PATH + '/resources/media/banner-' + LiveDataSource.module + '.png',
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + LiveDataSource.module + '.jpg',
+                    {
+                        'Plot' : ADDON.getLocalizedString(30274)
+                    }
+                )
+            )
+            
+            listItems.extend(self.__createShowListing(self.__current, True))
+            
+        if [] != self.__upcoming:
+            listItems.append(
+                ListItem(
+                    self.id,
+                    ADDON.getLocalizedString(30275),
+                    '#',
+                    ADDON_BASE_PATH + '/resources/media/banner-' + LiveDataSource.module + '.png',
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + LiveDataSource.module + '.jpg',
+                    {
+                        'Plot' : ADDON.getLocalizedString(30276)
+                    }
+                )
+            )
+            listItems.extend(self.__createShowListing(self.__upcoming))
+        
+        return listItems
+    
+    def getContentMode(self):
+        return 'episodes'
+    
+    def __createShowListing(self, shows, isLive=False):
+        listItems = []
+        
+        for i in shows:
+            iconimage = self.__getThumbnailURL(i['pid'])
+            plot      = i['oneliner']
+            time      = datetime.datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y, %H:%M:%S')
+            date      = datetime.datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y')
+            name      = self.__getShowName(int(i['pid']))
+            
+            if None == plot:
+                plot = ''
+            else:
+                plot += '\n\n'
+            
+            plot += ADDON.getLocalizedString(30277).format(name, time)
+            
+            metaData  = {
+                'Title'     : name,
+                'Date'      : date,
+                'Premiered' : date,
+                'Plot'      : plot
+            }
+            
+            listName   = '    ' + name + ' [' + time + ']'
+            streamName = name + ' [' + ADDON.getLocalizedString(30270) + ']'
+            
+            isFolder = True
+            if True == isLive:
+                isFolder = False
+            
+            listItems.append(
+                ListItem(
+                    self.id,
+                    listName,
+                    resources.lib.assemblePlayURL(self.__getStreamURL(i['showid']), streamName, iconimage, metaData),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                    metaData,
+                    isFolder=isFolder
+                )
+            )
+        
+        return listItems
+    
+    def __getShowName(self, id):
+        if -3 == id:
+            # Livetalk
+            return ADDON.getLocalizedString(30280)
+        elif 0 == id:
+            # Massengeschmack-TV
+            return ADDON.getLocalizedString(30230)
+        elif 1 == id:
+            # FKTV
+            return ADDON.getLocalizedString(30200)
+        elif 2 == id:
+            # PantoffelTV
+            return ADDON.getLocalizedString(30210)
+        elif 3 == id:
+            # Pressesch(l)au
+            return ADDON.getLocalizedString(30220)
+        elif 4 == id:
+            # Pasch-TV
+            return ADDON.getLocalizedString(30240)
+        elif 5 == id:
+            # Netzprediger
+            return ADDON.getLocalizedString(30250)
+        elif 6 == id:
+            # Asynchron
+            return ADDON.getLocalizedString(30260)
+        else:
+            return '-'
+    
+    def __getStreamURL(self, showid):
+        info = resources.lib.getLiveStreamInfo(showid)
+        if False == info:
+            return '#'
+        return info['url']
+    
+    def __getThumbnailURL(self, id):
+        return 'http://massengeschmack.tv/img/logo' + str(id) + '_feed.jpg'
+    
 
 class FKTVDataSource(DataSource):
     id           = 1
@@ -922,7 +1076,9 @@ def createDataSource(module=''):
     @keyword module: the magazine name (fktv, ptv, ps, mgtv, paschtv, netzprediger, asynchron)
     @return: DataSource instance
     """
-    if 'fktv' == module:
+    if 'live' == module:
+        return LiveDataSource()
+    elif 'fktv' == module:
         return FKTVDataSource()
     elif 'ptv' == module:
         return PTVDataSource()

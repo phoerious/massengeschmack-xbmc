@@ -36,7 +36,7 @@ class Listing:
         items         = source.getListItems()
         subscriptions = resources.lib.getSubscriptions()
         for i in items:
-            if i.getData('id') in subscriptions:
+            if 0 > i.getData('id') or i.getData('id') in subscriptions:
                 self.__addDir(i)
     
     def show(self):

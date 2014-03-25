@@ -134,8 +134,8 @@ def cacheSubscriptions(subscriptions):
     """
     Cache active subscriptions to the add-on settings.
     
-    @type subscriptions: list
-    @param subscriptions: list of numeric IDs for all active subscriptions
+    @type subscriptions: subscriptions: list
+    @param: subscriptions: list of numeric IDs for all active subscriptions
     """
     __subscriptions = subscriptions
     ADDON.setSetting('account.subscriptions', json.dumps(subscriptions))
@@ -148,8 +148,10 @@ def getSubscriptions():
     from the server. Use fetchSubscriptions() for that and then write
     the fetched data to the cache using cacheSubscriptions().
     
-    @return list of subscriptions
+    @return: list of subscriptions
     """
+    global __subscriptions
+    
     subscriptions = []
     if None == __subscriptions:
         tmp = ADDON.getSetting('account.subscriptions')
@@ -160,6 +162,42 @@ def getSubscriptions():
     
     return subscriptions
 
+# live streams cache
+__liveShows = {}
+
+def getLiveShows():
+    """
+    Return a list of dictionaries with information about current and upcoming live shows.
+    This method does no exception handling, so make sure the login credentials are correct.
+    
+    @return: dictionary list of live streams
+    """
+    global __liveShows
+    if {} == __liveShows:
+        handle = openHTTPConnection(HTTP_BASE_URI + 'api/?action=listLiveShows')
+        __liveShows = json.loads(handle.read())
+        handle.close()
+    
+    return __liveShows
+
+def getLiveStreamInfo(id):
+    """
+    Fetch information about a particular live stream.
+    
+    @type id: str
+    @param id: the GUID of the live stream, False on error
+    """
+    handle = openHTTPConnection(HTTP_BASE_URI + 'api/?action=getPlaylistUrl&id=' + id)
+    streamInfo = handle.read()
+    handle.close()
+    
+    if 'ERROR: NO ACCESS OR STREAM NOT LIVE' == streamInfo:
+        return False
+    
+    streamInfo = json.loads(streamInfo)
+    
+    return streamInfo
+    
 
 # feed cache
 __fetchedFeeds = {}
@@ -327,6 +365,9 @@ def assemblePlayURL(url, name='', iconImage='', metaData={}, streamInfo={}):
     @type streamInfo: dict
     @param: streamInfo: technical info about the stream (such as the duration or resolution)
     """
+    if '#' == url or '' == url:
+        return '#'
+    
     return 'plugin://' + ADDON_ID + '/?cmd=play&url=' + urllib.quote(url) + \
            '&name=' + urllib.quote(name) + '&iconimage=' + urllib.quote(iconImage) + \
            '&metadata=' + dictUrlEncode(metaData) + \

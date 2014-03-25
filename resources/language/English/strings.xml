@@ -55,6 +55,17 @@
     <string id="30261">Movies, TV Series</string>
     <string id="30262">Germany</string>
     <string id="30263">Asynchron is about dubbing of TV series and movies. How good are the voice actors? How closely related to the original are the dialogs?</string>
+
+    <string id="30270">LIVE</string>
+    <string id="30271">Germany</string>
+    <string id="30272">Massengeschmack Live streams</string>
+    <string id="30273">Live:</string>
+    <string id="30274">The following shows are currently online</string>
+    <string id="30275">Upcoming:</string>
+    <string id="30276">Shows coming live next</string>
+    <string id="30277">Live stream: {0}[CR]Air date: {1}</string>
+    
+    <string id="30280">Livetalk</string>
     
     <!-- Listings (general) -->
     <string id="30300">All</string>

@@ -56,6 +56,15 @@
     <string id="30262">Germany</string>
     <string id="30263">Asynchron beschäftigt sich mit der Synchronisation von Serien und Filmen. Wie gut sind die Sprecher? Wie nah am Original sind die Dialoge?</string>
     
+    <string id="30270">LIVE</string>
+    <string id="30271">Deutschland</string>
+    <string id="30272">Massengeschmack Live-Streams</string>
+    <string id="30273">Live:</string>
+    <string id="30274">Die folgenden Sendungen sind gerade online</string>
+    <string id="30275">Upcoming:</string>
+    <string id="30276">Sendungen, die demnächst online kommen</string>
+    <string id="30277">Live-Stream: {0}[CR]Sendedatum: {1}</string>
+    
     <!-- Listings (general) -->
     <string id="30300">Alle</string>
     <string id="30301">Folgen</string>
