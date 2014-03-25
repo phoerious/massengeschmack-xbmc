@@ -340,7 +340,7 @@ def getPluginBaseURL():
     url = 'plugin://'
     
     if IS_XBOX:
-        url += ADDON_NAME
+        url += 'video/' + ADDON_NAME
     else:
         url += ADDON_ID
     
