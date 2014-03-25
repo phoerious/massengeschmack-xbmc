@@ -1,3 +1,6 @@
+0.3.3beta2
+ - Add plugin path fixes for XBMC4XBOX
+
 0.3.3beta
  - Add fix for XBMC4Xbox
 
