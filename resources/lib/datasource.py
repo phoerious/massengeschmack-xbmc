@@ -188,7 +188,7 @@ class LiveDataSource(DataSource):
                     self.id,
                     ADDON.getLocalizedString(30273),
                     '#',
-                    ADDON_BASE_PATH + '/resources/media/banner-' + LiveDataSource.module + '.png',
+                    self.__getThumbnailURL(0),
                     ADDON_BASE_PATH + '/resources/media/fanart-' + LiveDataSource.module + '.jpg',
                     {
                         'Plot' : ADDON.getLocalizedString(30274)
@@ -204,7 +204,7 @@ class LiveDataSource(DataSource):
                     self.id,
                     ADDON.getLocalizedString(30275),
                     '#',
-                    ADDON_BASE_PATH + '/resources/media/banner-' + LiveDataSource.module + '.png',
+                    self.__getThumbnailURL(0),
                     ADDON_BASE_PATH + '/resources/media/fanart-' + LiveDataSource.module + '.jpg',
                     {
                         'Plot' : ADDON.getLocalizedString(30276)
