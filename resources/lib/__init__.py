@@ -187,12 +187,15 @@ def getLiveStreamInfo(id):
     @type id: str
     @param id: the GUID of the live stream, False on error
     """
-    handle = openHTTPConnection(HTTP_BASE_URI + 'api/?action=getPlaylistUrl&id=' + id)
-    streamInfo = handle.read()
-    handle.close()
-    
-    if 'ERROR: NO ACCESS OR STREAM NOT LIVE' == streamInfo:
+    try:
+        handle = openHTTPConnection(HTTP_BASE_URI + 'api/?action=getPlaylistUrl&id=' + id)
+    except urllib2.HTTPError, e:
         return False
+    except urllib2.URLError, e:
+        return False
+    else:
+        streamInfo = handle.read()
+        handle.close()
     
     streamInfo = json.loads(streamInfo)
     
