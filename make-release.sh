@@ -72,6 +72,9 @@ ${oldChangelog}"
     echo "$changelog" > changelog.txt
 fi
 
+echo -e "${_CLR_GREEN}Opening changelog for manual editing...${_CLR_NONE}"
+vim changelog.txt
+
 # Commit and tag changes
 echo -e "${_CLR_GREEN}Committing changes...${_CLR_NONE}"
 git add addon.xml
