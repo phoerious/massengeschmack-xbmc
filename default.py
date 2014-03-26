@@ -82,7 +82,8 @@ elif 'play' == ADDON_ARGS['cmd']:
     
     listitem = xbmcgui.ListItem(name, iconImage=iconImage, thumbnailImage=iconImage)
     listitem.setInfo('video', metaData)
-    listitem.addStreamInfo('video', streamInfo)
+    if not IS_XBOX:
+        listitem.addStreamInfo('video', streamInfo)
     playlist = xbmc.PlayList(1)
     playlist.clear()
     playlist.add(ADDON_ARGS['url'], listitem)
