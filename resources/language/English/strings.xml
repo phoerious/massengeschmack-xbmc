@@ -90,8 +90,8 @@
     <string id="30364">Massengeschmack announcements and uncategorized extras.</string>
     
     <!-- General runtime error messages -->
-    <string id="39901">Invalid internal command![CR]This is probably a bug. You should report it if it happens more often.</string>
-    <string id="39902">Request failed!</string>
-    <string id="39903">Could not complete request, maybe the network is down?</string>
-    <string id="39904">Could not complete request, server replied:</string>
+    <string id="30901">Invalid internal command![CR]This is probably a bug. You should report it if it happens more often.</string>
+    <string id="30902">Request failed!</string>
+    <string id="30903">Could not complete request, maybe the network is down?</string>
+    <string id="30904">Could not complete request, server replied:</string>
 </strings>

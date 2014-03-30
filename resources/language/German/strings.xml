@@ -88,8 +88,8 @@
     <string id="30364">Massengeschmack-Ankündigungen und unkategorisierte Extras.</string>
     
     <!-- General runtime error messages -->
-    <string id="39901">Ungültiges internes Kommando![CR]Dies ist möglicherweise ein Bug und Sie sollten ihn melden, wenn er häufiger auftritt.</string>
-    <string id="39902">Request fehlgeschlagen!</string>
-    <string id="39903">Konnte Request nicht ausführen, ist vielleicht das Netzwerk unerreichbar?</string>
-    <string id="39904">Konnte Request nicht ausführen, Server antwortete:</string>
+    <string id="30901">Ungültiges internes Kommando![CR]Dies ist möglicherweise ein Bug und Sie sollten ihn melden, wenn er häufiger auftritt.</string>
+    <string id="30902">Request fehlgeschlagen!</string>
+    <string id="30903">Konnte Request nicht ausführen, ist vielleicht das Netzwerk unerreichbar?</string>
+    <string id="30904">Konnte Request nicht ausführen, Server antwortete:</string>
 </strings>
