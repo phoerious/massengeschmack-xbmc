@@ -405,7 +405,7 @@ class FKTVDataSource(DataSource):
         basePath1 = 'http://fernsehkritik.tv/images/magazin/'
         basePath2 = 'http://massengeschmack.tv/img/mag/'
         basePath3 = 'http://dl.massengeschmack.tv/img/mag/'
-        print guid
+
         if 'fktv' == guid[:4]:
             # if new Postecke or new FKTV episode
             if -1 != guid[4:].find('-') or re.match(r'^fktv(\d+)interview\d+', guid) or 128 < int(guid[4:]):
