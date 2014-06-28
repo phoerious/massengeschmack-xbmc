@@ -389,7 +389,7 @@ class FKTVDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__getThumbnailURL(i['guid'])
+            iconimage = i["thumbUrl"]
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],
@@ -571,7 +571,7 @@ class PTVDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__getThumbnailURL(i['guid'])
+            iconimage = i['thumbUrl']
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],
@@ -661,7 +661,7 @@ class PSDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__getThumbnailURL(i['guid'])
+            iconimage = i['thumbUrl']
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],
@@ -760,7 +760,7 @@ class MGTVDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__getThumbnailURL(i['guid'])
+            iconimage = i['thumbUrl']
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],
@@ -884,7 +884,7 @@ class PaschTVDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__getThumbnailURL(i['guid'])
+            iconimage = i['thumbUrl']
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],
@@ -969,7 +969,7 @@ class NetzpredigerDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__getThumbnailURL(i['guid'])
+            iconimage = i['thumbUrl']
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],
@@ -1053,7 +1053,7 @@ class AsynchronDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__getThumbnailURL(i['guid'])
+            iconimage = i['thumbUrl']
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],
@@ -1132,7 +1132,7 @@ class TonangeberDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__getThumbnailURL(i['guid'])
+            iconimage = i['thumbUrl']
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],
@@ -1209,7 +1209,7 @@ class HoaxillaTVDataSource(DataSource):
         listItems = []
         
         for i in data:
-            iconimage = self.__getThumbnailURL(i['guid'])
+            iconimage = i['thumbUrl']
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
             metaData  = {
                 'Title'     : i['title'],

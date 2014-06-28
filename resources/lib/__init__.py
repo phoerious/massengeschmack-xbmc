@@ -279,6 +279,8 @@ def parseRSSFeed(feed, fetch=False):
         thumbUrlMatch = re.search('^<img src="([^"]+)" /><br>', description)
         if None != thumbUrlMatch:
             thumbUrl = thumbUrlMatch.group(1)
+            if None == re.match('^https?://', thumbUrl):
+                thumbUrl = HTTP_BASE_URI + re.sub('^/', '', thumbUrl)
 
         # strip HTML tags
         description = re.sub('<[^>]*>', '', description).strip()
