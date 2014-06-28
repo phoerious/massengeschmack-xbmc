@@ -100,6 +100,24 @@ class DataSource(object):
                 ADDON_BASE_PATH + '/resources/media/fanart-' + AsynchronDataSource.module + '.jpg',
                 AsynchronDataSource.showMetaData
             ),
+            # Tonangeber
+            ListItem(
+                TonangeberDataSource.id,
+                ADDON.getLocalizedString(30264),
+                resources.lib.assembleListURL(TonangeberDataSource.module),
+                ADDON_BASE_PATH + '/resources/media/banner-' + TonangeberDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + TonangeberDataSource.module + '.jpg',
+                TonangeberDataSource.showMetaData
+            ),
+            # Hoaxilla-TV
+            ListItem(
+                HoaxillaTVDataSource.id,
+                ADDON.getLocalizedString(30400),
+                resources.lib.assembleListURL(HoaxillaTVDataSource.module),
+                ADDON_BASE_PATH + '/resources/media/banner-' + HoaxillaTVDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + HoaxillaTVDataSource.module + '.jpg',
+                HoaxillaTVDataSource.showMetaData
+            ),
             # Massengeschmack-TV
             ListItem(
                 MGTVDataSource.id,
@@ -289,6 +307,12 @@ class LiveDataSource(DataSource):
         elif 6 == id:
             # Asynchron
             return ADDON.getLocalizedString(30260)
+        elif 7 == id:
+            # Tonangeber
+            return ADDON.getLocalizedString(30264)
+        elif 8 == id:
+            # Hoaxilla-TV
+            return ADDON.getLocalizedString(30400)
         else:
             return '-'
     
@@ -1067,6 +1091,159 @@ class AsynchronDataSource(DataSource):
             return 'http://dl.massengeschmack.tv/img/screens/' + guid + '.jpg'
         return 'http://dl.massengeschmack.tv/img/mag/' + guid + '.jpg'
 
+class TonangeberDataSource(DataSource):
+    id           = 7
+    module       = 'tonangeber'
+    showMetaData = {
+        'Title'    : ADDON.getLocalizedString(30264),
+        'Director' : 'Nils Beckmann, Holger Kreymeier',
+        'Genre'    : ADDON.getLocalizedString(30265),
+        'Premiered': '17.06.2014',
+        'Country'  : ADDON.getLocalizedString(30266),
+        'Plot'     : ADDON.getLocalizedString(30267)
+    }
+    
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'hd'),
+            },
+            'mobile' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'mobile'),
+            },
+            'audio' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'audio'),
+            }
+        }
+    
+    def getListItems(self):
+        audioOnly = ADDON.getSetting('content.audioOnly')
+        
+        quality = None
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'hd'
+            else:
+                quality = 'mobile'
+        
+        data      = resources.lib.parseRSSFeed(self.__urls[quality]['all'], True)
+        listItems = []
+        
+        for i in data:
+            iconimage = self.__getThumbnailURL(i['guid'])
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30265),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30266),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+            
+            listItems.append(
+                ListItem(
+                    self.id,
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+        
+        return listItems
+    
+    def getContentMode(self):
+        return 'episodes'
+    
+    def __getThumbnailURL(self, guid):
+        return 'http://dl.massengeschmack.tv/img/mag/' + guid + '.jpg'
+
+class HoaxillaTVDataSource(DataSource):
+    id           = 8
+    module       = 'hoaxillatv'
+    showMetaData = {
+        'Title'    : ADDON.getLocalizedString(30400),
+        'Director' : 'Alexa Waschkau, Alexander Waschkau, Holger Kreymeier',
+        'Genre'    : ADDON.getLocalizedString(30401),
+        'Premiered': '17.06.2014',
+        'Country'  : ADDON.getLocalizedString(30402),
+        'Plot'     : ADDON.getLocalizedString(30403)
+    }
+    
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'hd'),
+            },
+            'mobile' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'mobile'),
+            },
+            'audio' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'audio'),
+            }
+        }
+    
+    def getListItems(self):
+        audioOnly = ADDON.getSetting('content.audioOnly')
+        
+        quality = None
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'hd'
+            else:
+                quality = 'mobile'
+        
+        data      = resources.lib.parseRSSFeed(self.__urls[quality]['all'], True)
+        listItems = []
+        
+        for i in data:
+            iconimage = self.__getThumbnailURL(i['guid'])
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30401),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30402),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+            
+            listItems.append(
+                ListItem(
+                    self.id,
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+        
+        return listItems
+    
+    def getContentMode(self):
+        return 'episodes'
+    
+    def __getThumbnailURL(self, guid):
+        return 'http://dl.massengeschmack.tv/img/mag/' + guid + '.jpg'
 
 def createDataSource(module=''):
     """
@@ -1093,5 +1270,9 @@ def createDataSource(module=''):
         return NetzpredigerDataSource()
     elif 'asynchron' == module:
         return AsynchronDataSource()
+    elif 'tonangeber' == module:
+        return TonangeberDataSource()
+    elif 'hoaxillatv' == module:
+        return HoaxillaTVDataSource()
     else:
         return DataSource()
