@@ -21,3 +21,6 @@ Desktop.ini
 
 # package files
 *.zip
+
+# IDE files and directories
+.idea
