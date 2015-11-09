@@ -13,6 +13,7 @@ Desktop.ini
 
 # Python byte code
 *.pyc
+*.pyo
 
 # certain image formats
 *.psd
