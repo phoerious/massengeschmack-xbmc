@@ -136,6 +136,15 @@ class DataSource(object):
                 ADDON_BASE_PATH + '/resources/media/fanart-' + SakuraDataSource.module + '.jpg',
                 SakuraDataSource.showMetaData
             ),
+            # Migropolis
+            ListItem(
+                MigropolisDataSource.id,
+                ADDON.getLocalizedString(30410),
+                resources.lib.assembleListURL(MigropolisDataSource.module),
+                ADDON_BASE_PATH + '/resources/media/banner-' + MigropolisDataSource.module + '.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + MigropolisDataSource.module + '.jpg',
+                MigropolisDataSource.showMetaData
+            ),
             # Live
             ListItem(
                 LiveDataSource.id,
@@ -1417,6 +1426,80 @@ class SakuraDataSource(DataSource):
             )
         ]
 
+class MigropolisDataSource(DataSource):
+    id           = 10
+    module       = 'migropolis'
+    showMetaData = {
+        'Title'     : ADDON.getLocalizedString(30410),
+        'Director'  : 'Tom Knoll',
+        'Genre'     : ADDON.getLocalizedString(30411),
+        'Premiered' : '13.10.2015',
+        'Country'   : ADDON.getLocalizedString(30412),
+        'Plot'      : ADDON.getLocalizedString(30413)
+    }
+
+    def __init__(self):
+        self.__urls = {
+            'hd' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'hd')
+            },
+            'mobile' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'mobile')
+            },
+            'audio' : {
+                'all' : DataSource._buildFeedURL(self, [1], 'audio')
+            }
+        }
+
+    def getListItems(self):
+        audioOnly = ADDON.getSetting('content.audioOnly')
+
+        if 'true' == audioOnly:
+            quality = 'audio'
+        else:
+            if 0 == int(ADDON.getSetting('content.quality')):
+                quality = 'hd'
+            else:
+                quality = 'mobile'
+
+        # noinspection PyTypeChecker
+        data      = resources.lib.parseRSSFeed(self.__urls[quality]['all'], True)
+        listItems = []
+
+        for i in data:
+            iconimage = i['thumbUrl']
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : ADDON.getLocalizedString(30411),
+                'Date'      : date,
+                'Premiered' : date,
+                'Country'   : ADDON.getLocalizedString(30412),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+
+            listItems.append(
+                ListItem(
+                    self.id,
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+
+        return listItems
+
+    def getContentMode(self):
+        return 'episodes'
+
 
 def createDataSource(module=''):
     """
@@ -1449,5 +1532,7 @@ def createDataSource(module=''):
         return HoaxillaTVDataSource()
     elif 'sakura' == module:
         return SakuraDataSource()
+    elif 'migropolis' == module:
+        return MigropolisDataSource()
     else:
         return DataSource()
