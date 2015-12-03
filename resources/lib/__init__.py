@@ -214,7 +214,7 @@ def parseRSSFeed(feed, fetch=False):
     if fetch is true, feed is assumed to be a URI to an RSS feed instead of
     its XML contents.
 
-    The returned list has to following format:
+    The returned list has the following format:
     [
         {
             'title'       : summary1,
