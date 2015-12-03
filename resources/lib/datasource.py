@@ -26,7 +26,7 @@ from resources.lib.listing import *
 
 class DataSource(object):
     """Numeric ID of the show."""
-    id = -1
+    id = None
 
     """Internal module name."""
     moduleName = ''
@@ -699,22 +699,28 @@ class MGTVDataSource(DataSource):
     def __init__(self):
         self.__urls = {
             'hd' : {
-                'all'      : DataSource._buildFeedURL(self, [1, 2, 3], 'hd'),
-                'internal' : DataSource._buildFeedURL(self, [1], 'hd'),
-                'studio'   : DataSource._buildFeedURL(self, [2], 'hd'),
-                'direkt'   : DataSource._buildFeedURL(self, [3], 'hd')
+                'all'          : DataSource._buildFeedURL(self, [1, 2, 3, 4, 5], 'hd'),
+                'internal'     : DataSource._buildFeedURL(self, [1], 'hd'),
+                'studio'       : DataSource._buildFeedURL(self, [2], 'hd'),
+                'direkt'       : DataSource._buildFeedURL(self, [3], 'hd'),
+                'interaktiv'   : DataSource._buildFeedURL(self, [4], 'hd'),
+                'spendennacht' : DataSource._buildFeedURL(self, [5], 'hd')
             },
             'mobile' : {
-                'all'      : DataSource._buildFeedURL(self, [1, 2, 3], 'mobile'),
-                'internal' : DataSource._buildFeedURL(self, [1], 'mobile'),
-                'studio'   : DataSource._buildFeedURL(self, [2], 'mobile'),
-                'direkt'   : DataSource._buildFeedURL(self, [3], 'mobile')
+                'all'          : DataSource._buildFeedURL(self, [1, 2, 3, 4, 5], 'mobile'),
+                'internal'     : DataSource._buildFeedURL(self, [1], 'mobile'),
+                'studio'       : DataSource._buildFeedURL(self, [2], 'mobile'),
+                'direkt'       : DataSource._buildFeedURL(self, [3], 'mobile'),
+                'interaktiv'   : DataSource._buildFeedURL(self, [4], 'mobile'),
+                'spendennacht' : DataSource._buildFeedURL(self, [5], 'mobile')
             },
             'audio' : {
-                'all'      : DataSource._buildFeedURL(self, [1, 2, 3], 'audio'),
-                'internal' : DataSource._buildFeedURL(self, [1], 'audio'),
-                'studio'   : DataSource._buildFeedURL(self, [2], 'audio'),
-                'direkt'   : DataSource._buildFeedURL(self, [3], 'audio')
+                'all'          : DataSource._buildFeedURL(self, [1, 2, 3, 4, 5], 'audio'),
+                'internal'     : DataSource._buildFeedURL(self, [1], 'audio'),
+                'studio'       : DataSource._buildFeedURL(self, [2], 'audio'),
+                'direkt'       : DataSource._buildFeedURL(self, [3], 'audio'),
+                'interaktiv'   : DataSource._buildFeedURL(self, [4], 'audio'),
+                'spendennacht' : DataSource._buildFeedURL(self, [5], 'audio')
             }
         }
     
@@ -825,6 +831,30 @@ class MGTVDataSource(DataSource):
                 {
                     'Title': ADDON.getLocalizedString(30363),
                     'Plot': ADDON.getLocalizedString(30364)
+                }
+            ),
+            # Interaktiv
+            ListItem(
+                self.id,
+                ADDON.getLocalizedString(30375),
+                resources.lib.assembleListURL(self.module, 'interaktiv'),
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '_20140818.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30375),
+                    'Plot': ADDON.getLocalizedString(30376)
+                }
+            ),
+            # Spendennacht
+            ListItem(
+                self.id,
+                ADDON.getLocalizedString(30377),
+                resources.lib.assembleListURL(self.module, 'spendennacht'),
+                ADDON_BASE_PATH + '/resources/media/banner-' + self.module + '_20140818.png',
+                ADDON_BASE_PATH + '/resources/media/fanart-' + self.module + '.jpg',
+                {
+                    'Title': ADDON.getLocalizedString(30377),
+                    'Plot': ADDON.getLocalizedString(30378)
                 }
             )
         ]
