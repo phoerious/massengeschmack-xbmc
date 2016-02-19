@@ -1,0 +1,480 @@
+# Kodi Media Center language file
+# Addon Name: Massengeschmack
+# Addon id: plugin.video.massengeschmack
+# Addon Provider: Janek Bevendorff <janek at jbev dot net>
+
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC-Addons\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"POT-Creation-Date: 2016-02-19 18:52+0000\n"
+"PO-Revision-Date: 2016-02-19 18:52+0000\n"
+"Last-Translator: Janek Bevendorff <janek at jbev dot net>\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+
+# ----------------------------------------------------------------------------------
+# Settings
+# ----------------------------------------------------------------------------------
+
+msgctxt "#30001"
+msgid "Account"
+msgstr "Konto"
+
+msgctxt "#30002"
+msgid "Warning: Login credentials will not be saved in encrypted form!"
+msgstr "Warnung: Login-Daten werden nicht in verschlüsselter Form gespeichert!"
+
+msgctxt "#30003"
+msgid "Username"
+msgstr "Benutzername"
+
+msgctxt "#30004"
+msgid "Password"
+msgstr "Passwort"
+
+msgctxt "#30050"
+msgid "Contents"
+msgstr "Inhalte"
+
+msgctxt "#30051"
+msgid "Image Quality"
+msgstr "Bild-Qualität"
+
+msgctxt "#30052"
+msgid "HD (MP4/MOV)"
+msgstr "HD (MP4/MOV)"
+
+msgctxt "#30053"
+msgid "Mobile (MP4)"
+msgstr "Mobil (MP4)"
+
+msgctxt "#30054"
+msgid "Use audio version (may not be available for all contents)"
+msgstr "Verwende Audio-Version (möglicherweise nicht für alle Inhalte verfügbar)"
+
+msgctxt "#30060"
+msgid "Advanced Settings"
+msgstr "Erweiterte Einstellungen"
+
+msgctxt "#30061"
+msgid "Apply ViewMode fix for AeonNox 5"
+msgstr "ViewMode-Fix für AeonNox 5 anwenden"
+
+
+# ----------------------------------------------------------------------------------
+# Application start up
+# ----------------------------------------------------------------------------------
+
+msgctxt "#30100"
+msgid "No login data found!"
+msgstr "Keine Login-Daten gefunden!"
+
+msgctxt "#30101"
+msgid "You need to configure your login credentials\nbefore you can use this add-on."
+msgstr "Sie müssen zuerst Ihre Login-Daten angeben,\nbevor Sie dieses Add-on verwenden können."
+
+msgctxt "#30102"
+msgid "Login failed!"
+msgstr "Login fehlgeschlagen!"
+
+msgctxt "#30103"
+msgid "Could not log into your Massengeschmack account,\nplease check your login credentials!"
+msgstr "Login-in für Ihr Massengeschmack-Konto fehlgeschlagen,\nbitte prüfen Sie Ihre Benutzer-Daten!"
+
+msgctxt "#30104"
+msgid "Probing login data…"
+msgstr "Teste Login-Daten…"
+
+msgctxt "#30105"
+msgid "Your login credentials for these contents are invalid,\nmaybe you didn't subscribe to them?"
+msgstr "Ihre Login-Daten sind für diese Inhalte ungültig,\nhaben Sie diese vielleicht nicht abonniert?"
+
+
+
+# ----------------------------------------------------------------------------------
+# Magazine listings and descriptions
+# ----------------------------------------------------------------------------------
+
+msgctxt "#30200"
+msgid "Fernsehkritik-TV"
+msgstr "Fernsehkritik-TV"
+
+msgctxt "#30201"
+msgid "Satirical, Critical"
+msgstr "Satirisch, Kritisch"
+
+msgctxt "#30202"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30203"
+msgid "Fernsehkritik-TV is a satirical and critical magazine, moderated by Holger Kreymeier which first aired "
+"in 2007.\nThe magazine deals with current TV shows and throws a skeptical glance at them. Popular topics are bad "
+"journalism, (scripted) reality shows, call-in TV and many more.\n\nSecondary shows are "
+"“Postecke” and “Sendeschluss”."
+msgstr "Fernsehkritik-TV ist ein satirisches und kritisches Magazin, das von Holger Kreymeier moderiert wird und "
+"seit 2007 besteht.\nDas Magazin beschäftigt sich mit aktuellen TV-Sendungen und wirft dabei stets einen skeptischen "
+"Blick auf diese. Häufige Themen sind schlechter Journalismus, (gescriptete) Reality-Shows, Call-in-TV und viele "
+"mehr.\n\nNebenformate sind die „Postecke“ und „Sendeschluss“."
+
+msgctxt "#30210"
+msgid "Pantoffel-TV"
+msgstr "Pantoffel-TV"
+
+msgctxt "#30211"
+msgid "Cultural, Literature, Music, Movies, Games"
+msgstr "Kulturell, Literatur, Musik, Filme, Games"
+
+msgctxt "#30212"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30213"
+msgid "Pantoffel-TV is a magazine about all cultural things you can enjoy at home or (almost) anywhere else. "
+"It is the big successor of the discontinued movie critique YouTube series “Pantoffelkino-TV”. The main topics of "
+"Pantoffel-TV are new releases of books, movies, music albums, games etc."
+msgstr "Pantoffel-TV ist ein Magazin über all die kulturellen Dinge, an denen Sie sich zu Hause oder (fast) "
+"überall sonst erfreuen können. Es ist der große Nachfolger der eingestellten Filmkritik-YouTube-Reihe "
+"„Pantoffelkino-TV“. Die Hauptthemen von Pantoffel-TV sind neue Veröffentlichungen von Büchern, "
+"Filmen, Musik-Alben, Games etc."
+
+msgctxt "#30220"
+msgid "Pressesch(l)au"
+msgstr "Pressesch(l)au"
+
+msgctxt "#30221"
+msgid "Satirical, Critical, Comedy"
+msgstr "Satirisch, Kritisch, Comedy"
+
+msgctxt "#30222"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30223"
+msgid "Pressesch(l)au is a magazine moderated by Lars Golenia that concerns itself with all kinds of serious, not so "
+"serious, simply bizarre or rather rubbishy press releases. Be it “Brigitte”, “Bravo“, “Die Welt”, “Der Spiegel” or a "
+"teddy bear magazine – Lars reads them all and reviews them on stage."
+msgstr "Pressesch(l)au ist ein Magazin, das von Lars Golenia moderiert wird und sich mit allen Arten von "
+"ernsthaften, nicht so ernsthaften, schlicht bizarren oder völlig wertlosen Presseerzeugnissen beschäftigt. "
+"Sei es „Brigitte“, „Bravo“, „Die Welt“, „Der Spiegel“ oder ein Teddybären-Magazin – Lars liest sie alle und "
+"bespricht sie auf der Bühne."
+
+msgctxt "#30230"
+msgid "Massengeschmack-TV"
+msgstr "Massengeschmack-TV"
+
+msgctxt "#30231"
+msgid "Comedy, Scripted Reality"
+msgstr "Comedy, Scripted Reality"
+
+msgctxt "#30232"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30233"
+msgid "In this category you find all extra content regarding Massengeschmack such as „Massengeschmack Direkt“ or the "
+"satirical weekly show „Das Studio“."
+msgstr "In dieser Kategorie finden Sie alle Extra-Inhalte von Massengeschmack wie etwa „Massengeschmack Direkt“ "
+"oder die wöchentliche Satireshow „Das Studio“."
+
+msgctxt "#30240"
+msgid "Pasch-TV"
+msgstr "Pasch-TV"
+
+msgctxt "#30241"
+msgid "Let's Play, Board Game"
+msgstr "Let's Play, Brettspiele"
+
+msgctxt "#30242"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30243"
+msgid "Pasch-TV is a magazine in which Holger and guests try one new board game release each episode."
+msgstr "Pasch-TV ist ein Magazin, in dem Holger zusammen mit Gästen pro Folge eine "
+"Brettspiel-Neuerscheinung ausprobiert."
+
+msgctxt "#30250"
+msgid "Netzprediger"
+msgstr "Netzprediger"
+
+msgctxt "#30251"
+msgid "Internet, Media"
+msgstr "Internet, Medien"
+
+msgctxt "#30252"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30253"
+msgid "Netzprediger is an online magazine about the Internet with all its bright and dark sides: fun, fraud, "
+"absurdities and much more, presented by the virtual moderator Untenein G. Blendet."
+msgstr "Netzprediger ist ein Online-Magazin über das Internet mit all seinen hellen und dunklen Seiten: Spaß, "
+"Betrug und Absurditäten, präsentiert vom virtuellen Moderator Untenein G. Blendet."
+
+msgctxt "#30260"
+msgid "Asynchron"
+msgstr "Asynchron"
+
+msgctxt "#30261"
+msgid "Movies, TV Series"
+msgstr "Filme, Serien"
+
+msgctxt "#30262"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30263"
+msgid "Asynchron is about dubbing of TV series and movies. How good are the voice actors? How closely related to the "
+"original are the dialogs?"
+msgstr "Asynchron beschäftigt sich mit der Synchronisation von Serien und Filmen. Wie gut sind die Sprecher? "
+"Wie nah am Original sind die Dialoge?"
+
+msgctxt "#30264"
+msgid "Tonangeber"
+msgstr "Tonangeber"
+
+msgctxt "#30265"
+msgid "Music"
+msgstr "Musik"
+
+msgctxt "#30266"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30267"
+msgid "In Tonangeber Nils reviews new music album releases and live concert DVDs. He also invites musicians as guests "
+"into the studio and talks with them about their music and performances. Featuring Klaus Kauker."
+msgstr "In Tonangeber rezensiert Nils Releases neuer Musik-Alben und Live-Konzert-DVDs. Außerdem lädt er Musiker "
+"als Gäste ins Studio ein und spricht mit ihnen über ihre Musik und Konzerte. Featuring Klaus Kauker."
+
+msgctxt "#30270"
+msgid "LIVE"
+msgstr "LIVE"
+
+msgctxt "#30271"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30272"
+msgid "Massengeschmack Live streams"
+msgstr "Massengeschmack Live-Streams"
+
+msgctxt "#30273"
+msgid "Live:"
+msgstr "Live:"
+
+msgctxt "#30274"
+msgid "The following shows are currently online"
+msgstr "Die folgenden Sendungen sind gerade online"
+
+msgctxt "#30275"
+msgid "Upcoming:"
+msgstr "Upcoming:"
+
+msgctxt "#30276"
+msgid "Shows coming live next"
+msgstr "Sendungen, die demnächst online kommen"
+
+msgctxt "#30277"
+msgid "Live stream: {0}\nAir date: {1}"
+msgstr "Live-Stream: {0}\nSendedatum: {1}"
+
+msgctxt "#30280"
+msgid "Livetalk"
+msgstr ""
+
+msgctxt "#30290"
+msgid "Sakura"
+msgstr "Sakura"
+
+msgctxt "#30291"
+msgid "Anime, Manga"
+msgstr "Anime, Manga"
+
+msgctxt "#30292"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30293"
+msgid "Sakura is a magazine about Anime and Manga"
+msgstr "Sakura beschäftigt sich mit der Manga- und Anime-Szene sowie japanischem Lifestyle"
+
+msgctxt "#30300"
+msgid "All"
+msgstr "Alle"
+
+msgctxt "#30301"
+msgid "Episodes"
+msgstr "Folgen"
+
+msgctxt "#30302"
+msgid "Interviews"
+msgstr "Interviews"
+
+msgctxt "#30303"
+msgid "Extras"
+msgstr "Extras"
+
+msgctxt "#30350"
+msgid "All Fernsehkritik-TV episodes and extras, including Postecke, uncut interview and other specials."
+msgstr "Alle Fernsehkritik-TV-Folgen und Extras, einschließlich Postecke, ungeschnittenen Interviews "
+"und anderen Specials."
+
+msgctxt "#30351"
+msgid "Regular Fernsehkritik-TV episodes."
+msgstr "Reguläre Fernsehkritik-TV-Folgen."
+
+msgctxt "#30352"
+msgid "Postecke"
+msgstr "Postecke"
+
+msgctxt "#30353"
+msgid "Postecke is a video podcast where Holger reads and answers letters from Fernsehkritik-TV viewers "
+"(now replaced by Massengeschmack Direkt)."
+msgstr "Die Postecke ist ein Video-Podcast, in dem Holger Zuschauerpost vorliest und beantwortet "
+"(nun ersetzt durch Massengeschmack Direkt)."
+
+msgctxt "#30354"
+msgid "Uncut interviews."
+msgstr "Ungeschnittene Interviews."
+
+msgctxt "#30355"
+msgid "Various extras."
+msgstr "Verschiedene Extras."
+
+msgctxt "#30356"
+msgid "Sendeschluss"
+msgstr "Sendeschluss"
+
+msgctxt "#30357"
+msgid "Sendeschluss is a weekly retro TV magazine in which Holger deals with either very iconic or very bizarre "
+"TV shows from back in the day."
+msgstr "Sendeschluss ist ein wöchentliches Retro-TV-Magazin, in dem Holger sich besonders kultige oder "
+"besonders skurrile Fernsehshows von damals vornimmt."
+
+msgctxt "#30360"
+msgid "Das Studio"
+msgstr "Das Studio"
+
+msgctxt "#30361"
+msgid "All Massengeschmack-TV content, including “Massengeschmack Direkt“, “Das Studio” and any extras."
+msgstr "Alle Massengeschmack-TV-Inhalte, einschließlich „Massengeschmack Direkt“, „Das Studio“, sowie sämtliche Extras."
+
+msgctxt "#30362"
+msgid "“Das Studio” is the Massengeschmack reality show. It is guaranteed to be fake and scripted!"
+msgstr "„Das Studio“ ist die Massengeschmack-Reality-Show. Sie ist garantiert gefaked und gescripted!"
+
+msgctxt "#30363"
+msgid "Massengeschmack Internal"
+msgstr "Massengeschmack Intern"
+
+msgctxt "#30364"
+msgid "Massengeschmack announcements and uncategorized extras."
+msgstr "Massengeschmack-Ankündigungen und unkategorisierte Extras."
+
+msgctxt "#30365"
+msgid "Massengeschmack Direkt"
+msgstr "Massengeschmack Direkt"
+
+msgctxt "#30366"
+msgid "Fan mail and live talk for subscribers."
+msgstr "Postecke und Live-Talk für Abonnenten."
+
+msgctxt "#30367"
+msgid "-> Massengeschmack Direkt"
+msgstr "-> Massengeschmack Direkt"
+
+msgctxt "#30368"
+msgid "Postecke has been replaced by “Massengeschmack Direkt”. Click on this link to go to the new "
+"“Massengeschmack Direkt” category. You can also find it in the main category „Massengeschmack-TV“"
+msgstr "Postecke wurde durch „Massengeschmack Direkt“ ersetzt. Klicken Sie auf den Link, um zur neuen "
+"„Massengeschmack Direkt“-Kategorie zu gelangen. Sie können diese auch in der Hauptkategorie "
+"„Massengeschmack-TV“ finden."
+
+msgctxt "#30370"
+msgid "All Sakura epsisodes und interviews"
+msgstr "Alle Sakura-Folgen und Interviews"
+
+msgctxt "#30371"
+msgid "regular Sakura episodes"
+msgstr "Reguläre Sakura-Folgen"
+
+msgctxt "#30375"
+msgid "MG Interaktiv"
+msgstr "MG Interaktiv"
+
+msgctxt "#30376"
+msgid "Massengeschmack Game Show"
+msgstr "Massengeschmack Spielshow"
+
+msgctxt "#30377"
+msgid "Spendennacht"
+msgstr "Spendennacht"
+
+msgctxt "#30378"
+msgid "Contribution night for the Supernanny lawsuit"
+msgstr "Spendennacht zum Supernanny-Prozess"
+
+msgctxt "#30400"
+msgid "Hoaxilla-TV"
+msgstr "Hoaxilla-TV"
+
+msgctxt "#30401"
+msgid "Information, Education, Scepticism Conspiracy Theories, Urban Legends"
+msgstr "Information, Education, Scepticism Conspiracy Theories, Urban Legends"
+
+msgctxt "#30402"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30403"
+msgid "Hoaxilla-TV is a video series by the moderators of Hoaxilla, a sceptic podcast about myths, urban legends, "
+"conspiracy theories, culture and science."
+msgstr "Hoaxilla-TV ist ein Videoformat der Moderatoren von Hoaxilla, einem skeptischen Podcast über Mythen, "
+"urbane Legenden, Verschwörungstheorien, Kultur und Wissenschaft."
+
+msgctxt "#30410"
+msgid "Migropolis"
+msgstr "Migropolis"
+
+msgctxt "#30411"
+msgid "Information, Culture, Politics, Migration"
+msgstr "Information, Kulture, Politik, Migration"
+
+msgctxt "#30412"
+msgid "Germany"
+msgstr "Germany"
+
+msgctxt "#30413"
+msgid "Migropolis is a documentary magazine about integration of people with migration background in Germany."
+msgstr "Migropolis ist ein dokumentarisches Magazin über Integration von Menschen mit Migrationshintergrund "
+"in Deutschland."
+
+
+# ----------------------------------------------------------------------------------
+# General runtime error messages
+# ----------------------------------------------------------------------------------
+
+msgctxt "#30901"
+msgid "Invalid internal command!\nThis is probably a bug. You should report it if it happens more often."
+msgstr "Ungültiges internes Kommando!\nDies ist möglicherweise ein Bug und Sie sollten ihn melden, wenn er "
+"häufiger auftritt."
+
+msgctxt "#30902"
+msgid "Request failed!"
+msgstr "Request fehlgeschlagen!"
+
+msgctxt "#30903"
+msgid "Could not complete request, maybe the network is down?"
+msgstr "Konnte Request nicht ausführen, ist vielleicht das Netzwerk unerreichbar?"
+
+msgctxt "#30904"
+msgid "Could not complete request, server replied:"
+msgstr "Konnte Request nicht ausführen, Server antwortete:"
