@@ -33,7 +33,6 @@ class DataSource(object):
         'Title'     : None,
         'Director'  : None,
         'Genre'     : None,
-        'Premiered' : None,
         'Country'   : None,
         'Plot'      : None
     }
@@ -270,7 +269,6 @@ class LiveDataSource(DataSource):
             metaData  = {
                 'Title'     : name,
                 'Date'      : date,
-                'Premiered' : date,
                 'Plot'      : plot
             }
             
@@ -346,7 +344,6 @@ class FKTVDataSource(DataSource):
         'Title'    : ADDON.getLocalizedString(30200),
         'Director' : 'Holger Kreymeier, Nils Beckmann, Daniel Gusy',
         'Genre'    : ADDON.getLocalizedString(30201),
-        'Premiered': '07.04.2007',
         'Country'  : ADDON.getLocalizedString(30202),
         'Plot'     : ADDON.getLocalizedString(30203)
     }
@@ -424,7 +421,6 @@ class FKTVDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30201),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30232),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -538,7 +534,6 @@ class PTVDataSource(DataSource):
         'Title'     : ADDON.getLocalizedString(30210),
         'Director'  : 'Holger Kreymeier, Jenny von Gagern, Steven Gräwe, Michael Stock',
         'Genre'     : ADDON.getLocalizedString(30211),
-        'Premiered' : '17.06.2013',
         'Country'   : ADDON.getLocalizedString(30212),
         'Plot'      : ADDON.getLocalizedString(30213)
     }
@@ -578,7 +573,6 @@ class PTVDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30211),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30232),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -613,7 +607,6 @@ class PSDataSource(DataSource):
         'Title'     : ADDON.getLocalizedString(30220),
         'Director'  :'Holger Kreymeier, Steven Gräwe, Daniel Gusy',
         'Genre'     : ADDON.getLocalizedString(30221),
-        'Premiered' :'01.08.2013',
         'Country'   : ADDON.getLocalizedString(30222),
         'Plot'      : ADDON.getLocalizedString(30223)
     }
@@ -653,7 +646,6 @@ class PSDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30221),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30232),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -688,7 +680,6 @@ class MGTVDataSource(DataSource):
         'Title'     : ADDON.getLocalizedString(30230),
         'Director'  : 'Holger Kreymeier',
         'Genre'     : ADDON.getLocalizedString(30231),
-        'Premiered' : '05.08.2013',
         'Country'   : ADDON.getLocalizedString(30232),
         'Plot'      : ADDON.getLocalizedString(30233)
     }
@@ -750,7 +741,6 @@ class MGTVDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30231),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30232),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -864,7 +854,6 @@ class PaschTVDataSource(DataSource):
         'Title'    : ADDON.getLocalizedString(30240),
         'Director' :'Holger Kreymeier,',
         'Genre'    : ADDON.getLocalizedString(30241),
-        'Premiered':'10.10.2013',
         'Country'  : ADDON.getLocalizedString(30242),
         'Plot'     : ADDON.getLocalizedString(30243)
     }
@@ -904,7 +893,6 @@ class PaschTVDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30241),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30242),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -939,7 +927,6 @@ class NetzpredigerDataSource(DataSource):
         'Title'     : ADDON.getLocalizedString(30250),
         'Director'  :'Holger Kreymeier',
         'Genre'     : ADDON.getLocalizedString(30251),
-        'Premiered' :'10.10.2013',
         'Country'   : ADDON.getLocalizedString(30252),
         'Plot'      : ADDON.getLocalizedString(30253)
     }
@@ -979,7 +966,6 @@ class NetzpredigerDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30251),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30252),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -1014,7 +1000,6 @@ class AsynchronDataSource(DataSource):
         'Title'    : ADDON.getLocalizedString(30260),
         'Director' : 'Evgenij Cernov',
         'Genre'    : ADDON.getLocalizedString(30261),
-        'Premiered': '26.02.2014',
         'Country'  : ADDON.getLocalizedString(30262),
         'Plot'     : ADDON.getLocalizedString(30263)
     }
@@ -1054,7 +1039,6 @@ class AsynchronDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30261),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30262),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -1089,7 +1073,6 @@ class TonangeberDataSource(DataSource):
         'Title'     : ADDON.getLocalizedString(30264),
         'Director'  : 'Nils Beckmann, Holger Kreymeier',
         'Genre'     : ADDON.getLocalizedString(30265),
-        'Premiered' : '17.06.2014',
         'Country'   : ADDON.getLocalizedString(30266),
         'Plot'      : ADDON.getLocalizedString(30267)
     }
@@ -1129,7 +1112,6 @@ class TonangeberDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30265),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30266),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -1164,7 +1146,6 @@ class HoaxillaTVDataSource(DataSource):
         'Title'    : ADDON.getLocalizedString(30400),
         'Director' : 'Alexa Waschkau, Alexander Waschkau, Holger Kreymeier',
         'Genre'    : ADDON.getLocalizedString(30401),
-        'Premiered': '17.06.2014',
         'Country'  : ADDON.getLocalizedString(30402),
         'Plot'     : ADDON.getLocalizedString(30403)
     }
@@ -1204,7 +1185,6 @@ class HoaxillaTVDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30401),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30402),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -1239,7 +1219,6 @@ class SakuraDataSource(DataSource):
         'Title'     : ADDON.getLocalizedString(30290),
         'Director'  : 'Volker Robrahn, Maria Timonina',
         'Genre'     : ADDON.getLocalizedString(30291),
-        'Premiered' : '21.04.2015',
         'Country'   : ADDON.getLocalizedString(30292),
         'Plot'      : ADDON.getLocalizedString(30293)
     }
@@ -1292,7 +1271,6 @@ class SakuraDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30291),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30292),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
@@ -1370,7 +1348,6 @@ class MigropolisDataSource(DataSource):
         'Title'     : ADDON.getLocalizedString(30410),
         'Director'  : 'Tom Knoll',
         'Genre'     : ADDON.getLocalizedString(30411),
-        'Premiered' : '13.10.2015',
         'Country'   : ADDON.getLocalizedString(30412),
         'Plot'      : ADDON.getLocalizedString(30413)
     }
@@ -1410,7 +1387,6 @@ class MigropolisDataSource(DataSource):
                 'Title'     : i['title'],
                 'Genre'     : ADDON.getLocalizedString(30411),
                 'Date'      : date,
-                'Premiered' : date,
                 'Country'   : ADDON.getLocalizedString(30412),
                 'Plot'      : i['description'],
                 'Duration'  : int(i['duration']) / 60
