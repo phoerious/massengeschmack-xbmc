@@ -1,0 +1,40 @@
+{
+    "id": 5,
+    "order": 40,
+    "metadata": {
+        "Title": 30250,
+        "Director": "Adam Wolke, Nero",
+        "Genre": 30251,
+        "Country": 30252,
+        "Plot": 30253
+    },
+    "banner": "banner-netzprediger.jpg",
+    "fanart": "fanart-netzprediger.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1, 2],
+            "metadata": {
+                "Title": 30300,
+                "Plot": "TODO: translate"
+            }
+        },
+        {
+            "name": "episodes",
+            "ids": [1],
+            "metadata": {
+                "Title": 30301,
+                "Plot": "TODO: translate"
+            }
+        },
+        {
+            "name": "interviews",
+            "ids": [2],
+            "metadata": {
+                "Title": 30302,
+                "Plot": "TODO: translate"
+            }
+        }
+    ]
+}

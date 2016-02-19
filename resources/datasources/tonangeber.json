@@ -1,0 +1,21 @@
+{
+    "id": 7,
+    "order": 90,
+    "metadata": {
+        "Title": 30264,
+        "Director": "Nils Beckmann, Klaus Kauker",
+        "Genre": 30265,
+        "Country": 30266,
+        "Plot": 30267
+    },
+    "banner": "banner-tonangeber.jpg",
+    "fanart": "fanart-tonangeber.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ],
+    "active": false
+}

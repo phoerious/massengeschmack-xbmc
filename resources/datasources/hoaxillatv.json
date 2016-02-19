@@ -1,0 +1,21 @@
+{
+    "id": 8,
+    "order": 60,
+    "metadata": {
+        "Title": 30400,
+        "Director": "Alexa Waschkau, Alexander Waschkau",
+        "Genre": 30401,
+        "Country": 30402,
+        "Plot": 30403
+    },
+    "banner": "banner-hoaxillatv.jpg",
+    "fanart": "fanart-hoaxillatv.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ],
+    "active": false
+}

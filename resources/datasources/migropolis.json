@@ -1,0 +1,20 @@
+{
+    "id": 10,
+    "order": 80,
+    "metadata": {
+        "Title": 30410,
+        "Director": "Tom Knoll",
+        "Genre": 30411,
+        "Country": 30412,
+        "Plot": 30413
+    },
+    "banner": "banner-migropolis.jpg",
+    "fanart": "fanart-migropolis.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "id": 4,
+    "order": 30,
+    "metadata": {
+        "Title": 30240,
+        "Director": "Holger Kreymeier, Mario Perez",
+        "Genre": 30241,
+        "Country": 30242,
+        "Plot": 30243
+    },
+    "banner": "banner-paschtv.jpg",
+    "fanart": "fanart-paschtv.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1, 2],
+            "metadata": {
+                "Title": 30300,
+                "Plot": "TODO: translate"
+            }
+        },
+        {
+            "name": "episodes",
+            "ids": [1],
+            "metadata": {
+                "Title": 30301,
+                "Plot": "TODO: translate"
+            }
+        },
+        {
+            "name": "extra",
+            "ids": [2],
+            "metadata": {
+                "Title": "TODO: translate",
+                "Plot": "TODO: translate"
+            }
+        }
+    ]
+}
