@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # 
 # Massengeschmack XBMC add-on
-# Copyright (C) 2013 by Janek Bevendorff
+# Copyright (C) 2013-2016 by Janek Bevendorff
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -1077,7 +1077,7 @@ class AsynchronDataSource(DataSource):
                     False
                 )
             )
-        
+
         return listItems
     
     def getContentMode(self):
