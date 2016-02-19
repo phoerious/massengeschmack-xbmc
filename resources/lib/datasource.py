@@ -16,13 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import xbmcgui
-import urllib
 import datetime
-import re
-from globalvars import *
 import resources.lib
 from resources.lib.listing import *
+
 
 class DataSource(object):
     """Numeric ID of the show."""
@@ -859,6 +856,7 @@ class MGTVDataSource(DataSource):
             )
         ]
 
+
 class PaschTVDataSource(DataSource):
     id           = 4
     module       = 'paschtv'
@@ -1363,6 +1361,7 @@ class SakuraDataSource(DataSource):
                 }
             )
         ]
+
 
 class MigropolisDataSource(DataSource):
     id           = 10

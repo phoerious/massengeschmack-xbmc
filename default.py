@@ -32,7 +32,7 @@ if '' == ADDON.getSetting('account.username') or '' == ADDON.getSetting('account
 lib.installHTTPLoginData(ADDON.getSetting('account.username'), ADDON.getSetting('account.password'))
 
 # if we're on the start page, verify login data first
-if not 'cmd' in ADDON_ARGS:
+if 'cmd' not in ADDON_ARGS:
     response = lib.fetchSubscriptions(True)
     if 200 != response['code']:
         dialog = xbmcgui.Dialog()
@@ -50,7 +50,7 @@ if not 'cmd' in ADDON_ARGS:
 
 
 # analyze URL
-if not 'cmd' in ADDON_ARGS:
+if 'cmd' not in ADDON_ARGS:
     ADDON_ARGS['cmd'] = 'list'
 
 if 'list' == ADDON_ARGS['cmd']:
@@ -88,4 +88,4 @@ elif 'play' == ADDON_ARGS['cmd']:
     playlist.clear()
     
 else:
-    raise RuntimeError(ADDON_ARGS['cmd'] + ': ' + ADDON.getLocalizedString(30901)) 
+    raise RuntimeError(ADDON_ARGS['cmd'] + ': ' + ADDON.getLocalizedString(30901))

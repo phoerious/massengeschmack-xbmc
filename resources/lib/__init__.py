@@ -30,14 +30,17 @@ from globalvars import *
 from resources.lib.listing import Listing, ListItem
 from resources.lib.datasource import DataSource, FKTVDataSource
 
+
 # enable non-GET HTTP requests using urllib2
 class PostRequest(urllib2.Request):
     def get_method(self):
         return 'POST'
 
+
 class HeadRequest(urllib2.Request):
     def get_method(self):
         return 'HEAD'
+
 
 # helper functions
 def openHTTPConnection(uri, requestMethod='GET'):
@@ -62,6 +65,7 @@ def openHTTPConnection(uri, requestMethod='GET'):
     request.add_header('User-Agent', HTTP_USER_AGENT)
     return urllib2.urlopen(request, None, HTTP_TIMEOUT)
 
+
 def installHTTPLoginData(username, password):
     """
     Register the HTTP login data for accessing feeds later on.
@@ -74,6 +78,7 @@ def installHTTPLoginData(username, password):
     authHandler = urllib2.HTTPBasicAuthHandler(passwordManager)
     opener      = urllib2.build_opener(authHandler)
     urllib2.install_opener(opener)
+
 
 def fetchSubscriptions(showDialog=False):
     """
@@ -127,8 +132,10 @@ def fetchSubscriptions(showDialog=False):
     
     return response
 
+
 # subscriptions cache
 __subscriptions = None
+
 
 def cacheSubscriptions(subscriptions):
     """
@@ -137,8 +144,10 @@ def cacheSubscriptions(subscriptions):
     @type subscriptions: subscriptions: list
     @param: subscriptions: list of numeric IDs for all active subscriptions
     """
+    global __subscriptions
     __subscriptions = subscriptions
     ADDON.setSetting('account.subscriptions', json.dumps(subscriptions))
+
 
 def getSubscriptions():
     """
@@ -151,19 +160,21 @@ def getSubscriptions():
     @return: list of subscriptions
     """
     global __subscriptions
-    
+
     subscriptions = []
-    if None == __subscriptions:
+    if __subscriptions is None:
         tmp = ADDON.getSetting('account.subscriptions')
         if '' != tmp:
             subscriptions = json.loads(tmp)
     else:
-        subscriptions == __subscriptions
+        subscriptions = __subscriptions
     
     return subscriptions
 
+
 # live streams cache
-__liveShows = {}
+__liveShows = None
+
 
 def getLiveShows():
     """
@@ -173,12 +184,14 @@ def getLiveShows():
     @return: dictionary list of live streams
     """
     global __liveShows
-    if {} == __liveShows:
+
+    if __liveShows is None:
         handle = openHTTPConnection(HTTP_BASE_URI + 'api/?action=listLiveShows')
         __liveShows = json.loads(handle.read())
         handle.close()
     
     return __liveShows
+
 
 def getLiveStreamInfo(id):
     """
@@ -204,6 +217,7 @@ def getLiveStreamInfo(id):
 
 # feed cache
 __fetchedFeeds = {}
+
 
 def parseRSSFeed(feed, fetch=False):
     """
@@ -246,7 +260,7 @@ def parseRSSFeed(feed, fetch=False):
     @return a list of dicts with the parsed feed data
     """
     if fetch:
-        if not feed in __fetchedFeeds:
+        if feed not in __fetchedFeeds:
             response = None
             try:
                 response = openHTTPConnection(feed)
@@ -278,7 +292,7 @@ def parseRSSFeed(feed, fetch=False):
         # get thumbnail URL
         thumbUrl = ''
         thumbUrlMatch = re.search('^<img[^>]* src="([^"]+)" /><br>', description)
-        if None != thumbUrlMatch:
+        if thumbUrlMatch is not None:
             thumbUrl = thumbUrlMatch.group(1)
             if 0 == thumbUrl.index('//'):
                 thumbUrl = 'https:' + thumbUrl
@@ -305,6 +319,7 @@ def parseRSSFeed(feed, fetch=False):
     
     return data
 
+
 class TZOffset(tzinfo):
     """Represent fixed timezone offset east from UTC."""
     
@@ -316,6 +331,7 @@ class TZOffset(tzinfo):
     
     def dst(self, dt):
         return timedelta(0)
+
 
 def parseUTCDateString(datestr):
     """
@@ -341,6 +357,7 @@ def parseUTCDateString(datestr):
     
     return date
 
+
 def dictUrlEncode(data):
     """
     Create a URL encoded JSON string from a given dict or list.
@@ -350,6 +367,7 @@ def dictUrlEncode(data):
     @return URL encoded string
     """
     return urllib.quote(json.dumps(data, separators=(',', ':')))
+
 
 def getPluginBaseURL():
     """
@@ -366,6 +384,7 @@ def getPluginBaseURL():
         url += ADDON_ID
     
     return url
+
 
 def assembleListURL(module=None, submodule=None, mode=None):
     """
