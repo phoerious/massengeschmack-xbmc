@@ -44,21 +44,24 @@ msgid "Contents"
 msgstr ""
 
 msgctxt "#30051"
-msgid "Image Quality"
+msgid "Video Quality"
+msgstr ""
+
+msgctxt "#30055"
+msgid "Best Quality (1080p)"
 msgstr ""
 
 msgctxt "#30052"
-msgid "HD (MP4/MOV)"
+msgid "HD Quality (720p)"
 msgstr ""
 
 msgctxt "#30053"
-msgid "Mobile (MP4)"
+msgid "Podcast Version (SD)"
 msgstr ""
 
 msgctxt "#30054"
-msgid "Use audio version (may not be available for all contents)"
+msgid "Audio only (may not be available for all contents)"
 msgstr ""
-
 
 msgctxt "#30060"
 msgid "Advanced Settings"
