@@ -54,6 +54,18 @@ class DataSource(object):
         def __hash__(self):
             return self.name.__hash__()
 
+        def getModuleTitle(self):
+            """
+            Get display title for current submodule.
+
+            @rtype: str
+            @return: submodule title to be displayed in listings
+            """
+            title = self.moduleMetaData.get('Title', ADDON.getLocalizedString(30198))
+            if not self.isActive:
+                title += ' ' + ADDON.getLocalizedString(30199)
+            return title
+
     def __init__(self):
         self.id = None  # type: int
         """Numeric ID of the show."""
@@ -128,7 +140,8 @@ class DataSource(object):
         sm = jd.get('submodules', [])
         for i in sm:
             s = cls.Submodule()
-            s.name = i.get('name', s.name)
+            s.name     = i.get('name', s.name)
+            s.isActive = i.get('active', s.isActive)
             s.ids.extend(i.get('ids', []))
             s.moduleMetaData.update(__localizeDict(i.get('metadata', {})))
             ds.submodules.append(s)
@@ -186,6 +199,18 @@ class DataSource(object):
         if self.getCurrentSubmoduleName():
             return 'episodes'
         return 'tvshows'
+
+    def getShowTitle(self):
+        """
+        Get display title for current show.
+
+        @rtype: str
+        @return: show title to be displayed in listings
+        """
+        title = self.showMetaData.get('Title', ADDON.getLocalizedString(30198))
+        if not self.isActive:
+            title += ' ' + ADDON.getLocalizedString(30199)
+        return title
 
     def buildFeedURL(self, ids, quality):
         """
@@ -268,7 +293,7 @@ class DataSource(object):
         for i in self.submodules:
             yield ListItem(
                 self.id,
-                i.moduleMetaData.get('Title', ''),
+                i.getModuleTitle(),
                 resources.lib.assembleListURL(self.moduleName, i.name),
                 self.bannerPath,
                 self.fanartPath,
@@ -308,7 +333,7 @@ class OverviewDataSource(DataSource):
         for i in dataSources:
             yield ListItem(
                 i.id,
-                i.showMetaData.get('Title', ''),
+                i.getShowTitle(),
                 resources.lib.assembleListURL(i.moduleName),
                 i.bannerPath,
                 i.fanartPath,

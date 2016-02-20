@@ -105,6 +105,14 @@ msgstr "Ihre Login-Daten sind für diese Inhalte ungültig,\nhaben Sie diese vie
 # Magazine listings and descriptions
 # ----------------------------------------------------------------------------------
 
+msgctxt "#30198"
+msgid "[Missing Title]"
+msgstr "[Fehlender Titel]"
+
+msgctxt "#30199"
+msgid "[inactive]"
+msgstr "[inaktiv]"
+
 msgctxt "#30200"
 msgid "Fernsehkritik-TV"
 msgstr "Fernsehkritik-TV"

@@ -105,6 +105,14 @@ msgstr ""
 # Magazine listings and descriptions
 # ----------------------------------------------------------------------------------
 
+msgctxt "#30198"
+msgid "[Missing Title]"
+msgstr ""
+
+msgctxt "#30199"
+msgid "[inactive]"
+msgstr ""
+
 msgctxt "#30200"
 msgid "Fernsehkritik-TV"
 msgstr ""
