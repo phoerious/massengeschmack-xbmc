@@ -158,7 +158,7 @@ class DataSource(object):
 
         return quality
 
-    def getCurrentSubmodule(self):
+    def getCurrentSubmoduleName(self):
         """
         Get the name of the current submodule.
 
@@ -169,15 +169,6 @@ class DataSource(object):
         if 'submodule' in ADDON_ARGS and ADDON_ARGS['submodule'] in self.submodules:
             submodule = ADDON_ARGS['submodule']
         return submodule
-
-    def getNumSubmodules(self):
-        """
-        Get number of available submodules.
-
-        @rtype: int
-        @return: number of submodules
-        """
-        return len(self.submodules)
     
     def getContentMode(self):
         """
@@ -189,7 +180,7 @@ class DataSource(object):
         @rtype: bool
         @return content mode
         """
-        if self.getCurrentSubmodule():
+        if self.getCurrentSubmoduleName():
             return 'episodes'
         return 'tvshows'
 
@@ -226,16 +217,88 @@ class DataSource(object):
         @rtype: list of resources.lib.listing.ListItem
         @return: generated ListItems
         """
-        raise NotImplementedError
+        submoduleName = self.getCurrentSubmoduleName()
+
+        # show selection list if there are several submodules and we're not inside one already
+        if len(self.submodules) > 1 and not submoduleName:
+            return self.__getBaseList()
+
+        # if there is only one submodule, don't show a selection list
+        if len(self.submodules) == 1 and not submoduleName:
+            submoduleName = self.submodules[0].name
+
+        # shouldn't happen
+        if submoduleName is None:
+            raise RuntimeError("No valid submodule given.")
+
+        submodule = next(s for s in self.submodules if s.name == submoduleName)
+        data      = resources.lib.parseRSSFeed(self.buildFeedURL(submodule.ids, self.getQuality()), True)
+        listItems = []
+        for i in data:
+            iconimage = i["thumbUrl"]
+            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
+            metaData  = {
+                'Title'     : i['title'],
+                'Genre'     : self.showMetaData.get('Genre', ''),
+                'Date'      : date,
+                'Country'   : self.showMetaData.get('Country', ''),
+                'Plot'      : i['description'],
+                'Duration'  : int(i['duration']) / 60
+            }
+            streamInfo = {
+                'duration' : i['duration']
+            }
+
+            listItems.append(
+                ListItem(
+                    self.id,
+                    i['title'],
+                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                    iconimage,
+                    self.fanartPath,
+                    metaData,
+                    streamInfo,
+                    False
+                )
+            )
+
+        return listItems
+
+    def __getBaseList(self):
+        baseList = []
+
+        for i in self.submodules:
+            baseList.append(ListItem(
+                self.id,
+                i.moduleMetaData.get('Title', ''),
+                resources.lib.assembleListURL(self.moduleName, i.name),
+                self.bannerPath,
+                self.fanartPath,
+                {
+                    'Title': i.moduleMetaData.get('Title', ''),
+                    'Plot': i.moduleMetaData.get('Plot', '')
+                }
+            ))
+
+        return baseList
 
 
-def createDataSource(module=''):
+def createDataSource(module=None):
     """
-    Create a data source object based on the magazine name.
-    If left empty, an overview data source will be generated.
+    Create a L{DataSource} object based on the given module name.
+    If no module name is given, an overview DataSource will be generated.
     
     @type module: str
-    @keyword module: the magazine name
-    @return: DataSource instance
+    @keyword module: the magazine name, None or empty string for overview
+    @rtype: DataSource
+    @return: generated DataSource
     """
-    raise NotImplementedError
+    if not module:
+        raise NotImplementedError
+
+    jsonFile = ADDON_BASE_PATH + '/resources/datasources/' + module + '.json'
+    if os.path.isfile(jsonFile):
+        return DataSource.bootstrap(jsonFile)
+    else:
+        raise NotImplementedError
+

@@ -401,13 +401,13 @@ def assembleListURL(module=None, submodule=None, mode=None):
     
     url = getPluginBaseURL() + '/?cmd=list'
     
-    if None == module:
+    if module is None:
         return url
     
     url += '&module=' + urllib.quote(module)
-    if None != submodule:
+    if submodule is not None:
         url += '&submodule=' + urllib.quote(submodule)
-    if None != submodule and None != mode:
+    if submodule is not None and mode is not None:
         url += '&mode=' + urllib.quote(mode)
     
     return url
