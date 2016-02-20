@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # 
-# Massengeschmack XBMC add-on
+# Massengeschmack Kodi add-on
 # Copyright (C) 2013-2016 by Janek Bevendorff
 #
 # This program is free software: you can redistribute it and/or modify
@@ -31,7 +31,7 @@ ADDON_BASE_PATH   = xbmc.translatePath(ADDON.getAddonInfo('path')).decode('utf-8
 ADDON_HANDLE      = int(sys.argv[1])
 ADDON_ARGS        = dict(urlparse.parse_qsl(sys.argv[2][1:]))
 
-HTTP_USER_AGENT      = 'Massengeschmack XBMC add-on v' + ADDON_VERSION
+HTTP_USER_AGENT      = 'Massengeschmack Kodi add-on v' + ADDON_VERSION
 HTTP_TIMEOUT         = 20
 HTTP_BASE_URI        = 'https://massengeschmack.tv/'
 HTTP_BASE_FEED_URI   = HTTP_BASE_URI + 'feed/'

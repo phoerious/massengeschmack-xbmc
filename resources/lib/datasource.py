@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # 
-# Massengeschmack XBMC add-on
+# Massengeschmack Kodi add-on
 # Copyright (C) 2013-2016 by Janek Bevendorff
 #
 # This program is free software: you can redistribute it and/or modify
