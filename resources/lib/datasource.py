@@ -430,7 +430,9 @@ class LiveDataSource(DataSource):
             else:
                 self.__upcoming.append(i)
 
+        # if there is a show live on air, mark it in the list and move it to the top
         if self.isLive:
+            self.sortOrder = -10000
             self.showMetaData['Title'] = self.showMetaData['Title'].rstrip() + ' ' + ADDON.getLocalizedString(30278)
 
     @classmethod

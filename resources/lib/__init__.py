@@ -188,6 +188,7 @@ def getLiveShows():
     if __liveShows is None:
         handle = openHTTPConnection(HTTP_BASE_API_URI + '/?action=listLiveShows')
         __liveShows = json.loads(handle.read())
+
         handle.close()
     
     return __liveShows
