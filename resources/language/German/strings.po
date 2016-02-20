@@ -105,6 +105,14 @@ msgstr "Ihre Login-Daten sind für diese Inhalte ungültig,\nhaben Sie diese vie
 # Magazine listings and descriptions
 # ----------------------------------------------------------------------------------
 
+msgctxt "#30150"
+msgid "Latest releases"
+msgstr "Neuste Veröffentlichungen"
+
+msgctxt "#30151"
+msgid "Main feed with latest releases from all magazines."
+msgstr "Haupt-Feed mit neusten Folgen aus allen Magazinen."
+
 msgctxt "#30198"
 msgid "[Missing Title] "
 msgstr "[Fehlender Titel]"

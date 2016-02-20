@@ -39,7 +39,10 @@ class DataSource(object):
             """Name of the submodule."""
 
             self.ids = []   # type: list of int
-            """Feed ids contained in this submodule."""
+            """Feed IDs contained in this submodule."""
+
+            self.feedName = None    # type: str
+            """Custom feed name (overrides automatically generated name from feed IDs)"""
 
             self.moduleMetaData = {}    # type: dict
             """Metadata for the submodule (int values can be used to reference i18n strings)."""
@@ -143,6 +146,7 @@ class DataSource(object):
         for i in sm:
             s = cls.Submodule()
             s.name     = i.get('name', s.name)
+            s.feedName = i.get('feed_name', s.feedName)
             s.isActive = i.get('active', s.isActive)
             s.ids.extend(i.get('ids', []))
             s.moduleMetaData.update(__localizeDict(i.get('metadata', {})))
@@ -216,14 +220,14 @@ class DataSource(object):
             title = title.rstrip() + ' ' + ADDON.getLocalizedString(30199)
         return title
 
-    def buildFeedURL(self, ids, quality):
+    def buildFeedURL(self, submodule, quality):
         """
         Build a feed URL which points to an RSS feed which is filtered by the given IDs.
 
         This method relies on self.id being set properly in derived classes.
 
-        @type ids: list
-        @param ids: a list of numeric IDs of all sub shows to filter by
+        @type submodule: DataSource.Submodule
+        @param submodule: submodule for which to generate the feed URL
         @type quality: str
         @param quality: the movie quality (either 'best', 'hd', 'mobile' or 'audio')
         @rtype: str
@@ -231,15 +235,18 @@ class DataSource(object):
         """
         url = HTTP_BASE_FEED_URI + '/'
 
-        first = True
-        for i in ids:
-            if not first:
-                url += 'x'
-            first = False
-            url += str(self.id) + '-' + str(i)
+        if submodule.feedName:
+            url += submodule.feedName
+        else:
+            first = True
+            for i in submodule.ids:
+                if not first:
+                    url += 'x'
+                first = False
+                url += str(self.id) + '-' + str(i)
 
         url += '/' + quality + '.xml'
-
+        print(url)
         return url
 
     def getListItems(self):
@@ -266,7 +273,7 @@ class DataSource(object):
             raise RuntimeError("No valid submodule given.")
 
         submodule = next(s for s in self.submodules if s.name == submoduleName)
-        data      = resources.lib.parseRSSFeed(self.buildFeedURL(submodule.ids, self.getQuality()), True)
+        data      = resources.lib.parseRSSFeed(self.buildFeedURL(submodule, self.getQuality()), True)
         for i in data:
             iconimage = i["thumbUrl"]
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')

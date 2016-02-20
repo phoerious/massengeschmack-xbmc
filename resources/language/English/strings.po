@@ -105,6 +105,14 @@ msgstr ""
 # Magazine listings and descriptions
 # ----------------------------------------------------------------------------------
 
+msgctxt "#30150"
+msgid "Latest releases"
+msgstr ""
+
+msgctxt "#30151"
+msgid "Main feed with latest releases from all magazines."
+msgstr ""
+
 msgctxt "#30198"
 msgid "[Missing Title] "
 msgstr ""
