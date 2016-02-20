@@ -243,7 +243,7 @@ class DataSource(object):
         Generate a list of L{resources.lib.listing.ListItem} objects for the current data source.
 
         @rtype: list of resources.lib.listing.ListItem
-        @return: generated ListItems
+        @return: generator object with ListItems
         """
         submoduleName = self.getCurrentSubmoduleName()
 
@@ -290,18 +290,20 @@ class DataSource(object):
             )
 
     def __getBaseList(self):
-        for i in self.submodules:
-            yield ListItem(
-                self.id,
-                i.getModuleTitle(),
-                resources.lib.assembleListURL(self.moduleName, i.name),
-                self.bannerPath,
-                self.fanartPath,
-                {
-                    'Title': i.moduleMetaData.get('Title', ''),
-                    'Plot': i.moduleMetaData.get('Plot', '')
-                }
-            )
+        # create generator object of submodules with inactive submodules coming last
+        for active in (True, False):
+            for i in (s for s in self.submodules if s.isActive == active):
+                yield ListItem(
+                    self.id,
+                    i.getModuleTitle(),
+                    resources.lib.assembleListURL(self.moduleName, i.name),
+                    self.bannerPath,
+                    self.fanartPath,
+                    {
+                        'Title': i.moduleMetaData.get('Title', ''),
+                        'Plot': i.moduleMetaData.get('Plot', '')
+                    }
+                )
 
 
 class OverviewDataSource(DataSource):
@@ -330,15 +332,17 @@ class OverviewDataSource(DataSource):
         # sort DataSources as defined in each DataSource's sortOrder property
         dataSources.sort(key=lambda x: x.sortOrder)
 
-        for i in dataSources:
-            yield ListItem(
-                i.id,
-                i.getShowTitle(),
-                resources.lib.assembleListURL(i.moduleName),
-                i.bannerPath,
-                i.fanartPath,
-                i.showMetaData
-            )
+        # create generator object of shows with inactive submodules coming last
+        for active in (True, False):
+            for i in (s for s in dataSources if s.isActive == active):
+                yield ListItem(
+                    i.id,
+                    i.getShowTitle(),
+                    resources.lib.assembleListURL(i.moduleName),
+                    i.bannerPath,
+                    i.fanartPath,
+                    i.showMetaData
+                )
 
 
 def createDataSource(module=None):
