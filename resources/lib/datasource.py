@@ -63,7 +63,9 @@ class DataSource(object):
             """
             title = self.moduleMetaData.get('Title', ADDON.getLocalizedString(30198))
             if not self.isActive:
-                title += ' ' + ADDON.getLocalizedString(30199)
+                # rstrip() for removing workaround white-space for 16 char min-length issue
+                # see <http://trac.kodi.tv/ticket/16599>
+                title = title.rstrip() + ' ' + ADDON.getLocalizedString(30199)
             return title
 
     def __init__(self):
@@ -209,7 +211,9 @@ class DataSource(object):
         """
         title = self.showMetaData.get('Title', ADDON.getLocalizedString(30198))
         if not self.isActive:
-            title += ' ' + ADDON.getLocalizedString(30199)
+            # rstrip() for removing workaround white-space for 16 char min-length issue
+            # see <http://trac.kodi.tv/ticket/16599>
+            title = title.rstrip() + ' ' + ADDON.getLocalizedString(30199)
         return title
 
     def buildFeedURL(self, ids, quality):

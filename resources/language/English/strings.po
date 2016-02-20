@@ -106,7 +106,7 @@ msgstr ""
 # ----------------------------------------------------------------------------------
 
 msgctxt "#30198"
-msgid "[Missing Title]"
+msgid "[Missing Title] "
 msgstr ""
 
 msgctxt "#30199"
@@ -122,7 +122,8 @@ msgid "Satirical, Critical"
 msgstr ""
 
 msgctxt "#30202"
-msgid "Germany"
+# workaround for 16 char min-length issue, see <http://trac.kodi.tv/ticket/16599>
+msgid "Germany         "
 msgstr ""
 
 msgctxt "#30203"
@@ -133,15 +134,11 @@ msgid "Fernsehkritik-TV is a satirical and critical magazine, moderated by Holge
 msgstr ""
 
 msgctxt "#30210"
-msgid "Pantoffel-TV"
+msgid "Pantoffel-TV    "
 msgstr ""
 
 msgctxt "#30211"
 msgid "Cultural, Literature, Music, Movies, Games"
-msgstr ""
-
-msgctxt "#30212"
-msgid "Germany"
 msgstr ""
 
 msgctxt "#30213"
@@ -151,15 +148,11 @@ msgid "Pantoffel-TV is a magazine about all cultural things you can enjoy at hom
 msgstr ""
 
 msgctxt "#30220"
-msgid "Pressesch(l)au"
+msgid "Pressesch(l)au  "
 msgstr ""
 
 msgctxt "#30221"
 msgid "Satirical, Critical, Comedy"
-msgstr ""
-
-msgctxt "#30222"
-msgid "Germany"
 msgstr ""
 
 msgctxt "#30223"
@@ -176,25 +169,17 @@ msgctxt "#30231"
 msgid "Comedy, Scripted Reality"
 msgstr ""
 
-msgctxt "#30232"
-msgid "Germany"
-msgstr ""
-
 msgctxt "#30233"
 msgid "In this category you find all extra content regarding Massengeschmack such as „Massengeschmack Direkt“ or the "
 "satirical weekly show „Das Studio“."
 msgstr ""
 
 msgctxt "#30240"
-msgid "Pasch-TV"
+msgid "Pasch-TV        "
 msgstr ""
 
 msgctxt "#30241"
 msgid "Let's Play, Board Game"
-msgstr ""
-
-msgctxt "#30242"
-msgid "Germany"
 msgstr ""
 
 msgctxt "#30243"
@@ -202,15 +187,11 @@ msgid "Pasch-TV is a magazine in which Holger and guests try one new board game 
 msgstr ""
 
 msgctxt "#30250"
-msgid "Netzprediger"
+msgid "Netzprediger    "
 msgstr ""
 
 msgctxt "#30251"
-msgid "Internet, Media"
-msgstr ""
-
-msgctxt "#30252"
-msgid "Germany"
+msgid "Internet, Media "
 msgstr ""
 
 msgctxt "#30253"
@@ -219,15 +200,11 @@ msgid "Netzprediger is an online magazine about the Internet with all its bright
 msgstr ""
 
 msgctxt "#30260"
-msgid "Asynchron"
+msgid "Asynchron       "
 msgstr ""
 
 msgctxt "#30261"
 msgid "Movies, TV Series"
-msgstr ""
-
-msgctxt "#30262"
-msgid "Germany"
 msgstr ""
 
 msgctxt "#30263"
@@ -236,15 +213,11 @@ msgid "Asynchron is about dubbing of TV series and movies. How good are the voic
 msgstr ""
 
 msgctxt "#30264"
-msgid "Tonangeber"
+msgid "Tonangeber      "
 msgstr ""
 
 msgctxt "#30265"
-msgid "Music"
-msgstr ""
-
-msgctxt "#30266"
-msgid "Germany"
+msgid "Music           "
 msgstr ""
 
 msgctxt "#30267"
@@ -253,11 +226,7 @@ msgid "In Tonangeber Nils reviews new music album releases and live concert DVDs
 msgstr ""
 
 msgctxt "#30270"
-msgid "LIVE"
-msgstr ""
-
-msgctxt "#30271"
-msgid "Germany"
+msgid "LIVE            "
 msgstr ""
 
 msgctxt "#30272"
@@ -289,15 +258,11 @@ msgid "Livetalk"
 msgstr ""
 
 msgctxt "#30290"
-msgid "Sakura"
+msgid "Sakura          "
 msgstr ""
 
 msgctxt "#30291"
-msgid "Anime, Manga"
-msgstr ""
-
-msgctxt "#30292"
-msgid "Germany"
+msgid "Anime, Manga    "
 msgstr ""
 
 msgctxt "#30293"
@@ -396,7 +361,7 @@ msgid "All Sakura epsisodes und interviews"
 msgstr ""
 
 msgctxt "#30371"
-msgid "regular Sakura episodes"
+msgid "Regular Sakura episodes"
 msgstr ""
 
 msgctxt "#30375"
@@ -416,15 +381,11 @@ msgid "Contribution night for the Supernanny lawsuit"
 msgstr ""
 
 msgctxt "#30400"
-msgid "Hoaxilla-TV"
+msgid "Hoaxilla-TV     "
 msgstr ""
 
 msgctxt "#30401"
 msgid "Information, Education, Scepticism Conspiracy Theories, Urban Legends"
-msgstr ""
-
-msgctxt "#30402"
-msgid "Germany"
 msgstr ""
 
 msgctxt "#30403"
@@ -433,15 +394,11 @@ msgid "Hoaxilla-TV is a video series by the moderators of Hoaxilla, a sceptic po
 msgstr ""
 
 msgctxt "#30410"
-msgid "Migropolis"
+msgid "Migropolis      "
 msgstr ""
 
 msgctxt "#30411"
 msgid "Information, Culture, Politics, Migration"
-msgstr ""
-
-msgctxt "#30412"
-msgid "Germany"
 msgstr ""
 
 msgctxt "#30413"

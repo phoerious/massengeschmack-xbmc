@@ -106,7 +106,7 @@ msgstr "Ihre Login-Daten sind für diese Inhalte ungültig,\nhaben Sie diese vie
 # ----------------------------------------------------------------------------------
 
 msgctxt "#30198"
-msgid "[Missing Title]"
+msgid "[Missing Title] "
 msgstr "[Fehlender Titel]"
 
 msgctxt "#30199"
@@ -122,8 +122,9 @@ msgid "Satirical, Critical"
 msgstr "Satirisch, Kritisch"
 
 msgctxt "#30202"
-msgid "Germany"
-msgstr "Deutschland"
+# workaround for 16 char min-length issue, see <http://trac.kodi.tv/ticket/16599>
+msgid "Germany         "
+msgstr "Deutschland     "
 
 msgctxt "#30203"
 msgid "Fernsehkritik-TV is a satirical and critical magazine, moderated by Holger Kreymeier which first aired "
@@ -136,16 +137,12 @@ msgstr "Fernsehkritik-TV ist ein satirisches und kritisches Magazin, das von Hol
 "mehr.\n\nNebenformate sind die „Postecke“ und „Sendeschluss“."
 
 msgctxt "#30210"
-msgid "Pantoffel-TV"
-msgstr "Pantoffel-TV"
+msgid "Pantoffel-TV    "
+msgstr "Pantoffel-TV    "
 
 msgctxt "#30211"
 msgid "Cultural, Literature, Music, Movies, Games"
 msgstr "Kulturell, Literatur, Musik, Filme, Games"
-
-msgctxt "#30212"
-msgid "Germany"
-msgstr "Deutschland"
 
 msgctxt "#30213"
 msgid "Pantoffel-TV is a magazine about all cultural things you can enjoy at home or (almost) anywhere else. "
@@ -157,16 +154,12 @@ msgstr "Pantoffel-TV ist ein Magazin über all die kulturellen Dinge, an denen S
 "Filmen, Musik-Alben, Games etc."
 
 msgctxt "#30220"
-msgid "Pressesch(l)au"
-msgstr "Pressesch(l)au"
+msgid "Pressesch(l)au  "
+msgstr "Pressesch(l)au  "
 
 msgctxt "#30221"
 msgid "Satirical, Critical, Comedy"
 msgstr "Satirisch, Kritisch, Comedy"
-
-msgctxt "#30222"
-msgid "Germany"
-msgstr "Deutschland"
 
 msgctxt "#30223"
 msgid "Pressesch(l)au is a magazine moderated by Lars Golenia that concerns itself with all kinds of serious, not so "
@@ -185,10 +178,6 @@ msgctxt "#30231"
 msgid "Comedy, Scripted Reality"
 msgstr "Comedy, Scripted Reality"
 
-msgctxt "#30232"
-msgid "Germany"
-msgstr "Deutschland"
-
 msgctxt "#30233"
 msgid "In this category you find all extra content regarding Massengeschmack such as „Massengeschmack Direkt“ or the "
 "satirical weekly show „Das Studio“."
@@ -196,16 +185,12 @@ msgstr "In dieser Kategorie finden Sie alle Extra-Inhalte von Massengeschmack wi
 "oder die wöchentliche Satireshow „Das Studio“."
 
 msgctxt "#30240"
-msgid "Pasch-TV"
-msgstr "Pasch-TV"
+msgid "Pasch-TV        "
+msgstr "Pasch-TV        "
 
 msgctxt "#30241"
 msgid "Let's Play, Board Game"
 msgstr "Let's Play, Brettspiele"
-
-msgctxt "#30242"
-msgid "Germany"
-msgstr "Deutschland"
 
 msgctxt "#30243"
 msgid "Pasch-TV is a magazine in which Holger and guests try one new board game release each episode."
@@ -213,16 +198,12 @@ msgstr "Pasch-TV ist ein Magazin, in dem Holger zusammen mit Gästen pro Folge e
 "Brettspiel-Neuerscheinung ausprobiert."
 
 msgctxt "#30250"
-msgid "Netzprediger"
-msgstr "Netzprediger"
+msgid "Netzprediger    "
+msgstr "Netzprediger    "
 
 msgctxt "#30251"
-msgid "Internet, Media"
+msgid "Internet, Media "
 msgstr "Internet, Medien"
-
-msgctxt "#30252"
-msgid "Germany"
-msgstr "Deutschland"
 
 msgctxt "#30253"
 msgid "Netzprediger is an online magazine about the Internet with all its bright and dark sides: fun, fraud, "
@@ -231,16 +212,12 @@ msgstr "Netzprediger ist ein Online-Magazin über das Internet mit all seinen he
 "Betrug und Absurditäten, präsentiert vom virtuellen Moderator Untenein G. Blendet."
 
 msgctxt "#30260"
-msgid "Asynchron"
-msgstr "Asynchron"
+msgid "Asynchron       "
+msgstr "Asynchron       "
 
 msgctxt "#30261"
 msgid "Movies, TV Series"
-msgstr "Filme, Serien"
-
-msgctxt "#30262"
-msgid "Germany"
-msgstr "Deutschland"
+msgstr "Filme, Serien   "
 
 msgctxt "#30263"
 msgid "Asynchron is about dubbing of TV series and movies. How good are the voice actors? How closely related to the "
@@ -249,16 +226,12 @@ msgstr "Asynchron beschäftigt sich mit der Synchronisation von Serien und Filme
 "Wie nah am Original sind die Dialoge?"
 
 msgctxt "#30264"
-msgid "Tonangeber"
-msgstr "Tonangeber"
+msgid "Tonangeber      "
+msgstr "Tonangeber      "
 
 msgctxt "#30265"
-msgid "Music"
-msgstr "Musik"
-
-msgctxt "#30266"
-msgid "Germany"
-msgstr "Deutschland"
+msgid "Music           "
+msgstr "Music           "
 
 msgctxt "#30267"
 msgid "In Tonangeber Nils reviews new music album releases and live concert DVDs. He also invites musicians as guests "
@@ -267,12 +240,8 @@ msgstr "In Tonangeber rezensiert Nils Releases neuer Musik-Alben und Live-Konzer
 "als Gäste ins Studio ein und spricht mit ihnen über ihre Musik und Konzerte. Featuring Klaus Kauker."
 
 msgctxt "#30270"
-msgid "LIVE"
-msgstr "LIVE"
-
-msgctxt "#30271"
-msgid "Germany"
-msgstr "Deutschland"
+msgid "LIVE            "
+msgstr "LIVE            "
 
 msgctxt "#30272"
 msgid "Massengeschmack Live streams"
@@ -303,16 +272,12 @@ msgid "Livetalk"
 msgstr ""
 
 msgctxt "#30290"
-msgid "Sakura"
-msgstr "Sakura"
+msgid "Sakura          "
+msgstr "Sakura          "
 
 msgctxt "#30291"
-msgid "Anime, Manga"
-msgstr "Anime, Manga"
-
-msgctxt "#30292"
-msgid "Germany"
-msgstr "Deutschland"
+msgid "Anime, Manga    "
+msgstr "Anime, Manga    "
 
 msgctxt "#30293"
 msgid "Sakura is a magazine about Anime and Manga"
@@ -415,7 +380,7 @@ msgid "All Sakura epsisodes und interviews"
 msgstr "Alle Sakura-Folgen und Interviews"
 
 msgctxt "#30371"
-msgid "regular Sakura episodes"
+msgid "Regular Sakura episodes"
 msgstr "Reguläre Sakura-Folgen"
 
 msgctxt "#30375"
@@ -435,16 +400,12 @@ msgid "Contribution night for the Supernanny lawsuit"
 msgstr "Spendennacht zum Supernanny-Prozess"
 
 msgctxt "#30400"
-msgid "Hoaxilla-TV"
-msgstr "Hoaxilla-TV"
+msgid "Hoaxilla-TV     "
+msgstr "Hoaxilla-TV     "
 
 msgctxt "#30401"
 msgid "Information, Education, Scepticism Conspiracy Theories, Urban Legends"
 msgstr "Information, Education, Scepticism Conspiracy Theories, Urban Legends"
-
-msgctxt "#30402"
-msgid "Germany"
-msgstr "Deutschland"
 
 msgctxt "#30403"
 msgid "Hoaxilla-TV is a video series by the moderators of Hoaxilla, a sceptic podcast about myths, urban legends, "
@@ -453,16 +414,12 @@ msgstr "Hoaxilla-TV ist ein Videoformat der Moderatoren von Hoaxilla, einem skep
 "urbane Legenden, Verschwörungstheorien, Kultur und Wissenschaft."
 
 msgctxt "#30410"
-msgid "Migropolis"
-msgstr "Migropolis"
+msgid "Migropolis      "
+msgstr "Migropolis      "
 
 msgctxt "#30411"
 msgid "Information, Culture, Politics, Migration"
 msgstr "Information, Kulture, Politik, Migration"
-
-msgctxt "#30412"
-msgid "Germany"
-msgstr "Germany"
 
 msgctxt "#30413"
 msgid "Migropolis is a documentary magazine about integration of people with migration background in Germany."
