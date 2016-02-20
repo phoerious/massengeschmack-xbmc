@@ -202,9 +202,7 @@ class DataSource(object):
         @rtype: bool
         @return content mode
         """
-        if self.getCurrentSubmoduleName():
-            return 'episodes'
-        return 'tvshows'
+        return 'episodes'
 
     def getShowTitle(self):
         """
@@ -401,6 +399,9 @@ class OverviewDataSource(DataSource):
                     i.fanartPath,
                     i.showMetaData
                 )
+
+    def getContentMode(self):
+        return "tvshows"
 
 
 @DataSourceRegistry('live')
