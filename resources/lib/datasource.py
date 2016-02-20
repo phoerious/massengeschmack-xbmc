@@ -19,6 +19,7 @@
 import json
 import os
 import glob
+import datetime
 from resources.lib.listing import *
 
 
@@ -124,8 +125,7 @@ class DataSource(object):
         with open(jsonFile, 'r') as f:
             jd = json.load(f, 'utf-8')
 
-        ds = cls()
-
+        ds            = cls()
         ds.moduleName = os.path.basename(jsonFile).replace('.json', '')
         ds.id         = jd.get('id', ds.id)
         ds.sortOrder  = jd.get('order', ds.sortOrder)
@@ -229,7 +229,7 @@ class DataSource(object):
         @rtype: str
         @return feed URL string
         """
-        url = HTTP_BASE_FEED_URI
+        url = HTTP_BASE_FEED_URI + '/'
 
         first = True
         for i in ids:
@@ -310,9 +310,57 @@ class DataSource(object):
                 )
 
 
+class DataSourceRegistry:
+    """
+    Decorator for registering custom DataSource classes.
+    Any non-bootstrapped DataSource that shall be hooked into the DataSource list, needs to be decorated.
+    The only exception is L{OverviewDataSource} which is always the root DataSource and
+    therefore registered implicitly.
+    """
+
+    __dataSources = {}
+
+    def __init__(self, moduleName):
+        """
+        Register class as DataSource. The specified moduleName will be used to automatically instantiate
+        DataSources when that submodule is called via KODI URI.
+
+        @type moduleName: str
+        @param moduleName: module name to register for
+        @return: decorated DataSource
+        """
+        self.__moduleName = moduleName
+
+    def __call__(self, cls):
+        if self.__moduleName not in self.__dataSources:
+            self.__dataSources[self.__moduleName] = cls
+        return self.__dataSources[self.__moduleName]
+
+    @classmethod
+    def getDataSources(cls):
+        """
+        Return a set of registered DataSource classes.
+
+        @rtype: set of DataSource
+        @return all registered DataSources
+        """
+        return set(cls.__dataSources.values())
+
+    @classmethod
+    def getDataSourceByName(cls, moduleName):
+        """
+        Get DataSource class by registered module name.
+
+        @param moduleName: module name the DataSource was registered for
+        @rtype DataSource
+        @return: the DataSource class or None if no DataSource is registered under moduleName
+        """
+        return cls.__dataSources.get(moduleName, None)
+
+
 class OverviewDataSource(DataSource):
     """
-    Overview DataSource for displaying an overview of all available shows.
+    Overview DataSource for displaying an overview of all registered show DataSources.
     This is the root DataSource that is displayed at top level.
     """
 
@@ -323,12 +371,11 @@ class OverviewDataSource(DataSource):
     def getListItems(self):
         dataSources = []
 
-        # create instances of all DataSource subclasses (except this one)
-        subclasses = DataSource.__subclasses__()
-        for i in (s for s in subclasses if s is not self.__class__):
+        # add all registered DataSources to the list
+        for i in DataSourceRegistry.getDataSources():
             dataSources.append(i())
 
-        # boostrap any other DataSources from available bootstrap files
+        # boostrap any remaining DataSources from available bootstrap files
         bootstrapFiles = glob.glob(ADDON_BOOTSTRAP_PATH + '/*.json')
         for i in bootstrapFiles:
             dataSources.append(DataSource.bootstrap(i))
@@ -349,6 +396,164 @@ class OverviewDataSource(DataSource):
                 )
 
 
+@DataSourceRegistry('live')
+class LiveDataSource(DataSource):
+    """
+    Custom DataSource for LIVE streams.
+    """
+
+    def __init__(self):
+        super(LiveDataSource, self).__init__()
+
+        self.id           = -9999
+        self.moduleName   = 'live'
+        self.sortOrder    = 600
+        self.showMetaData = {
+            'Title'    : ADDON.getLocalizedString(30270),
+            'Country'  : ADDON.getLocalizedString(30202),
+            'Plot'     : ADDON.getLocalizedString(30272)
+        }
+        self.bannerPath = ADDON_BASE_PATH + '/resources/media/banner-live.png'
+        self.fanartPath = ADDON_BASE_PATH + '/resources/media/fanart-live.png'
+        self.isActive   = True
+
+        self.isLive     = False
+
+        self.__shows    = resources.lib.getLiveShows()
+        self.__current  = []
+        self.__upcoming = []
+
+        for i in self.__shows:
+            if i['isLive']:
+                self.isLive = True
+                self.__current.append(i)
+            else:
+                self.__upcoming.append(i)
+
+        if self.isLive:
+            self.showMetaData['Title'] = self.showMetaData['Title'].rstrip() + ' ' + ADDON.getLocalizedString(30278)
+
+    @classmethod
+    def bootstrap(cls, jsonFile):
+        raise NotImplementedError
+
+    def getListItems(self):
+        if self.__current:
+            yield ListItem(
+                self.id,
+                ADDON.getLocalizedString(30273),
+                '#',
+                self.__getThumbnailURL(0),
+                self.fanartPath,
+                {'Plot' : ADDON.getLocalizedString(30274)}
+            )
+
+            for i in self.__createShowListing(self.__current, True):
+                yield i
+
+        if self.__upcoming:
+            yield ListItem(
+                self.id,
+                ADDON.getLocalizedString(30275),
+                '#',
+                self.__getThumbnailURL(0),
+                self.fanartPath,
+                {'Plot' : ADDON.getLocalizedString(30276)}
+            )
+
+            for i in self.__createShowListing(self.__upcoming):
+                yield i
+
+    def getContentMode(self):
+        return 'episodes'
+
+    def __createShowListing(self, shows, isLive=False):
+        for i in shows:
+            iconimage = self.__getThumbnailURL(i['pid'])
+            plot      = i['oneliner']
+            time      = datetime.datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y, %H:%M:%S')
+            date      = datetime.datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y')
+            name      = self.__getShowName(int(i['pid']))
+
+            if not plot:
+                plot = ''
+            else:
+                plot += '\n\n'
+
+            plot += ADDON.getLocalizedString(30277).format(name, time)
+
+            metaData  = {
+                'Title'     : name,
+                'Date'      : date,
+                'Plot'      : plot
+            }
+
+            listName   = '    ' + name + ' [' + time + ']'
+            streamName = name + ' [' + ADDON.getLocalizedString(30270) + ']'
+
+            isFolder = True
+            if isLive:
+                isFolder = False
+
+            yield ListItem(
+                self.id,
+                listName,
+                resources.lib.assemblePlayURL(self.__getStreamURL(i['showid']), streamName, iconimage, metaData),
+                iconimage,
+                self.fanartPath,
+                metaData,
+                isFolder=isFolder
+            )
+
+    @staticmethod
+    def __getShowName(id):
+        if -3 == id:
+            # Livetalk
+            name = ADDON.getLocalizedString(30280)
+        elif 0 == id:
+            # Massengeschmack-TV
+            name = ADDON.getLocalizedString(30230)
+        elif 1 == id:
+            # FKTV
+            name = ADDON.getLocalizedString(30200)
+        elif 2 == id:
+            # PantoffelTV
+            name = ADDON.getLocalizedString(30210)
+        elif 3 == id:
+            # Pressesch(l)au
+            name = ADDON.getLocalizedString(30220)
+        elif 4 == id:
+            # Pasch-TV
+            name = ADDON.getLocalizedString(30240)
+        elif 5 == id:
+            # Netzprediger
+            name = ADDON.getLocalizedString(30250)
+        elif 6 == id:
+            # Asynchron
+            name = ADDON.getLocalizedString(30260)
+        elif 7 == id:
+            # Tonangeber
+            name = ADDON.getLocalizedString(30264)
+        elif 8 == id:
+            # Hoaxilla-TV
+            name = ADDON.getLocalizedString(30400)
+        else:
+            name = '-'
+
+        return name.rstrip()
+
+    @staticmethod
+    def __getStreamURL(showid):
+        info = resources.lib.getLiveStreamInfo(showid)
+        if not info:
+            return '#'
+        return info['url']
+
+    @staticmethod
+    def __getThumbnailURL(id):
+        return HTTP_BASE_URI + '/img/logo' + str(id) + '_feed.jpg'
+
+
 def createDataSource(module=None):
     """
     Create a L{DataSource} object based on the given module name.
@@ -366,5 +571,8 @@ def createDataSource(module=None):
     if os.path.isfile(bootstrapFile):
         return DataSource.bootstrap(bootstrapFile)
     else:
-        raise RuntimeError("Invalid module {}".format(module))
+        ds = DataSourceRegistry.getDataSourceByName(module)
+        if ds is None:
+            raise RuntimeError("Invalid module {}".format(module))
+        return ds()
 

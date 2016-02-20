@@ -115,7 +115,7 @@ def fetchSubscriptions(showDialog=False):
         dialog.update(50)
     
     try:
-        handle = openHTTPConnection(HTTP_BASE_URI + 'api/?action=listSubscriptionsID')
+        handle = openHTTPConnection(HTTP_BASE_API_URI + '/?action=listSubscriptionsID')
     except urllib2.HTTPError, e:
         response['code']   = e.code
         response['reason'] = e.reason
@@ -186,7 +186,7 @@ def getLiveShows():
     global __liveShows
 
     if __liveShows is None:
-        handle = openHTTPConnection(HTTP_BASE_URI + 'api/?action=listLiveShows')
+        handle = openHTTPConnection(HTTP_BASE_API_URI + '/?action=listLiveShows')
         __liveShows = json.loads(handle.read())
         handle.close()
     
@@ -201,10 +201,10 @@ def getLiveStreamInfo(id):
     @param id: the GUID of the live stream, False on error
     """
     try:
-        handle = openHTTPConnection(HTTP_BASE_URI + 'api/?action=getPlaylistUrl&id=' + id)
-    except urllib2.HTTPError, e:
+        handle = openHTTPConnection(HTTP_BASE_API_URI + '/?action=getPlaylistUrl&id=' + id)
+    except urllib2.HTTPError:
         return False
-    except urllib2.URLError, e:
+    except urllib2.URLError:
         return False
     else:
         streamInfo = handle.read()
@@ -297,7 +297,7 @@ def parseRSSFeed(feed, fetch=False):
             if 0 == thumbUrl.find('//'):
                 thumbUrl = 'https:' + thumbUrl
             elif not re.match('^https?://', thumbUrl):
-                thumbUrl = HTTP_BASE_URI + re.sub('^/', '', thumbUrl)
+                thumbUrl = HTTP_BASE_URI + thumbUrl if 0 == thumbUrl.find('/') else '/' + thumbUrl
 
         # strip HTML tags
         description = re.sub('<[^>]*>', '', description).strip()

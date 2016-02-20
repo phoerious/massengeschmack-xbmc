@@ -262,7 +262,7 @@ msgid "In Tonangeber Nils reviews new music album releases and live concert DVDs
 msgstr ""
 
 msgctxt "#30270"
-msgid "LIVE            "
+msgid "LIVE Streams    "
 msgstr ""
 
 msgctxt "#30272"
@@ -287,6 +287,10 @@ msgstr ""
 
 msgctxt "#30277"
 msgid "Live stream: {0}\nAir date: {1}"
+msgstr ""
+
+msgctxt "#30278"
+msgid "[ON AIR]"
 msgstr ""
 
 msgctxt "#30280"

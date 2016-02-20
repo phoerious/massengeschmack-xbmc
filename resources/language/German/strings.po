@@ -276,8 +276,8 @@ msgstr "In Tonangeber rezensiert Nils Releases neuer Musik-Alben und Live-Konzer
 "als Gäste ins Studio ein und spricht mit ihnen über ihre Musik und Konzerte. Featuring Klaus Kauker."
 
 msgctxt "#30270"
-msgid "LIVE            "
-msgstr "LIVE            "
+msgid "LIVE Streams    "
+msgstr "LIVE-Sendungen  "
 
 msgctxt "#30272"
 msgid "Massengeschmack Live streams"
@@ -302,6 +302,10 @@ msgstr "Sendungen, die demnächst online kommen"
 msgctxt "#30277"
 msgid "Live stream: {0}\nAir date: {1}"
 msgstr "Live-Stream: {0}\nSendedatum: {1}"
+
+msgctxt "#30278"
+msgid "[ON AIR]"
+msgstr "[ON AIR]"
 
 msgctxt "#30280"
 msgid "Livetalk"
