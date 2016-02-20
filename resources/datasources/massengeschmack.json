@@ -4,10 +4,8 @@
     "metadata": {
         "Title": 30230,
         "Director": "Holger Kreymeier",
-        "Genre": 30231,
         "Country": 30202,
-        "Plot": 30233,
-        "Premiered": "2013-08-05"
+        "Plot": 30233
     },
     "banner": "banner-massengeschmack-20160220.png",
     "fanart": "fanart-massengeschmack-20160220.jpg",
@@ -26,7 +24,9 @@
             "ids": [2],
             "metadata": {
                 "Title": 30360,
-                "Plot": 30362
+                "Plot": 30362,
+                "Genre": 30231,
+                "Premiered": "2013-08-05"
             }
         },
         {
