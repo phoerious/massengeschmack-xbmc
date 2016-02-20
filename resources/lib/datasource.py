@@ -19,7 +19,7 @@
 import json
 import os
 import glob
-import datetime
+from datetime import datetime
 from resources.lib.listing import *
 
 
@@ -480,8 +480,8 @@ class LiveDataSource(DataSource):
         for i in shows:
             iconimage = self.__getThumbnailURL(i['pid'])
             plot      = i['oneliner']
-            time      = datetime.datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y, %H:%M:%S')
-            date      = datetime.datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y')
+            time      = datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y, %H:%M:%S')
+            date      = datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y')
             name      = self.__getShowName(int(i['pid']))
 
             if not plot:
