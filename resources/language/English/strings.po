@@ -105,6 +105,10 @@ msgstr ""
 # Magazine listings and descriptions
 # ----------------------------------------------------------------------------------
 
+msgctxt "#30140"
+msgid "OLDER >>"
+msgstr ""
+
 msgctxt "#30150"
 msgid "Latest releases"
 msgstr ""

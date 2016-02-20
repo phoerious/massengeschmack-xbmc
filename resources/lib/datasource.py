@@ -48,6 +48,9 @@ class DataSource(object):
             self.moduleMetaData = {}    # type: dict
             """Metadata for the submodule (int values can be used to reference i18n strings)."""
 
+            self.pagination = True  # type: bool
+            """Whether to enable pagination."""
+
             self.isActive = True    # type: bool
             """Whether this submodule is currently active."""
 
@@ -149,9 +152,10 @@ class DataSource(object):
         sm = jd.get('submodules', [])
         for i in sm:
             s = cls.Submodule()
-            s.name     = i.get('name', s.name)
-            s.feedName = i.get('feed_name', s.feedName)
-            s.isActive = i.get('active', s.isActive)
+            s.name       = i.get('name', s.name)
+            s.feedName   = i.get('feed_name', s.feedName)
+            s.pagination = i.get('pagination', s.pagination)
+            s.isActive   = i.get('active', s.isActive)
             s.ids.extend(i.get('ids', []))
             s.moduleMetaData.update(__localizeDict(i.get('metadata', {})))
             ds.submodules.append(s)
@@ -222,7 +226,7 @@ class DataSource(object):
             title = title.rstrip() + ' ' + ADDON.getLocalizedString(30199)
         return title
 
-    def buildFeedURL(self, submodule, quality):
+    def buildFeedURL(self, submodule, quality, page=1):
         """
         Build a feed URL which points to an RSS feed which is filtered by the given IDs.
 
@@ -232,6 +236,8 @@ class DataSource(object):
         @param submodule: submodule for which to generate the feed URL
         @type quality: str
         @param quality: the movie quality (either 'best', 'hd', 'mobile' or 'audio')
+        @type page: int
+        @param page: page for pagination
         @rtype: str
         @return feed URL string
         """
@@ -247,8 +253,8 @@ class DataSource(object):
                 first = False
                 url += str(self.id) + '-' + str(i)
 
-        url += '/' + quality + '.xml'
-        print(url)
+        url += '/' + quality + '.xml?page=' + str(page)
+
         return url
 
     def getListItems(self):
@@ -274,8 +280,10 @@ class DataSource(object):
         if submoduleName is None:
             raise RuntimeError("No valid submodule given.")
 
-        submodule = next(s for s in self.submodules if s.name == submoduleName)
-        data      = resources.lib.parseRSSFeed(self.buildFeedURL(submodule, self.getQuality()), True)
+        currentPage = int(ADDON_ARGS['page']) if 'page' in ADDON_ARGS else 1
+        submodule   = next(s for s in self.submodules if s.name == submoduleName)
+        data        = resources.lib.parseRSSFeed(self.buildFeedURL(submodule, self.getQuality(), currentPage), True)
+
         for i in data:
             iconimage = i["thumbUrl"]
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
@@ -300,6 +308,16 @@ class DataSource(object):
                 metaData,
                 streamInfo,
                 False
+            )
+
+        # forward pagination
+        if submodule.pagination and len(data) >= 10:
+            yield ListItem(
+                self.id,
+                ADDON.getLocalizedString(30140),
+                resources.lib.assembleListURL(self.moduleName, submodule.name, page=currentPage + 1),
+                self.bannerPath,
+                self.fanartPath
             )
 
     def __getBaseList(self):

@@ -387,7 +387,7 @@ def getPluginBaseURL():
     return url
 
 
-def assembleListURL(module=None, submodule=None, mode=None):
+def assembleListURL(module=None, submodule=None, **kwargs):
     """
     Assemble a plugin:// url with a list command.
     
@@ -395,8 +395,7 @@ def assembleListURL(module=None, submodule=None, mode=None):
     @param module: the name of the module to list
     @type submodule: str
     @param submodule: the name of the sub module to list (requires module to be set)
-    @type mode: str
-    @param mode: a mode for a submodule (requires submodule to be set)
+    @param kwargs: additional parameters
     @return the URL
     """
     
@@ -408,8 +407,9 @@ def assembleListURL(module=None, submodule=None, mode=None):
     url += '&module=' + urllib.quote(module)
     if submodule is not None:
         url += '&submodule=' + urllib.quote(submodule)
-    if submodule is not None and mode is not None:
-        url += '&mode=' + urllib.quote(mode)
+
+    for p in kwargs:
+        url += '&' + urllib.quote(p) + '=' + urllib.quote(str(kwargs[p]))
     
     return url
     
