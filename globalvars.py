@@ -22,14 +22,15 @@ import urlparse
 import sys
 
 # globals
-ADDON_ID          = 'plugin.video.massengeschmack'
-ADDON             = xbmcaddon.Addon(id=ADDON_ID)
-ADDON_NAME        = ADDON.getAddonInfo('name')
-ADDON_ICON        = ADDON.getAddonInfo('icon')
-ADDON_VERSION     = ADDON.getAddonInfo('version')
-ADDON_BASE_PATH   = xbmc.translatePath(ADDON.getAddonInfo('path')).decode('utf-8')
-ADDON_HANDLE      = int(sys.argv[1])
-ADDON_ARGS        = dict(urlparse.parse_qsl(sys.argv[2][1:]))
+ADDON_ID             = 'plugin.video.massengeschmack'
+ADDON                = xbmcaddon.Addon(id=ADDON_ID)
+ADDON_NAME           = ADDON.getAddonInfo('name')
+ADDON_ICON           = ADDON.getAddonInfo('icon')
+ADDON_VERSION        = ADDON.getAddonInfo('version')
+ADDON_BASE_PATH      = xbmc.translatePath(ADDON.getAddonInfo('path')).decode('utf-8')
+ADDON_BOOTSTRAP_PATH = ADDON_BASE_PATH + '/resources/datasources'
+ADDON_HANDLE         = int(sys.argv[1])
+ADDON_ARGS           = dict(urlparse.parse_qsl(sys.argv[2][1:]))
 
 HTTP_USER_AGENT      = 'Massengeschmack Kodi add-on v' + ADDON_VERSION
 HTTP_TIMEOUT         = 20

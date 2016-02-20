@@ -54,7 +54,7 @@ if 'cmd' not in ADDON_ARGS:
     ADDON_ARGS['cmd'] = 'list'
 
 if 'list' == ADDON_ARGS['cmd']:
-    listing    = lib.Listing()
+    listing    = lib.listing.Listing()
     datasource = None
     if 'module' in ADDON_ARGS:
         datasource = lib.datasource.createDataSource(ADDON_ARGS['module'])

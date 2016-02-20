@@ -18,6 +18,7 @@
 
 import json
 import os
+import glob
 from resources.lib.listing import *
 
 
@@ -46,6 +47,8 @@ class DataSource(object):
             """Whether this submodule is currently active."""
 
         def __eq__(self, other):
+            if type(other) is str:
+                return self.name == other
             return self.name == other.name
 
         def __hash__(self):
@@ -61,7 +64,7 @@ class DataSource(object):
         self.sortOrder = 0  # type: int
         """Show listing sort order."""
 
-        self.showMetaData = None    # type: dict
+        self.showMetaData = {}    # type: dict
         """Global meta data for the show  (int values can be used to reference i18n strings)."""
 
         self.availableQualities = []    # type: list
@@ -221,7 +224,9 @@ class DataSource(object):
 
         # show selection list if there are several submodules and we're not inside one already
         if len(self.submodules) > 1 and not submoduleName:
-            return self.__getBaseList()
+            for i in self.__getBaseList():
+                yield i
+            return
 
         # if there is only one submodule, don't show a selection list
         if len(self.submodules) == 1 and not submoduleName:
@@ -233,7 +238,6 @@ class DataSource(object):
 
         submodule = next(s for s in self.submodules if s.name == submoduleName)
         data      = resources.lib.parseRSSFeed(self.buildFeedURL(submodule.ids, self.getQuality()), True)
-        listItems = []
         for i in data:
             iconimage = i["thumbUrl"]
             date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
@@ -249,26 +253,20 @@ class DataSource(object):
                 'duration' : i['duration']
             }
 
-            listItems.append(
-                ListItem(
-                    self.id,
-                    i['title'],
-                    resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
-                    iconimage,
-                    self.fanartPath,
-                    metaData,
-                    streamInfo,
-                    False
-                )
+            yield ListItem(
+                self.id,
+                i['title'],
+                resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
+                iconimage,
+                self.fanartPath,
+                metaData,
+                streamInfo,
+                False
             )
 
-        return listItems
-
     def __getBaseList(self):
-        baseList = []
-
         for i in self.submodules:
-            baseList.append(ListItem(
+            yield ListItem(
                 self.id,
                 i.moduleMetaData.get('Title', ''),
                 resources.lib.assembleListURL(self.moduleName, i.name),
@@ -278,9 +276,44 @@ class DataSource(object):
                     'Title': i.moduleMetaData.get('Title', ''),
                     'Plot': i.moduleMetaData.get('Plot', '')
                 }
-            ))
+            )
 
-        return baseList
+
+class OverviewDataSource(DataSource):
+    """
+    Overview DataSource for displaying an overview of all available shows.
+    This is the root DataSource that is displayed at top level.
+    """
+
+    @classmethod
+    def bootstrap(cls, jsonFile):
+        raise NotImplementedError
+
+    def getListItems(self):
+        dataSources = []
+
+        # create instances of all DataSource subclasses (except this one)
+        subclasses = DataSource.__subclasses__()
+        for i in (s for s in subclasses if s is not self.__class__):
+            dataSources.append(i())
+
+        # boostrap any other DataSources from available bootstrap files
+        bootstrapFiles = glob.glob(ADDON_BOOTSTRAP_PATH + '/*.json')
+        for i in bootstrapFiles:
+            dataSources.append(DataSource.bootstrap(i))
+
+        # sort DataSources as defined in each DataSource's sortOrder property
+        dataSources.sort(key=lambda x: x.sortOrder)
+
+        for i in dataSources:
+            yield ListItem(
+                i.id,
+                i.showMetaData.get('Title', ''),
+                resources.lib.assembleListURL(i.moduleName),
+                i.bannerPath,
+                i.fanartPath,
+                i.showMetaData
+            )
 
 
 def createDataSource(module=None):
@@ -294,11 +327,11 @@ def createDataSource(module=None):
     @return: generated DataSource
     """
     if not module:
-        raise NotImplementedError
+        return OverviewDataSource()
 
-    jsonFile = ADDON_BASE_PATH + '/resources/datasources/' + module + '.json'
-    if os.path.isfile(jsonFile):
-        return DataSource.bootstrap(jsonFile)
+    bootstrapFile = ADDON_BOOTSTRAP_PATH + '/' + module + '.json'
+    if os.path.isfile(bootstrapFile):
+        return DataSource.bootstrap(bootstrapFile)
     else:
-        raise NotImplementedError
+        raise RuntimeError("Invalid module {}".format(module))
 

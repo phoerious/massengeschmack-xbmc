@@ -27,8 +27,8 @@ from xml.dom import minidom
 from HTMLParser import HTMLParser
 
 from globalvars import *
-from resources.lib.listing import Listing, ListItem
-from resources.lib.datasource import DataSource, FKTVDataSource
+import listing
+import datasource
 
 
 # enable non-GET HTTP requests using urllib2
@@ -294,9 +294,9 @@ def parseRSSFeed(feed, fetch=False):
         thumbUrlMatch = re.search('^<img[^>]* src="([^"]+)" /><br>', description)
         if thumbUrlMatch is not None:
             thumbUrl = thumbUrlMatch.group(1)
-            if 0 == thumbUrl.index('//'):
+            if 0 == thumbUrl.find('//'):
                 thumbUrl = 'https:' + thumbUrl
-            elif None == re.match('^https?://', thumbUrl):
+            elif not re.match('^https?://', thumbUrl):
                 thumbUrl = HTTP_BASE_URI + re.sub('^/', '', thumbUrl)
 
         # strip HTML tags
