@@ -497,8 +497,8 @@ class LiveDataSource(DataSource):
                 'Plot'      : plot
             }
 
-            listName   = '    ' + name + ' [' + time + ']'
-            streamName = name + ' [' + ADDON.getLocalizedString(30270) + ']'
+            listName   = '    ' + name + ' -> ' + ADDON.getLocalizedString(30279).format(time)
+            streamName = name + ' ' + ADDON.getLocalizedString(30278)
 
             isFolder = True
             if isLive:
