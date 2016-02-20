@@ -539,6 +539,12 @@ class LiveDataSource(DataSource):
         elif 8 == id:
             # Hoaxilla-TV
             name = ADDON.getLocalizedString(30400)
+        elif 9 == id:
+            # Sakura
+            name = ADDON.getLocalizedString(30290)
+        elif 10 == id:
+            # Migropolis
+            name = ADDON.getLocalizedString(30410)
         else:
             name = '-'
 
