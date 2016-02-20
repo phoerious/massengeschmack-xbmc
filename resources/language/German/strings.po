@@ -136,6 +136,14 @@ msgstr "Fernsehkritik-TV ist ein satirisches und kritisches Magazin, das von Hol
 "Blick auf diese. Häufige Themen sind schlechter Journalismus, (gescriptete) Reality-Shows, Call-in-TV und viele "
 "mehr.\n\nNebenformate sind die „Postecke“ und „Sendeschluss“."
 
+msgctxt "#30204"
+msgid "FKTV Plus"
+msgstr "FKTV Plus"
+
+msgctxt "#30205"
+msgid "Subscriber-only FKTV extra"
+msgstr "FKTV-Extra nur für Abonnenten"
+
 msgctxt "#30210"
 msgid "Pantoffel-TV    "
 msgstr "Pantoffel-TV    "
@@ -170,6 +178,14 @@ msgstr "Pressesch(l)au ist ein Magazin, das von Lars Golenia moderiert wird und 
 "Sei es „Brigitte“, „Bravo“, „Die Welt“, „Der Spiegel“ oder ein Teddybären-Magazin – Lars liest sie alle und "
 "bespricht sie auf der Bühne."
 
+msgctxt "#30224"
+msgid "All Pressesch(l)au episodes and extras"
+msgstr "Alle Pressesch(l)au-Folgen und Extras"
+
+msgctxt "#30225"
+msgid "Regular Pressesch(l)au episodes"
+msgstr "Reguläre Pressesch(l)au-Folgen"
+
 msgctxt "#30230"
 msgid "Massengeschmack-TV"
 msgstr "Massengeschmack-TV"
@@ -192,6 +208,18 @@ msgctxt "#30241"
 msgid "Let's Play, Board Game"
 msgstr "Let's Play, Brettspiele"
 
+msgctxt "#30244"
+msgid "All Pasch-TV episodes and extras"
+msgstr "Alle Pasch-TV-Folgen und Extras"
+
+msgctxt "#30245"
+msgid "Regular Pasch-TV episodes"
+msgstr "Reguläre Pasch-TV-Folgen"
+
+msgctxt "#30246"
+msgid "Pasch-TV extras "
+msgstr "Pasch-TV-Extras "
+
 msgctxt "#30243"
 msgid "Pasch-TV is a magazine in which Holger and guests try one new board game release each episode."
 msgstr "Pasch-TV ist ein Magazin, in dem Holger zusammen mit Gästen pro Folge eine "
@@ -210,6 +238,14 @@ msgid "Netzprediger is an online magazine about the Internet with all its bright
 "absurdities and much more, presented by the virtual moderator Untenein G. Blendet."
 msgstr "Netzprediger ist ein Online-Magazin über das Internet mit all seinen hellen und dunklen Seiten: Spaß, "
 "Betrug und Absurditäten, präsentiert vom virtuellen Moderator Untenein G. Blendet."
+
+msgctxt "#30254"
+msgid "All Netzprediger episodes and extras"
+msgstr "Alle Netzprediger-Folgen und Extras"
+
+msgctxt "#30255"
+msgid "Regular Netzprediger episodes"
+msgstr "Reguläre Netzprediger-Folgen"
 
 msgctxt "#30260"
 msgid "Asynchron       "
@@ -313,7 +349,7 @@ msgid "Postecke"
 msgstr "Postecke"
 
 msgctxt "#30353"
-msgid "Postecke is a video podcast where Holger reads and answers letters from Fernsehkritik-TV viewers "
+msgid "Postecke is a video podcast in which Holger reads and answers letters from Fernsehkritik-TV viewers "
 "(now replaced by Massengeschmack Direkt)."
 msgstr "Die Postecke ist ein Video-Podcast, in dem Holger Zuschauerpost vorliest und beantwortet "
 "(nun ersetzt durch Massengeschmack Direkt)."
@@ -323,8 +359,8 @@ msgid "Uncut interviews."
 msgstr "Ungeschnittene Interviews."
 
 msgctxt "#30355"
-msgid "Various extras."
-msgstr "Verschiedene Extras."
+msgid "Various extras  "
+msgstr "Verschiedene Extras"
 
 msgctxt "#30356"
 msgid "Sendeschluss"

@@ -133,6 +133,14 @@ msgid "Fernsehkritik-TV is a satirical and critical magazine, moderated by Holge
 "“Postecke” and “Sendeschluss”."
 msgstr ""
 
+msgctxt "#30204"
+msgid "FKTV Plus"
+msgstr ""
+
+msgctxt "#30205"
+msgid "Subscriber-only FKTV extra"
+msgstr ""
+
 msgctxt "#30210"
 msgid "Pantoffel-TV    "
 msgstr ""
@@ -161,6 +169,14 @@ msgid "Pressesch(l)au is a magazine moderated by Lars Golenia that concerns itse
 "teddy bear magazine – Lars reads them all and reviews them on stage."
 msgstr ""
 
+msgctxt "#30224"
+msgid "All Pressesch(l)au episodes and extras"
+msgstr ""
+
+msgctxt "#30225"
+msgid "Regular Pressesch(l)au episodes"
+msgstr ""
+
 msgctxt "#30230"
 msgid "Massengeschmack-TV"
 msgstr ""
@@ -186,6 +202,18 @@ msgctxt "#30243"
 msgid "Pasch-TV is a magazine in which Holger and guests try one new board game release each episode."
 msgstr ""
 
+msgctxt "#30244"
+msgid "All Pasch-TV episodes and extras"
+msgstr ""
+
+msgctxt "#30245"
+msgid "Regular Pasch-TV episodes"
+msgstr ""
+
+msgctxt "#30246"
+msgid "Pasch-TV extras "
+msgstr ""
+
 msgctxt "#30250"
 msgid "Netzprediger    "
 msgstr ""
@@ -197,6 +225,14 @@ msgstr ""
 msgctxt "#30253"
 msgid "Netzprediger is an online magazine about the Internet with all its bright and dark sides: fun, fraud, "
 "absurdities and much more, presented by the virtual moderator Untenein G. Blendet."
+msgstr ""
+
+msgctxt "#30254"
+msgid "All Netzprediger episodes and extras"
+msgstr ""
+
+msgctxt "#30255"
+msgid "Regular Netzprediger episodes"
 msgstr ""
 
 msgctxt "#30260"
@@ -298,7 +334,7 @@ msgid "Postecke"
 msgstr ""
 
 msgctxt "#30353"
-msgid "Postecke is a video podcast where Holger reads and answers letters from Fernsehkritik-TV viewers "
+msgid "Postecke is a video podcast in which Holger reads and answers letters from Fernsehkritik-TV viewers "
 "(now replaced by Massengeschmack Direkt)."
 msgstr ""
 
@@ -307,7 +343,7 @@ msgid "Uncut interviews."
 msgstr ""
 
 msgctxt "#30355"
-msgid "Various extras."
+msgid "Various extras  "
 msgstr ""
 
 msgctxt "#30356"

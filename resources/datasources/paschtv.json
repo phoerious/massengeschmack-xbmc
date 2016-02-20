@@ -18,7 +18,7 @@
             "ids": [1, 2],
             "metadata": {
                 "Title": 30300,
-                "Plot": "TODO: translate"
+                "Plot": 30244
             }
         },
         {
@@ -26,15 +26,15 @@
             "ids": [1],
             "metadata": {
                 "Title": 30301,
-                "Plot": "TODO: translate"
+                "Plot": 30245
             }
         },
         {
             "name": "extra",
             "ids": [2],
             "metadata": {
-                "Title": "TODO: translate",
-                "Plot": "TODO: translate"
+                "Title": 30303,
+                "Plot": 30246
             }
         }
     ]
