@@ -5,8 +5,8 @@
         "Title": 30150,
         "Plot": 30151
     },
-    "banner": "banner-massengeschmack.jpg",
-    "fanart": "fanart-massengeschmack.jpg",
+    "banner": "banner-massengeschmack-20160220.png",
+    "fanart": "fanart-massengeschmack-20160220.jpg",
     "qualities": ["best", "hd", "mobile", "audio"],
     "submodules": [
         {

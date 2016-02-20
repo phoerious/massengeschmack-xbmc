@@ -20,6 +20,7 @@ import json
 import os
 import glob
 from datetime import datetime
+import time
 from resources.lib.listing import *
 
 
@@ -139,9 +140,12 @@ class DataSource(object):
 
         if 'banner' in jd:
             ds.bannerPath = ADDON_BASE_PATH + '/resources/media/' + jd['banner']
-        if 'fanart' in jd:
-            ds.bannerPath = ADDON_BASE_PATH + '/resources/media/' + jd['fanart']
+        else:
+            ds.bannerPath = HTTP_BASE_URI + 'img/header/mg_banner_' + str(ds.id) + '.jpg?' + time.strftime('%Y%m%d')
 
+        if 'fanart' in jd:
+            ds.fanartPath = ADDON_BASE_PATH + '/resources/media/' + jd['fanart']
+        print(ds.bannerPath)
         sm = jd.get('submodules', [])
         for i in sm:
             s = cls.Submodule()
@@ -421,8 +425,8 @@ class LiveDataSource(DataSource):
             'Country'  : ADDON.getLocalizedString(30202),
             'Plot'     : ADDON.getLocalizedString(30272)
         }
-        self.bannerPath = ADDON_BASE_PATH + '/resources/media/banner-live.png'
-        self.fanartPath = ADDON_BASE_PATH + '/resources/media/fanart-live.png'
+        self.bannerPath = ADDON_BASE_PATH + '/resources/media/banner-massengeschmack-20160220.png'
+        self.fanartPath = ADDON_BASE_PATH + '/resources/media/fanart-massengeschmack-20160220.jpg'
         self.isActive   = True
 
         self.isLive     = False
