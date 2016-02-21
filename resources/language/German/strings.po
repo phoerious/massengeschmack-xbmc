@@ -99,6 +99,9 @@ msgctxt "#30105"
 msgid "Your login credentials for these contents are invalid,\nmaybe you didn't subscribe to them?"
 msgstr "Ihre Login-Daten sind für diese Inhalte ungültig,\nhaben Sie diese vielleicht nicht abonniert?"
 
+msgctxt "#30106"
+msgid "Massengeschmack API unavailable (rate limit exceeded?)\nPlease try again later."
+msgstr "Massengeschmack-API zur Zeit nicht verfügbar (Rate-Limit überschritten?)\nBitte versuchen Sie es später erneut."
 
 
 # ----------------------------------------------------------------------------------

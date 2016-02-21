@@ -20,7 +20,6 @@ import xbmcplugin
 import xbmcgui
 
 from globalvars import *
-import resources.lib
 
 
 class Listing(object):
@@ -36,10 +35,8 @@ class Listing(object):
         """
         self.__source = source
         items         = source.getListItems()
-        subscriptions = resources.lib.getSubscriptions()
         for i in items:
-            if 0 > i.getData('id') or i.getData('id') in subscriptions:
-                self.__addDir(i)
+            self.__addDir(i)
     
     def show(self):
         """

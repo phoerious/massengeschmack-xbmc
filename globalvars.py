@@ -35,7 +35,7 @@ ADDON_ARGS           = dict(urlparse.parse_qsl(sys.argv[2][1:]))
 HTTP_USER_AGENT      = 'Massengeschmack Kodi add-on v' + ADDON_VERSION
 HTTP_TIMEOUT         = 20
 HTTP_BASE_URI        = 'https://massengeschmack.tv/'
-HTTP_BASE_API_URI    = HTTP_BASE_URI + 'api'
+HTTP_BASE_API_URI    = HTTP_BASE_URI + 'api/v1'
 HTTP_BASE_FEED_URI   = HTTP_BASE_URI + 'feed'
 
 IS_XBOX = bool(xbmc.getCondVisibility("System.Platform.xbox"))

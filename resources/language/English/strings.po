@@ -100,6 +100,10 @@ msgctxt "#30105"
 msgid "Your login credentials for these contents are invalid,\nmaybe you didn't subscribe to them?"
 msgstr ""
 
+msgctxt "#30106"
+msgid "Massengeschmack API unavailable (rate limit exceeded?)\nPlease try again later."
+msgstr ""
+
 
 # ----------------------------------------------------------------------------------
 # Magazine listings and descriptions

@@ -79,22 +79,20 @@ def installHTTPLoginData(username, password):
     urllib2.install_opener(opener)
 
 
-def fetchSubscriptions(showDialog=False):
+def probeLogin(showDialog=False):
     """
-    Test if the given login credentials are correct and get a list of subscriptions
-    (numeric IDs) in case the login data were correct.
+    Test if the given login credentials are correct and return server response or error description
+    in case of network issues.
     
     Login data need to be installed beforehand using installHTTPLoginData().
     Returns a dict of the following structure:
     
     {
         'code'          : HTTP response code,
-        'reason'        : error description if code is not 200,
-        'subscriptions' : [ list of numeric IDs of subscribed shows ]
+        'reason'        : error description if code is not 200
     }
     
     If a network error occurs, code is -1 and reason contains an error description.
-    If the login fails, 'subscription' will contain an empty list-
     
     @type showDialog: bool
     @param showDialog: whether to show a progress dialog while testing
@@ -104,8 +102,7 @@ def fetchSubscriptions(showDialog=False):
     
     response = {
         'code'          : 200,
-        'reason'        : '',
-        'subscriptions' : []
+        'reason'        : ''
     }
     
     if showDialog:
@@ -114,7 +111,7 @@ def fetchSubscriptions(showDialog=False):
         dialog.update(50)
     
     try:
-        handle = openHTTPConnection(HTTP_BASE_API_URI + '/?action=listSubscriptionsID')
+        handle = openHTTPConnection(HTTP_BASE_API_URI + '/?action=getFeed&from=[]&limit=1', requestMethod='HEAD')
     except urllib2.HTTPError, e:
         response['code']   = e.code
         response['reason'] = e.reason
@@ -122,7 +119,6 @@ def fetchSubscriptions(showDialog=False):
         response['code']   = -1
         response['reason'] = e.reason
     else:
-        response['subscriptions'] = json.loads(handle.read())
         handle.close()
     
     if showDialog:
@@ -130,45 +126,6 @@ def fetchSubscriptions(showDialog=False):
         del dialog
     
     return response
-
-
-# subscriptions cache
-__subscriptions = None
-
-
-def cacheSubscriptions(subscriptions):
-    """
-    Cache active subscriptions to the add-on settings.
-    
-    @type subscriptions: subscriptions: list
-    @param: subscriptions: list of numeric IDs for all active subscriptions
-    """
-    global __subscriptions
-    __subscriptions = subscriptions
-    ADDON.setSetting('account.subscriptions', json.dumps(subscriptions))
-
-
-def getSubscriptions():
-    """
-    Return a list with numeric IDs for all active subscriptions.
-    
-    This method will only read from the cache. It won't fetch any new data
-    from the server. Use fetchSubscriptions() for that and then write
-    the fetched data to the cache using cacheSubscriptions().
-    
-    @return: list of subscriptions
-    """
-    global __subscriptions
-
-    subscriptions = []
-    if __subscriptions is None:
-        tmp = ADDON.getSetting('account.subscriptions')
-        if '' != tmp:
-            subscriptions = json.loads(tmp)
-    else:
-        subscriptions = __subscriptions
-    
-    return subscriptions
 
 
 # live streams cache

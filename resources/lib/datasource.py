@@ -21,6 +21,7 @@ import os
 import glob
 from datetime import datetime
 import time
+import resources
 from resources.lib.listing import *
 
 
