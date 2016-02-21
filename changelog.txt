@@ -4,7 +4,7 @@
  - Add main feed with latest releases from all magazines
  - Add support for FKTV Plus
  - Add pagination to allow watching older episodes
- - Add "Best" quality setting fur 1080p streams
+ - Add "Best" quality setting for 1080p streams
  - Update magazine artwork
  - Update magazine descriptions
  - List recordings of recent live streams
