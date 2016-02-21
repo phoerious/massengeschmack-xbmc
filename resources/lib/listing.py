@@ -23,7 +23,7 @@ from globalvars import *
 import resources.lib
 
 
-class Listing:
+class Listing(object):
     def __init__(self):
         self.__source = None
 
@@ -62,18 +62,20 @@ class Listing:
         xbmc.executebuiltin('Container.SetViewMode(' + str(id) + ')')
     
     def __addDir(self, listItem):
-        xbmcListItem = xbmcgui.ListItem(listItem.getData('name'), iconImage=listItem.getData('thumbnail'), thumbnailImage=listItem.getData('thumbnail'))
+        xbmcListItem = xbmcgui.ListItem(listItem.getData('name'), iconImage=listItem.getData('thumbnail'),
+                                        thumbnailImage=listItem.getData('thumbnail'))
         xbmcListItem.setInfo(type='video', infoLabels=listItem.getData('metaData'))
         xbmcListItem.setProperty('fanart_image', listItem.getData('fanart'))
         # fix for XBMC4Xbox
         if not IS_XBOX:
             xbmcListItem.addStreamInfo('video', listItem.getData('streamInfo'))
         
-        xbmcplugin.addDirectoryItem(ADDON_HANDLE, url=listItem.getData('url'), listitem=xbmcListItem, isFolder=listItem.getData('isFolder'))
+        xbmcplugin.addDirectoryItem(ADDON_HANDLE, url=listItem.getData('url'), listitem=xbmcListItem,
+                                    isFolder=listItem.getData('isFolder'))
 
 
 class ListItem:
-    def __init__(self, id=0, name='', url='', thumbnail='', fanart='', metaData={}, streamInfo={}, isFolder=True):
+    def __init__(self, id=0, name='', url='', thumbnail='', fanart='', metaData=None, streamInfo=None, isFolder=True):
         """
         Generate list item from given parameters.
         
@@ -94,6 +96,11 @@ class ListItem:
         @type  isFolder  : bool
         @param isFolder  : True if this item is a folder
         """
+        if streamInfo is None:
+            streamInfo = {}
+        if metaData is None:
+            metaData = {}
+
         self.__data = {
             'id'        : id,
             'name'      : name,

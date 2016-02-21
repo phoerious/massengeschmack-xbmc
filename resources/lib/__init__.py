@@ -54,7 +54,6 @@ def openHTTPConnection(uri, requestMethod='GET'):
     @return: urllib2 request handle
     """
     requestMethod = requestMethod.upper()
-    request = None
     if 'POST' == requestMethod:
         request = PostRequest(uri)
     elif 'HEAD' == requestMethod:
@@ -269,9 +268,11 @@ def parseRSSFeed(feed, fetch=False):
                 if 401 == e.code:
                     xbmcgui.Dialog().ok(ADDON.getLocalizedString(30102), ADDON.getLocalizedString(30105))
                 else:
-                    xbmcgui.Dialog().ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30904) + '[CR]Error: {0} {1}'.format(e.code, e.reason))
+                    xbmcgui.Dialog().ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30904) +
+                                        '[CR]Error: {0} {1}'.format(e.code, e.reason))
             except urllib2.URLError, e:
-                xbmcgui.Dialog().ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30903) + '[CR]Error: {0}'.format(e.reason))
+                xbmcgui.Dialog().ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30903) +
+                                    '[CR]Error: {0}'.format(e.reason))
                 return
             __fetchedFeeds[feed] = response.read()
         feed = __fetchedFeeds[feed]
@@ -324,7 +325,8 @@ def parseRSSFeed(feed, fetch=False):
 class TZOffset(tzinfo):
     """Represent fixed timezone offset east from UTC."""
     
-    def __init__(self, offset):
+    def __init__(self, offset, *args, **kwargs):
+        super(TZOffset, self).__init__(*args, **kwargs)
         self.__offset = timedelta(minutes=offset)
     
     def utcoffset(self, dt):
@@ -343,7 +345,6 @@ def parseUTCDateString(datestr):
     @return a datetime object
     """
     # work around Python bug
-    date   = None
     format = '%a, %d %b %Y %H:%M:%S'
     try:
         date = datetime.strptime(datestr[:-6], format)
@@ -414,7 +415,7 @@ def assembleListURL(module=None, submodule=None, **kwargs):
     return url
     
 
-def assemblePlayURL(url, name='', iconImage='', metaData={}, streamInfo={}):
+def assemblePlayURL(url, name='', iconImage='', metaData=None, streamInfo=None):
     """
     Assemble a plugin:// URL with a play command for a given URL.
     
@@ -429,6 +430,11 @@ def assemblePlayURL(url, name='', iconImage='', metaData={}, streamInfo={}):
     @type streamInfo: dict
     @param: streamInfo: technical info about the stream (such as the duration or resolution)
     """
+    if streamInfo is None:
+        streamInfo = {}
+    if metaData is None:
+        metaData = {}
+
     if '#' == url or '' == url:
         return '#'
     

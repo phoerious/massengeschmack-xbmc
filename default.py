@@ -37,12 +37,14 @@ if 'cmd' not in ADDON_ARGS:
     if 200 != response['code']:
         dialog = xbmcgui.Dialog()
         if -1 == response['code']:
-            dialog.ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30903) + '[CR]Error: {0}'.format(response['reason']))
+            dialog.ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30903) +
+                      '[CR]Error: {0}'.format(response['reason']))
         elif 401 == response['code']:
             dialog.ok(ADDON.getLocalizedString(30102), ADDON.getLocalizedString(30103))
             ADDON.openSettings()
         else:
-            dialog.ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30904) + '[CR]Error: {0} {1}'.format(response['code'], response['reason']))
+            dialog.ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30904) +
+                      '[CR]Error: {0} {1}'.format(response['code'], response['reason']))
         exit(1)
     
     # if all went well, cache subscriptions
