@@ -531,7 +531,7 @@ class LiveDataSource(DataSource):
             yield ListItem(
                 self.id,
                 listName,
-                resources.lib.assemblePlayURL(self.__getStreamURL(i['showid']), streamName, iconimage, metaData),
+                resources.lib.assemblePlayURL(self.__getStreamURL(i), streamName, iconimage, metaData),
                 iconimage,
                 self.fanartPath,
                 metaData,
@@ -582,10 +582,11 @@ class LiveDataSource(DataSource):
         return name.rstrip()
 
     @staticmethod
-    def __getStreamURL(showid):
-        info = resources.lib.getLiveStreamInfo(showid)
-        if not info:
+    def __getStreamURL(show):
+        if not show['isLive']:
             return '#'
+
+        info = resources.lib.getLiveStreamInfo(show['showid'])
         return info['url']
 
     @staticmethod

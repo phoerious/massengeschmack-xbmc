@@ -132,17 +132,23 @@ def probeLogin(showDialog=False):
 __liveShows = None
 
 
-def getLiveShows():
+def getLiveShows(recordings=False):
     """
     Return a list of dictionaries with information about current and upcoming live shows.
     This method does no exception handling, so make sure the login credentials are correct.
-    
+
+    @type recordings: bool
+    @param recordings: whether to return recorded past shows instead of current and upcoming
     @return: dictionary list of live streams
     """
     global __liveShows
 
+    action = '/?action=listLiveShows'
+    if recordings:
+        action += '&listRecordings'
+
     if __liveShows is None:
-        handle = openHTTPConnection(HTTP_BASE_API_URI + '/?action=listLiveShows')
+        handle = openHTTPConnection(HTTP_BASE_API_URI + action)
         __liveShows = json.loads(handle.read())
 
         handle.close()
