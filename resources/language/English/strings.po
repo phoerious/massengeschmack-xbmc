@@ -303,6 +303,10 @@ msgctxt "#30275"
 msgid "Upcoming:"
 msgstr ""
 
+msgctxt "#30281"
+msgid "Recordings:"
+msgstr ""
+
 msgctxt "#30276"
 msgid "Shows coming live next"
 msgstr ""
@@ -315,8 +319,16 @@ msgctxt "#30278"
 msgid "[ON AIR]"
 msgstr ""
 
+msgctxt "#30294"
+msgid "[RECORDING]"
+msgstr ""
+
 msgctxt "#30279"
 msgid "Starts on {}"
+msgstr ""
+
+msgctxt "#30292"
+msgid "Recorded on {}"
 msgstr ""
 
 msgctxt "#30280"

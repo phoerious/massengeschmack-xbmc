@@ -319,6 +319,10 @@ msgctxt "#30275"
 msgid "Upcoming:"
 msgstr "Upcoming:"
 
+msgctxt "#30281"
+msgid "Recordings:"
+msgstr "Aufzeichnungen:"
+
 msgctxt "#30276"
 msgid "Shows coming live next"
 msgstr "Sendungen, die demnächst online kommen"
@@ -331,9 +335,17 @@ msgctxt "#30278"
 msgid "[ON AIR]"
 msgstr "[ON AIR]"
 
+msgctxt "#30294"
+msgid "[RECORDING]"
+msgstr "[AUFZEICHNUNG"
+
 msgctxt "#30279"
 msgid "Starts on {}"
 msgstr "Startet am {}"
+
+msgctxt "#30292"
+msgid "Recorded on {}"
+msgstr "Aufgezeichnet am {}"
 
 msgctxt "#30280"
 msgid "Livetalk"

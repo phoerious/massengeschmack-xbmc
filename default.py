@@ -33,21 +33,7 @@ lib.installHTTPLoginData(ADDON.getSetting('account.username'), ADDON.getSetting(
 
 # if we're on the start page, verify login data first
 if 'cmd' not in ADDON_ARGS:
-    response = lib.probeLogin(True)
-    if 200 != response['code']:
-        dialog = xbmcgui.Dialog()
-        if -1 == response['code']:
-            dialog.ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30903) +
-                      '[CR]Error: {0}'.format(response['reason']))
-        elif 401 == response['code']:
-            dialog.ok(ADDON.getLocalizedString(30102), ADDON.getLocalizedString(30103))
-            ADDON.openSettings()
-        elif 500 == response['code']:
-            dialog.ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30106))
-        else:
-            dialog.ok(ADDON.getLocalizedString(30902), ADDON.getLocalizedString(30904) +
-                      '[CR]Error: {0} {1}'.format(response['code'], response['reason']))
-        exit(1)
+    lib.handleHttpStatus(lib.probeLogin(showDialog=True))
 
 # analyze URL
 if 'cmd' not in ADDON_ARGS:
@@ -55,37 +41,17 @@ if 'cmd' not in ADDON_ARGS:
 
 if 'list' == ADDON_ARGS['cmd']:
     listing    = lib.listing.Listing()
-    datasource = None
-    if 'module' in ADDON_ARGS:
-        datasource = lib.datasource.createDataSource(ADDON_ARGS['module'])
-    else:
-        datasource = lib.datasource.createDataSource()
-    listing.generate(datasource)
-    listing.show()
+    datasource = lib.datasource.createDataSource(ADDON_ARGS.get('module', None))
+    if listing.generate(datasource):
+        listing.show()
     
 elif 'play' == ADDON_ARGS['cmd']:
-    name       = ''
-    iconImage  = ''
-    metaData   = {}
-    streamInfo = {}
-    if 'name' in ADDON_ARGS:
-        name = ADDON_ARGS['name']
-    if 'iconimage' in ADDON_ARGS:
-        iconImage = ADDON_ARGS['iconimage']
-    if 'metadata' in ADDON_ARGS:
-        metaData = json.loads(ADDON_ARGS['metadata'])
-    if 'streaminfo' in ADDON_ARGS:
-        streamInfo = json.loads(ADDON_ARGS['streaminfo'])
+    name       = ADDON_ARGS.get('name', '')
+    iconImage  = ADDON_ARGS.get('iconimage', '')
+    metaData   = json.loads(ADDON_ARGS.get('metadata', '{}'))
+    streamInfo = json.loads(ADDON_ARGS.get('streaminfo', '{}'))
     
-    listitem = xbmcgui.ListItem(name, iconImage=iconImage, thumbnailImage=iconImage)
-    listitem.setInfo('video', metaData)
-    if not IS_XBOX:
-        listitem.addStreamInfo('video', streamInfo)
-    playlist = xbmc.PlayList(1)
-    playlist.clear()
-    playlist.add(ADDON_ARGS['url'], listitem)
-    xbmc.Player().play(playlist)
-    playlist.clear()
+    lib.playVideoStream(ADDON_ARGS['url'], name, iconImage, metaData, streamInfo)
     
 else:
     raise RuntimeError(ADDON_ARGS['cmd'] + ': ' + ADDON.getLocalizedString(30901))

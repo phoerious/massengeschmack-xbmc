@@ -21,7 +21,7 @@ import os
 import glob
 from datetime import datetime
 import time
-import resources
+import resources.lib
 from resources.lib.listing import *
 
 
@@ -149,7 +149,7 @@ class DataSource(object):
 
         if 'fanart' in jd:
             ds.fanartPath = ADDON_BASE_PATH + '/resources/media/' + jd['fanart']
-        print(ds.bannerPath)
+
         sm = jd.get('submodules', [])
         for i in sm:
             s = cls.Submodule()
@@ -258,12 +258,22 @@ class DataSource(object):
 
         return url
 
+    def hasListItems(self):
+        """
+        Whether the DataSource intends to return a non-empty ListItem generator when calling L{getListItems}.
+        You should check the output of this method before creating a sub-listing that depends on the
+        returned ListItems from this DataSource.
+
+        @return: True if getListItems will return a non-empty generator
+        """
+        return True
+
     def getListItems(self):
         """
-        Generate a list of L{resources.lib.listing.ListItem} objects for the current data source.
+        Return a generator object of L{resources.lib.listing.ListItem} objects for the current data source.
 
-        @rtype: list of resources.lib.listing.ListItem
-        @return: generator object with ListItems
+        @rtype: generator of resources.lib.listing.ListItem
+        @return: generator object
         """
         submoduleName = self.getCurrentSubmoduleName()
 
@@ -450,9 +460,20 @@ class LiveDataSource(DataSource):
 
         self.isLive     = False
 
-        self.__shows    = resources.lib.getLiveShows()
-        self.__current  = []
-        self.__upcoming = []
+        # if we're about to play a stream, don't continue with querying data about other streams from the server
+        if 'playStream' in ADDON_ARGS:
+            info = resources.lib.getLiveStreamInfo(ADDON_ARGS['playStream'])
+            resources.lib.playVideoStream(info['url'],
+                                          ADDON_ARGS.get('streamName', ''),
+                                          ADDON_ARGS.get('iconImage', ''),
+                                          json.loads(ADDON_ARGS.get('metaData', '{}')))
+            return
+
+        # otherwise continue with regular listing
+        self.__shows      = resources.lib.getLiveShows()
+        self.__recordings = []
+        self.__current    = []
+        self.__upcoming   = []
 
         for i in self.__shows:
             if i['isLive']:
@@ -470,7 +491,23 @@ class LiveDataSource(DataSource):
     def bootstrap(cls, jsonFile):
         raise NotImplementedError
 
+    def getContentMode(self):
+        return 'episodes'
+
+    def hasListItems(self):
+        return 'playStream' not in ADDON_ARGS
+
     def getListItems(self):
+        # don't generate a listing when we're about to play a live stream or recording
+        # we should never end here because hasListItems() should be checked before calling this method,
+        # but exit method here just in case
+        if 'playStream' in ADDON_ARGS:
+            return
+
+        # otherwise ask for list of recordings additionally to the already queried live and upcoming streams
+        self.__recordings = resources.lib.getLiveShows(True)
+
+        # start building listing
         if self.__current:
             yield ListItem(
                 self.id,
@@ -478,10 +515,9 @@ class LiveDataSource(DataSource):
                 '#',
                 self.__getThumbnailURL(0),
                 self.fanartPath,
-                {'Plot' : ADDON.getLocalizedString(30274)}
             )
 
-            for i in self.__createShowListing(self.__current, True):
+            for i in self.__createShowListing(self.__current, 'live'):
                 yield i
 
         if self.__upcoming:
@@ -491,103 +527,69 @@ class LiveDataSource(DataSource):
                 '#',
                 self.__getThumbnailURL(0),
                 self.fanartPath,
-                {'Plot' : ADDON.getLocalizedString(30276)}
             )
 
-            for i in self.__createShowListing(self.__upcoming):
+            for i in self.__createShowListing(self.__upcoming, 'upcoming'):
                 yield i
 
-    def getContentMode(self):
-        return 'episodes'
+        if self.__recordings:
+            yield ListItem(
+                self.id,
+                ADDON.getLocalizedString(30281),
+                '#',
+                self.__getThumbnailURL(0),
+                self.fanartPath,
+            )
 
-    def __createShowListing(self, shows, isLive=False):
+            for i in self.__createShowListing(self.__recordings, 'recording'):
+                yield i
+
+    def __createShowListing(self, shows, mode):
         for i in shows:
-            iconimage = self.__getThumbnailURL(i['pid'])
-            plot      = i['oneliner']
+            iconImage = self.__getThumbnailURL(i['pid'])
             time      = datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y, %H:%M:%S')
             date      = datetime.fromtimestamp(float(i['begin'])).strftime('%d.%m.%Y')
-            name      = self.__getShowName(int(i['pid']))
+            name      = i['oneliner']
+            plot      = ADDON.getLocalizedString(30277).format(name, time)
 
-            if not plot:
-                plot = ''
+            streamName = name
+            if mode == 'live':
+                # add [ON AIR] if stream is live
+                streamName += ' ' + ADDON.getLocalizedString(30278)
+                listName = name
             else:
-                plot += '\n\n'
+                if mode == 'upcoming':
+                    # add "Starts on..."
+                    dateString = ADDON.getLocalizedString(30279).format(time)
+                else:
+                    # add "Recorded on..."
+                    dateString = ADDON.getLocalizedString(30292).format(time)
+                    streamName += ' ' + ADDON.getLocalizedString(30294)
 
-            plot += ADDON.getLocalizedString(30277).format(name, time)
+                listName = '    ' + name + ' -> ' + dateString
 
             metaData  = {
-                'Title'     : name,
+                'Title'     : streamName,
                 'Date'      : date,
                 'Plot'      : plot
             }
 
-            listName   = '    ' + name + ' -> ' + ADDON.getLocalizedString(30279).format(time)
-            streamName = name + ' ' + ADDON.getLocalizedString(30278)
-
-            isFolder = True
-            if isLive:
-                isFolder = False
+            if mode == 'live' or mode == 'recording':
+                listUrl = resources.lib.assembleListURL(self.moduleName, playStream=i['showid'], streamName=streamName,
+                                                        iconImage=iconImage, metaData=json.dumps(metaData))
+            else:
+                # don't create a real list URL for upcoming shows
+                listUrl = '#'
 
             yield ListItem(
                 self.id,
                 listName,
-                resources.lib.assemblePlayURL(self.__getStreamURL(i), streamName, iconimage, metaData),
-                iconimage,
+                listUrl,
+                iconImage,
                 self.fanartPath,
                 metaData,
-                isFolder=isFolder
+                isFolder=(mode == 'upcoming')
             )
-
-    @staticmethod
-    def __getShowName(id):
-        if -3 == id:
-            # Livetalk
-            name = ADDON.getLocalizedString(30280)
-        elif 0 == id:
-            # Massengeschmack-TV
-            name = ADDON.getLocalizedString(30230)
-        elif 1 == id:
-            # FKTV
-            name = ADDON.getLocalizedString(30200)
-        elif 2 == id:
-            # PantoffelTV
-            name = ADDON.getLocalizedString(30210)
-        elif 3 == id:
-            # Pressesch(l)au
-            name = ADDON.getLocalizedString(30220)
-        elif 4 == id:
-            # Pasch-TV
-            name = ADDON.getLocalizedString(30240)
-        elif 5 == id:
-            # Netzprediger
-            name = ADDON.getLocalizedString(30250)
-        elif 6 == id:
-            # Asynchron
-            name = ADDON.getLocalizedString(30260)
-        elif 7 == id:
-            # Tonangeber
-            name = ADDON.getLocalizedString(30264)
-        elif 8 == id:
-            # Hoaxilla-TV
-            name = ADDON.getLocalizedString(30400)
-        elif 9 == id:
-            # Sakura
-            name = ADDON.getLocalizedString(30290)
-        elif 10 == id:
-            # Migropolis
-            name = ADDON.getLocalizedString(30410)
-        else:
-            name = '-'
-
-        return name.rstrip()
-
-    @staticmethod
-    def __getStreamURL(show):
-        if not show['isLive']:
-            return '#'
-
-        info = resources.lib.getLiveStreamInfo(show['showid'])
-        return info['url']
 
     @staticmethod
     def __getThumbnailURL(id):

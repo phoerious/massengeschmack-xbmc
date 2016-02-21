@@ -29,18 +29,29 @@ class Listing(object):
     def generate(self, source):
         """
         Generate listing from data source.
+        Will return False if the given DataSource does not intend to return a non-empty listing generator,
+        i.e. when L{resources.lib.datasource.DataSource.hasListItems} returns False
         
-        @type source: DataSource
+        @type source: resources.lib.datasource.DataSource
         @param source: the data source object
+        @rtype: bool
+        @return Whether the given DataSource actually intends to return a non-empty listing
         """
+        if not source.hasListItems():
+            return False
+
         self.__source = source
         items         = source.getListItems()
+
         for i in items:
             self.__addDir(i)
+
+        return True
     
     def show(self):
         """
         Show the listing after it has been generated.
+        You should check the output of L{generate} before trying to show a listing.
         """
         if 'true' == ADDON.getSetting('advanced.viewmodeFix'):
             self.setViewMode(510)
