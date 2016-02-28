@@ -1,3 +1,6 @@
+2.0.1
+ - Fix feed parse error
+
 2.0.0
  - Major code refactoring
  - Move to new v1 API (you may experience rate limiting now)
