@@ -465,14 +465,6 @@ msgctxt "#30371"
 msgid "Regular Sakura episodes"
 msgstr "Reguläre Sakura-Folgen"
 
-msgctxt "#30375"
-msgid "MG Interaktiv"
-msgstr "MG Interaktiv"
-
-msgctxt "#30376"
-msgid "Massengeschmack Game Show"
-msgstr "Massengeschmack Spielshow"
-
 msgctxt "#30377"
 msgid "Spendennacht"
 msgstr "Spendennacht"
@@ -510,6 +502,34 @@ msgid "Migropolis portrays people who have migrated to Germany. What moves them?
 "kind of life did they live before?"
 msgstr "Migropolis porträtiert Menschen, die nach Deutschland eingewandert sind. Was bewegt sie? Wie gefällt es "
 "ihnen in Deutschland? Und was für ein Leben haben sie vorher gelebt?"
+
+msgctxt "#30414
+msgid "Comictalk"
+msgstr "Comictalk"
+
+msgctxt "#30415
+msgid "The ComicTalk with Hella of the senses is here! The "literary quartet for comics" starts right from the start, among other things. A real comic hero: After years, a new "Lucky Luke" band was released. Does the Western hero still inspire enthusiasm? Guests are the cult musician Lotto King Karl, who has just translated an Asterix volume in Hamburg, and the artist Naomi Fearn. A solid member of the show: Comic-expert Volker Robrahn. Free episode for all!"
+msgstr "Der ComicTalk mit Hella von Sinnen ist da! Das "literarische Quartett für Comics" nimmt sich gleich zu Beginn u.a. einen echten Comic-Helden vor: Nach Jahren ist wieder ein neuer "Lucky Luke"-Band erschienen. Sorgt der Westernheld immer noch für Begeisterung? Zu Gast sind Kult-Musiker Lotto King Karl, der selbst gerade erst einen Asterix-Band auf Hamburgisch übersetzt hat, und die Künstlerin Naomi Fearn. Festes Mitglied der Sendung: Comic-Experte Volker Robrahn. Freie Folge für alle!"
+
+msgctxt "#30416
+msgid "Talkshow, Comic"
+msgstr "Talkshow, Comic"
+
+msgctxt "#30417
+msgid "MG Interaktiv"
+msgstr "MG Interaktiv"
+
+msgctxt "#30418
+msgid "Gameshow"
+msgstr "Gameshow"
+
+msgctxt "#30419
+msgid "MG Interactive, the Gameshow is only available to subscribers - win prizes and coupons in creative and crazy rounds of the game. In Skype, in chat or live with us in the studio."
+msgstr "MG Interaktiv ist die Gameshow nur für Abonnenten - gewinnen Sie in kreativen und verrückten Spielrunden Preise und Gutscheine. In Skype, im Chat oder live bei uns im Studio."
+
+msgctxt "#30420
+msgid "Tilo Jung and Rayk Anders like to talk about politics - and with us they do it exclusively together! In "Jung & Anders" it is about the superordinate questions behind the messages - independent, free-thinking, without taboos!"
+msgstr "Tilo Jung und Rayk Anders reden gern über Politik - und bei uns tun sie das exklusiv gemeinsam! In "Jung & Anders" geht es um die übergeordneten Fragen hinter den Meldungen - unabhängig, frei denkend, ohne Tabus!"
 
 
 # ----------------------------------------------------------------------------------

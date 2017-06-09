@@ -1,8 +1,8 @@
 {
     "id": 0,
-    "order": 500,
+    "order": 99,
     "metadata": {
-        "Title": 30230,
+        "Title": "Extras",
         "Director": "Holger Kreymeier",
         "Country": 30202,
         "Plot": 30233
@@ -29,7 +29,7 @@
                 "Premiered": "2013-08-05"
             }
         },
-        {
+		{
             "name": "direkt",
             "ids": [3],
             "metadata": {
@@ -46,15 +46,7 @@
             }
         },
         {
-            "name": "interaktiv",
-            "ids": [4],
-            "metadata": {
-                "Title": 30375,
-                "Plot": 30376
-            }
-        },
-        {
-           "name":  "spendennacht",
+           "name":  "Spendennacht",
             "ids": [5],
             "metadata": {
                 "Title": 30377,

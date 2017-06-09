@@ -1,0 +1,20 @@
+{
+    "id": 14,
+    "order": 14,
+    "metadata": {
+        "Title": 30417,
+        "Director": "!CF, Thomas Mertke",
+        "Genre": 30418,
+        "Country": 30202,
+        "Plot": 30419,
+        "Premiered": "2015-08-01"
+    },
+    "fanart": "fanart-interaktiv.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
