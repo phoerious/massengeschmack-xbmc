@@ -109,6 +109,10 @@ msgstr ""
 # Magazine listings and descriptions
 # ----------------------------------------------------------------------------------
 
+msgctxt "#30130"
+msgid "Various"
+msgstr "Verschiedene"
+
 msgctxt "#30140"
 msgid "OLDER >>"
 msgstr ""
@@ -122,7 +126,7 @@ msgid "Main feed with latest releases from all magazines."
 msgstr ""
 
 msgctxt "#30198"
-msgid "[Missing Title] "
+msgid "[Missing Title]"
 msgstr ""
 
 msgctxt "#30199"
@@ -139,13 +143,13 @@ msgstr ""
 
 msgctxt "#30202"
 # workaround for 16 char min-length issue, see <http://trac.kodi.tv/ticket/16599>
-msgid "Germany         "
+msgid "Germany"
 msgstr ""
 
 msgctxt "#30203"
-msgid "Fernsehkritik-TV is the dinosaur on Massengeschmack – battling against bad television since 2007 and, amongst "
-"other things, awarded with the Grimme Online Award and the Deutsche Webvideopreis. With partly journalistic and "
-"investigative, partly satirical and derisive contributions, Holger grills the antiquated medium of television and "
+msgid "Fernsehkritik-TV is the dinosaur on Massengeschmack – battling against bad television since 2007 and, amongst"
+"other things, awarded with the Grimme Online Award and the Deutsche Webvideopreis. With partly journalistic and"
+"investigative, partly satirical and derisive contributions, Holger grills the antiquated medium of television and"
 "demands: Schalten Sie mal wieder ab!"
 msgstr ""
 
@@ -158,7 +162,7 @@ msgid "Subscriber-only FKTV extra"
 msgstr ""
 
 msgctxt "#30210"
-msgid "Pantoffel-TV    "
+msgid "Pantoffel-TV"
 msgstr ""
 
 msgctxt "#30211"
@@ -166,15 +170,15 @@ msgid "Movies, TV Shows, Culture, Home Entertainment"
 msgstr ""
 
 msgctxt "#30213"
-msgid "Pantoffel-TV is the home cinema magazine on Massengeschmack – latest releases on the DVD and BluRay market "
-"are discussed in a relaxed atmosphere. For this, Nils Beckmann, Mario Perez and Holger Kreymeyer often welcome "
-"illustrious guests who produce movie reviews themselves or work in the film business. Besides, there are "
-"categories such as “Original vs. Remake” in which old classics are compared to their remakes. And exclusively for "
+msgid "Pantoffel-TV is the home cinema magazine on Massengeschmack – latest releases on the DVD and BluRay market"
+"are discussed in a relaxed atmosphere. For this, Nils Beckmann, Mario Perez and Holger Kreymeyer often welcome"
+"illustrious guests who produce movie reviews themselves or work in the film business. Besides, there are"
+"categories such as “Original vs. Remake” in which old classics are compared to their remakes. And exclusively for"
 "subscribers there is always a competition with draws for discussed movies."
 msgstr ""
 
 msgctxt "#30220"
-msgid "Pressesch(l)au  "
+msgid "Pressesch(l)au"
 msgstr ""
 
 msgctxt "#30221"
@@ -182,8 +186,8 @@ msgid "Satirical, Critical, Comedy"
 msgstr ""
 
 msgctxt "#30223"
-msgid "Pressesch(l)au dives into the bizarre abyss of print media. Lars Golenia reviews articles, shows "
-"unbelievable magazines and scoffs at hoaxes and badly researched content. All that with cabaret comments. "
+msgid "Pressesch(l)au dives into the bizarre abyss of print media. Lars Golenia reviews articles, shows"
+"unbelievable magazines and scoffs at hoaxes and badly researched content. All that with cabaret comments."
 "A satiric sweeping blow with comedy elements."
 msgstr ""
 
@@ -204,12 +208,12 @@ msgid "Comedy, Scripted Reality"
 msgstr ""
 
 msgctxt "#30233"
-msgid "In this category you find all extra content from Massengeschmack such as “Massengeschmack Direkt” or the "
+msgid "In this category you find all extra content from Massengeschmack such as “Massengeschmack Direkt” or the"
 "satirical weekly show “Das Studio”."
 msgstr ""
 
 msgctxt "#30240"
-msgid "Pasch-TV        "
+msgid "Pasch-TV"
 msgstr ""
 
 msgctxt "#30241"
@@ -217,8 +221,8 @@ msgid "Board games, Tabletop, Review, Let's Play"
 msgstr ""
 
 msgctxt "#30243"
-msgid "Pasch-TV is all about the world of tabletop games. For each episode one board game is played – "
-"and in fact consequently to the end, no matter how bad, boring or frustrating it is for the participants. "
+msgid "Pasch-TV is all about the world of tabletop games. For each episode one board game is played –"
+"and in fact consequently to the end, no matter how bad, boring or frustrating it is for the participants."
 "But of course, sometimes we also come across very recommendable games."
 msgstr ""
 
@@ -231,19 +235,19 @@ msgid "Regular Pasch-TV episodes"
 msgstr ""
 
 msgctxt "#30246"
-msgid "Pasch-TV extras "
+msgid "Pasch-TV extras"
 msgstr ""
 
 msgctxt "#30250"
-msgid "Netzprediger    "
+msgid "Netzprediger"
 msgstr ""
 
 msgctxt "#30251"
-msgid "Internet, Media "
+msgid "Internet, Media"
 msgstr ""
 
 msgctxt "#30253"
-msgid "Our live show Netzprediger presents current and bizarre things from the Web – moderated by Adam Wolke. "
+msgid "Our live show Netzprediger presents current and bizarre things from the Web – moderated by Adam Wolke."
 "Always following the latest trends on the Web – and always mercilessly blunt."
 msgstr ""
 
@@ -256,7 +260,7 @@ msgid "Regular Netzprediger episodes"
 msgstr ""
 
 msgctxt "#30260"
-msgid "Asynchron       "
+msgid "Asynchron"
 msgstr ""
 
 msgctxt "#30261"
@@ -264,27 +268,27 @@ msgid "Movies, TV Shows"
 msgstr ""
 
 msgctxt "#30263"
-msgid "Asynchron deals with dubbing of TV shows and movies. How good are the voice actors? How close to the original "
-"are the dialogs? Asynchron is available exclusively for subscribers. A magazine about this special topic – "
+msgid "Asynchron deals with dubbing of TV shows and movies. How good are the voice actors? How close to the original"
+"are the dialogs? Asynchron is available exclusively for subscribers. A magazine about this special topic –"
 "that exists on Massengeschmack only."
 msgstr ""
 
 msgctxt "#30264"
-msgid "Tonangeber      "
+msgid "Tonangeber"
 msgstr ""
 
 msgctxt "#30265"
-msgid "Music           "
+msgid "Music"
 msgstr ""
 
 msgctxt "#30267"
-msgid "The music magazine on Massengeschmack – current CD reviews, illustrious live guests and the merciless view "
-"to the German album charts: Nils Beckmanmn, the passionate music junkie, lures us into all music genres from "
+msgid "The music magazine on Massengeschmack – current CD reviews, illustrious live guests and the merciless view"
+"to the German album charts: Nils Beckmanmn, the passionate music junkie, lures us into all music genres from"
 "Rock to Pop, from Jazz to Rock."
 msgstr ""
 
 msgctxt "#30270"
-msgid "LIVE Streams    "
+msgid "LIVE Streams"
 msgstr ""
 
 msgctxt "#30272"
@@ -336,15 +340,15 @@ msgid "Livetalk"
 msgstr ""
 
 msgctxt "#30290"
-msgid "Sakura          "
+msgid "Sakura"
 msgstr ""
 
 msgctxt "#30291"
-msgid "Anime, Manga    "
+msgid "Anime, Manga"
 msgstr ""
 
 msgctxt "#30293"
-msgid "Sakura is the Anime and Manga magazine on Massengeschmack. New releases from the Japanese comic and "
+msgid "Sakura is the Anime and Manga magazine on Massengeschmack. New releases from the Japanese comic and"
 "cartoon world are presented every month. Besides, there are interviews, tips and attendances at fan events."
 msgstr ""
 
@@ -377,7 +381,7 @@ msgid "Postecke"
 msgstr ""
 
 msgctxt "#30353"
-msgid "Postecke is a video podcast in which Holger reads and answers letters from Fernsehkritik-TV viewers "
+msgid "Postecke is a video podcast in which Holger reads and answers letters from Fernsehkritik-TV viewers"
 "(now replaced by Massengeschmack Direkt)."
 msgstr ""
 
@@ -386,7 +390,7 @@ msgid "Uncut interviews."
 msgstr ""
 
 msgctxt "#30355"
-msgid "Various extras  "
+msgid "Various extras"
 msgstr ""
 
 msgctxt "#30356"
@@ -394,7 +398,7 @@ msgid "Sendeschluss"
 msgstr ""
 
 msgctxt "#30357"
-msgid "Sendeschluss is a weekly retro TV magazine in which Holger deals with either very iconic or very bizarre "
+msgid "Sendeschluss is a weekly retro TV magazine in which Holger deals with either very iconic or very bizarre"
 "TV shows from back in the day."
 msgstr ""
 
@@ -431,7 +435,7 @@ msgid "-> Massengeschmack Direkt"
 msgstr ""
 
 msgctxt "#30368"
-msgid "Postecke has been replaced by “Massengeschmack Direkt”. Click on this link to go to the new "
+msgid "Postecke has been replaced by “Massengeschmack Direkt”. Click on this link to go to the new"
 "“Massengeschmack Direkt” category. You can also find it in the main category „Massengeschmack-TV“"
 msgstr ""
 
@@ -460,7 +464,7 @@ msgid "Contribution night for the Supernanny lawsuit"
 msgstr ""
 
 msgctxt "#30400"
-msgid "Hoaxilla-TV     "
+msgid "Hoaxilla-TV"
 msgstr ""
 
 msgctxt "#30401"
@@ -468,13 +472,13 @@ msgid "Information, Scepticism Conspiracy Theories, Urban Legends"
 msgstr ""
 
 msgctxt "#30403"
-msgid "Is Elvis alive? Was there never a man on the moon? Are we all being poisoned by Chemtrails? The world is full "
-"of gloomy and partly bizarre conspiracy theories. Alexa and Alex clear things up, bring up facts and show what's "
+msgid "Is Elvis alive? Was there never a man on the moon? Are we all being poisoned by Chemtrails? The world is full"
+"of gloomy and partly bizarre conspiracy theories. Alexa and Alex clear things up, bring up facts and show what's"
 "really behind many a lunatic theory."
 msgstr ""
 
 msgctxt "#30410"
-msgid "Migropolis      "
+msgid "Migropolis"
 msgstr ""
 
 msgctxt "#30411"
@@ -482,10 +486,39 @@ msgid "Information, Culture, Politics, Migration"
 msgstr ""
 
 msgctxt "#30413"
-msgid "Migropolis portrays people who have migrated to Germany. What moves them? How do they like it here? And what "
+msgid "Migropolis portrays people who have migrated to Germany. What moves them? How do they like it here? And what"
 "kind of life did they live before?"
 msgstr ""
 
+msgctxt "#30414"
+msgid "ComicTalk"
+msgstr "ComicTalk"
+
+msgctxt "#30415"
+msgid "The ComicTalk with Hella von Sinnen is here! The \"literary quartet for comics\" starts right"
+"away with a real classic comic hero: After many years, a new \"Lucky Luke\" volume was released. Can the Western hero still"
+"inspire enthusiasm? Guests are the cult musician Lotto King Karl, who has just translated an Asterix volume in Hamburg,"
+"and the artist Naomi Fearn. A solid member of the show: Comic expert Volker Robrahn. Free episode for all!"
+msgstr ""
+
+msgctxt "#30416"
+msgid "Talkshow, Comic"
+msgstr ""
+
+msgctxt "#30417"
+msgid "MG Interaktiv"
+msgstr ""
+
+msgctxt "#30419"
+msgid "The games show MG Interaktiv is only available to subscribers - win prizes and coupons in creative and crazy"
+"games: over Skype, via chat or live with us in the studio."
+msgstr ""
+
+msgctxt "#30420"
+msgid "Tilo Jung and Rayk Anders like to talk about politics - and with us they do it exclusively together!"
+"\"Jung & Anders\" is about the superordinate questions behind the news - independent, free-thinking, without taboos!"
+msgstr "Tilo Jung und Rayk Anders reden gern über Politik - und bei uns tun sie das exklusiv gemeinsam! In \"Jung &"
+"Anders\" geht es um die übergeordneten Fragen hinter den Meldungen - unabhängig, frei denkend, ohne Tabus!"
 
 # ----------------------------------------------------------------------------------
 # General runtime error messages
