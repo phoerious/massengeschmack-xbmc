@@ -1,0 +1,20 @@
+{
+    "id": 11,
+    "order": 11,
+    "metadata": {
+        "Title": "Serienkiller",
+        "Director": "Olaf Brill, Nils Beckmann, Wolfgang M. Schmitt",
+        "Genre": "Fernsehen, Serien, Kritik",
+        "Country": 30202,
+        "Plot": "Serienkiller ist das Magazin rund um TV-Serien. Filmhistoriker Olaf Brill, Serienjunkie Nils Beckmann und Deutschlands intellektuellster Filmkritiker Wolfgang M. Schmitt liefern umfangreiche Analysen zu Serien der Neuzeit und TV-Klassikern ab.",
+        "Premiered": "2016-06-28"
+    },
+    "fanart": "fanart-serienkiller.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}

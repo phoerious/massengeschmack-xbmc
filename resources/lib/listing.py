@@ -56,7 +56,7 @@ class Listing(object):
         if 'true' == ADDON.getSetting('advanced.viewmodeFix'):
             self.setViewMode(510)
         else:
-            self.setViewMode(503)
+            self.setViewMode(55)
         xbmcplugin.endOfDirectory(ADDON_HANDLE)
     
     def setViewMode(self, id):

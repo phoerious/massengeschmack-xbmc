@@ -1,0 +1,21 @@
+{
+    "id": 13,
+    "order": 113,
+    "metadata": {
+        "Title": "Jung und Anders",
+        "Director": "Tilo Jung, Ryak Anders",
+        "Genre": "Politik",
+        "Country": 30202,
+        "Plot": 30420,
+        "Premiered": "2016-07-12"
+    },
+    "fanart": "fanart-jungundanders.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ],
+    "active": false
+}

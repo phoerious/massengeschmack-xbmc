@@ -1,0 +1,20 @@
+{
+    "id": 15,
+    "order": 15,
+    "metadata": {
+        "Title": "Sprechplanet",
+        "Director": "Julian Schlichting",
+        "Genre": "Talkshow, Interview",
+        "Country": 30202,
+        "Plot": "Sprechplanet ist die Talkshow mit Julian Schlichting - lockere Plaudereien mit illustren Gästen aus der Kultur- und Medienwelt.",
+        "Premiered": "2016-07-12"
+    },
+    "fanart": "fanart-sprechplanet.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}

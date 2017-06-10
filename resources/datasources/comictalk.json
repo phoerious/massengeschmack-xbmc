@@ -1,15 +1,15 @@
 {
-    "id": 6,
-    "order": 6,
+    "id": 17,
+    "order": 17,
     "metadata": {
-        "Title": 30260,
-        "Director": "Verschiedene",
-        "Genre": 30261,
+        "Title": 30414,
+        "Director": "Hella von Sinnen, Volker Robrahn",
+        "Genre": 30419,
         "Country": 30202,
-        "Plot": 30263,
+        "Plot": 30415,
         "Premiered": "2017-04-05"
     },
-    "fanart": "fanart-asynchron-20160220.jpg",
+    "fanart": "fanart-comictalk.jpg",
     "qualities": ["best", "hd", "mobile", "audio"],
     "submodules": [
         {

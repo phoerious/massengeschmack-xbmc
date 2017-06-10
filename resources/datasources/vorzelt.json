@@ -1,0 +1,21 @@
+{
+    "id": 12,
+    "order": 112,
+    "metadata": {
+        "Title": "Das Vorzelt zur Hölle",
+        "Director": "Tommy Krappweis, Werner Krappweis",
+        "Genre": "Comedy",
+        "Country": 30202,
+        "Plot": "Tommy Krappweis erinnert sich gemeinsam mit seinem Vater Werner an skurrile Camping-Urlaube im 20. Jahrhundert. Ein nostalgisch-charmanter Rückblick auf naturnahe Ferien im analogen Zeitalter.",
+        "Premiered": "2016-06-15"
+    },
+    "fanart": "fanart-vorzelt.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ],
+	"active": false
+}
