@@ -1,3 +1,7 @@
+2.1.0
+ - Add support for ComicTalk, Geisterjäger, Jung und Anders, MG Interaktiv,
+   Serienkiller, Sprechplanet, Vorzelt zur Hölle (thanks, mchawk!)
+
 2.0.2
  - Fix Python 2.6 format string issue
 
