@@ -8,7 +8,7 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
-        <language>en_GB de_DE</language>
+        <language>en de</language>
         <license>GPLv3</license>
         
         <website>https://github.com/phoerious/massengeschmack-xbmc/</website>
