@@ -1,3 +1,9 @@
+2.2.0
+ - Update for Krypton
+ - List show runners as cast
+ - Fix episode length display
+ - Move plot descriptions from translation file to data source definition
+
 2.1.0
  - Add support for ComicTalk, Geisterjäger, Jung und Anders, MG Interaktiv,
    Serienkiller, Sprechplanet, Vorzelt zur Hölle (thanks, mchawk!)
