@@ -19,16 +19,18 @@
 import xbmcaddon
 import xbmc
 import urlparse
+
+import os
 import sys
 
 # globals
 ADDON_ID             = 'plugin.video.massengeschmack'
-ADDON                = xbmcaddon.Addon(id=ADDON_ID)
+ADDON                = xbmcaddon.Addon()
 ADDON_NAME           = ADDON.getAddonInfo('name')
 ADDON_ICON           = ADDON.getAddonInfo('icon')
 ADDON_VERSION        = ADDON.getAddonInfo('version')
 ADDON_BASE_PATH      = xbmc.translatePath(ADDON.getAddonInfo('path')).decode('utf-8')
-ADDON_BOOTSTRAP_PATH = ADDON_BASE_PATH + '/resources/datasources'
+ADDON_BOOTSTRAP_PATH = os.path.join(ADDON_BASE_PATH, 'resources', 'datasources')
 ADDON_HANDLE         = int(sys.argv[1])
 ADDON_ARGS           = dict(urlparse.parse_qsl(sys.argv[2][1:]))
 
@@ -37,5 +39,3 @@ HTTP_TIMEOUT         = 20
 HTTP_BASE_URI        = 'https://massengeschmack.tv/'
 HTTP_BASE_API_URI    = HTTP_BASE_URI + 'api/v1'
 HTTP_BASE_FEED_URI   = HTTP_BASE_URI + 'feed'
-
-IS_XBOX = bool(xbmc.getCondVisibility("System.Platform.xbox"))

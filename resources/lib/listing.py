@@ -70,20 +70,23 @@ class Listing(object):
         xbmc.executebuiltin('Container.SetViewMode(' + str(id) + ')')
     
     def __addDir(self, listItem):
-        xbmcListItem = xbmcgui.ListItem(listItem.getData('name'), iconImage=listItem.getData('thumbnail'),
-                                        thumbnailImage=listItem.getData('thumbnail'))
-        xbmcListItem.setInfo(type='video', infoLabels=listItem.getData('metaData'))
-        xbmcListItem.setProperty('fanart_image', listItem.getData('fanart'))
-        # fix for XBMC4Xbox
-        if not IS_XBOX:
-            xbmcListItem.addStreamInfo('video', listItem.getData('streamInfo'))
-        
+        xbmcListItem = xbmcgui.ListItem(listItem.getData('name'))
+        xbmcListItem.setInfo(type='video', infoLabels=listItem.getData('streamInfo'))
+
+        fanart = listItem.getData('fanart')
+        thumb = listItem.getData('thumbnail')
+
+        xbmcListItem.setArt({'thumb' : thumb,
+                             'icon'  : thumb,
+                             'banner': thumb,
+                             'fanart': fanart})
+
         xbmcplugin.addDirectoryItem(ADDON_HANDLE, url=listItem.getData('url'), listitem=xbmcListItem,
                                     isFolder=listItem.getData('isFolder'))
 
 
 class ListItem:
-    def __init__(self, id=0, name='', url='', thumbnail='', fanart='', metaData=None, streamInfo=None, isFolder=True):
+    def __init__(self, id=0, name='', url='', thumbnail='', fanart='', streamInfo=None, isFolder=True):
         """
         Generate list item from given parameters.
         
@@ -97,8 +100,6 @@ class ListItem:
         @param thumbnail : the path/URL to a thumbnail image
         @type  fanart    : str
         @param fanart    : the path/URL to a fanart image
-        @type  metaData  : dict
-        @param metaData  : meta data for this list item as passed to xbmcgui.ListItem()
         @type streamInfo : dict
         @param streamInfo: stream information for passing to xbmcgui.ListeItem.addStreamInfo()
         @type  isFolder  : bool
@@ -106,8 +107,6 @@ class ListItem:
         """
         if streamInfo is None:
             streamInfo = {}
-        if metaData is None:
-            metaData = {}
 
         self.__data = {
             'id'        : id,
@@ -115,7 +114,6 @@ class ListItem:
             'url'       : url,
             'thumbnail' : thumbnail,
             'fanart'    : fanart,
-            'metaData'  : metaData,
             'streamInfo': streamInfo,
             'isFolder'  : isFolder
         }

@@ -47,11 +47,10 @@ if 'list' == ADDON_ARGS['cmd']:
     
 elif 'play' == ADDON_ARGS['cmd']:
     name       = ADDON_ARGS.get('name', '')
-    iconImage  = ADDON_ARGS.get('iconimage', '')
-    metaData   = json.loads(ADDON_ARGS.get('metadata', '{}'))
     streamInfo = json.loads(ADDON_ARGS.get('streaminfo', '{}'))
-    
-    lib.playVideoStream(ADDON_ARGS['url'], name, iconImage, metaData, streamInfo)
+    art        = json.loads(ADDON_ARGS.get('art', '{}'))
+
+    lib.playVideoStream(ADDON_ARGS['url'], name, art, streamInfo)
     
 else:
     raise RuntimeError(ADDON_ARGS['cmd'] + ': ' + ADDON.getLocalizedString(30901))

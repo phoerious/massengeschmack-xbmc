@@ -70,7 +70,7 @@ class DataSource(object):
             @rtype: str
             @return: submodule title to be displayed in listings
             """
-            title = self.moduleMetaData.get('Title', ADDON.getLocalizedString(30198))
+            title = self.moduleMetaData.get('title', ADDON.getLocalizedString(30198))
             if not self.isActive:
                 # rstrip() for removing workaround white-space for 16 char min-length issue
                 # see <http://trac.kodi.tv/ticket/16599>
@@ -87,7 +87,7 @@ class DataSource(object):
         self.sortOrder = 0  # type: int
         """Show listing sort order."""
 
-        self.showMetaData = {}    # type: dict
+        self.showStreamInfo = {}    # type: dict
         """Global meta data for the show  (int values can be used to reference i18n strings)."""
 
         self.availableQualities = []    # type: list
@@ -140,15 +140,15 @@ class DataSource(object):
         ds.isActive   = jd.get('active', ds.isActive)
 
         ds.availableQualities.extend(jd.get('qualities', []))
-        ds.showMetaData.update(__localizeDict(jd.get('metadata', {})))
+        ds.showStreamInfo.update(__localizeDict(jd.get('metadata', {})))
 
         if 'banner' in jd:
-            ds.bannerPath = ADDON_BASE_PATH + '/resources/media/' + jd['banner']
+            ds.bannerPath = os.path.join(ADDON_BASE_PATH, 'resources', 'media', jd['banner'])
         else:
             ds.bannerPath = HTTP_BASE_URI + 'img/header/mg_banner_' + str(ds.id) + '.jpg?' + time.strftime('%Y%m%d')
 
         if 'fanart' in jd:
-            ds.fanartPath = ADDON_BASE_PATH + '/resources/media/' + jd['fanart']
+            ds.fanartPath = os.path.join(ADDON_BASE_PATH, 'resources', 'media', jd['fanart'])
 
         sm = jd.get('submodules', [])
         for i in sm:
@@ -220,7 +220,7 @@ class DataSource(object):
         @rtype: str
         @return: show title to be displayed in listings
         """
-        title = self.showMetaData.get('Title', ADDON.getLocalizedString(30198))
+        title = self.showStreamInfo.get('title', ADDON.getLocalizedString(30198))
         if not self.isActive:
             # rstrip() for removing workaround white-space for 16 char min-length issue
             # see <http://trac.kodi.tv/ticket/16599>
@@ -296,27 +296,24 @@ class DataSource(object):
         data        = resources.lib.parseRSSFeed(self.buildFeedURL(submodule, self.getQuality(), currentPage), True)
 
         for i in data:
-            iconimage = i["thumbUrl"]
-            date      = resources.lib.parseUTCDateString(i['pubdate']).strftime('%d.%m.%Y')
-            metaData  = {
-                'Title'     : i['title'],
-                'Genre'     : self.showMetaData.get('Genre', ''),
-                'Date'      : date,
-                'Country'   : self.showMetaData.get('Country', ''),
-                'Plot'      : i['description'],
-                'Duration'  : int(i['duration']) / 60
-            }
-            streamInfo = {
-                'duration' : i['duration']
+            streamInfo = self.showStreamInfo
+            streamInfo.update({
+                'title'     : i['title'],
+                'premiered' : resources.lib.parseUTCDateString(i['pubdate']).strftime('%Y-%m-%d'),
+                'plot'      : i['description'],
+                'duration'  : i['duration'],
+                'mediatype' : 'episode'
+            })
+            art = {
+                'thumb': i["thumbUrl"]
             }
 
             yield ListItem(
                 self.id,
                 i['title'],
-                resources.lib.assemblePlayURL(i['url'], i['title'], iconimage, metaData, streamInfo),
-                iconimage,
+                resources.lib.assemblePlayURL(i['url'], i['title'], art=art, streamInfo=streamInfo),
+                i["thumbUrl"],
                 self.fanartPath,
-                metaData,
                 streamInfo,
                 False
             )
@@ -335,16 +332,19 @@ class DataSource(object):
         # create generator object of submodules with inactive submodules coming last
         for active in (True, False):
             for i in (s for s in self.submodules if s.isActive == active):
+                streamInfo = self.showStreamInfo
+                streamInfo.update({
+                    'title': '',
+                    'plot': ''
+                })
+                streamInfo.update(i.moduleMetaData)
                 yield ListItem(
                     self.id,
                     i.getModuleTitle(),
                     resources.lib.assembleListURL(self.moduleName, i.name),
                     self.bannerPath,
                     self.fanartPath,
-                    {
-                        'Title': i.moduleMetaData.get('Title', ''),
-                        'Plot': i.moduleMetaData.get('Plot', '')
-                    }
+                    streamInfo
                 )
 
 
@@ -430,7 +430,7 @@ class OverviewDataSource(DataSource):
                     resources.lib.assembleListURL(i.moduleName),
                     i.bannerPath,
                     i.fanartPath,
-                    i.showMetaData
+                    i.showStreamInfo
                 )
 
     def getContentMode(self):
@@ -449,13 +449,13 @@ class LiveDataSource(DataSource):
         self.id           = -9999
         self.moduleName   = 'live'
         self.sortOrder    = 600
-        self.showMetaData = {
-            'Title'    : ADDON.getLocalizedString(30270),
-            'Country'  : ADDON.getLocalizedString(30202),
-            'Plot'     : ADDON.getLocalizedString(30272)
+        self.showStreamInfo = {
+            'title'    : ADDON.getLocalizedString(30270),
+            'country'  : ADDON.getLocalizedString(30202),
+            'plot'     : ADDON.getLocalizedString(30272)
         }
-        self.bannerPath = ADDON_BASE_PATH + '/resources/media/banner-massengeschmack-20160220.png'
-        self.fanartPath = ADDON_BASE_PATH + '/resources/media/fanart-massengeschmack-20160220.jpg'
+        self.bannerPath = os.path.join(ADDON_BASE_PATH, 'resources', 'media', 'banner-massengeschmack-20160220.png')
+        self.fanartPath = os.path.join(ADDON_BASE_PATH, 'resources', 'media', 'fanart-massengeschmack-20160220.jpg')
         self.isActive   = True
 
         self.isLive     = False
@@ -465,8 +465,8 @@ class LiveDataSource(DataSource):
             info = resources.lib.getLiveStreamInfo(ADDON_ARGS['playStream'])
             resources.lib.playVideoStream(info['url'],
                                           ADDON_ARGS.get('streamName', ''),
-                                          ADDON_ARGS.get('iconImage', ''),
-                                          json.loads(ADDON_ARGS.get('metaData', '{}')))
+                                          json.loads(ADDON_ARGS.get('art', '{}')),
+                                          json.loads(ADDON_ARGS.get('streamInfo', '{}')))
             return
 
         # otherwise continue with regular listing
@@ -485,7 +485,7 @@ class LiveDataSource(DataSource):
         # if there is a show live on air, mark it in the list and move it to the top
         if self.isLive:
             self.sortOrder = -10000
-            self.showMetaData['Title'] = self.showMetaData['Title'].rstrip() + ' ' + ADDON.getLocalizedString(30278)
+            self.showStreamInfo['title'] = self.showStreamInfo['title'].rstrip() + ' ' + ADDON.getLocalizedString(30278)
 
     @classmethod
     def bootstrap(cls, jsonFile):
@@ -568,15 +568,16 @@ class LiveDataSource(DataSource):
 
                 listName = '    ' + name + ' -> ' + dateString
 
-            metaData  = {
-                'Title'     : streamName,
-                'Date'      : date,
-                'Plot'      : plot
+            streamInfo  = {
+                'title'     : streamName,
+                'date'      : date,
+                'plot'      : plot
             }
 
             if mode == 'live' or mode == 'recording':
                 listUrl = resources.lib.assembleListURL(self.moduleName, playStream=i['showid'], streamName=streamName,
-                                                        iconImage=iconImage, metaData=json.dumps(metaData))
+                                                        art=json.dumps({"thumb": iconImage}),
+                                                        streamInfo=json.dumps(streamInfo))
             else:
                 # don't create a real list URL for upcoming shows
                 listUrl = '#'
@@ -587,7 +588,7 @@ class LiveDataSource(DataSource):
                 listUrl,
                 iconImage,
                 self.fanartPath,
-                metaData,
+                streamInfo,
                 isFolder=(mode == 'upcoming')
             )
 
@@ -617,4 +618,3 @@ def createDataSource(module=None):
         if ds is None:
             raise RuntimeError("Invalid module {}".format(module))
         return ds()
-

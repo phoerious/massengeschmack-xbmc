@@ -2,12 +2,11 @@
     "id": 1,
     "order": 1,
     "metadata": {
-        "Title": 30200,
-        "Director": "Holger Kreymeier",
-        "Genre": 30201,
-        "Country": 30202,
-        "Plot": 30203,
-        "Premiered": "2007-04-07"
+        "title": "Fernsehkritik-TV",
+        "cast": ["Holger Kreymeier"],
+        "country": 30202,
+        "plot": "Fernsehkritik-TV ist der Dino bei Massengeschmack – seit 2007 im stetigen Kampf gegen schlechtes Fernsehen, ausgezeichnet u.a. mit dem Grimme Online Award und dem Deutschen Webvideopreis. Mit teils journalistisch-investigativen und teils satirisch-spöttischen Beiträgen fühlt Holger Kreymeier dem rückständigen Medium Fernsehen auf den Zahn und fordert: Schalten Sie mal wieder ab!",
+        "premiered": "2007-04-07"
     },
     "fanart": "fanart-fktv-20160220.jpg",
     "qualities": ["best", "hd", "mobile", "audio"],
@@ -16,56 +15,56 @@
             "name": "all",
             "ids": [1, 2, 3, 4, 5, 6],
             "metadata": {
-                "Title": 30300,
-                "Plot": 30350
+                "title": 30300,
+                "plot": 30350
             }
         },
         {
             "name": "episodes",
             "ids": [1],
             "metadata": {
-                "Title": 30301,
-                "Plot": 30351
+                "title": 30301,
+                "plot": "Reguläre Fernsehkritik-TV-Folgen."
             }
         },
         {
             "name": "sendeschluss",
             "ids": [5],
             "metadata": {
-                "Title": 30356,
-                "Plot": 30357
+                "title": "Sendeschluss",
+                "plot": "Sendeschluss ist ein wöchentliches Retro-TV-Magazin, in dem Holger sich besonders kultige oder besonders skurrile Fernsehshows von damals vornimmt."
             }
         },
         {
             "name": "plus",
             "ids": [6],
             "metadata": {
-                "Title": 30204,
-                "Plot": 30205
+                "title": "FKTV Plus",
+                "plot": "FKTV-Extra nur für Abonnenten"
             }
         },
         {
             "name": "interviews",
             "ids": [3],
             "metadata": {
-                "Title": 30302,
-                "Plot": 30354
+                "title": 30301,
+                "plot": 30354
             }
         },
         {
            "name":  "extras",
             "ids": [4],
             "metadata": {
-                "Title": 30303,
-                "Plot": 30355
+                "title": 30303,
+                "plot": 30355
             }
         },
         {
             "name": "postecke",
             "ids": [2],
             "metadata": {
-                "Title": 30352,
-                "Plot": 30353
+                "title": "Postecke",
+                "plot": "Die Postecke ist ein Video-Podcast, in dem Holger Zuschauerpost vorliest und beantwortet (nun ersetzt durch Massengeschmack Direkt)."
             },
             "active": false
         }

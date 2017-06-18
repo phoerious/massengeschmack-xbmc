@@ -2,10 +2,10 @@
     "id": 0,
     "order": 99,
     "metadata": {
-        "Title": 30303,
-        "Director": "Holger Kreymeier",
-        "Country": 30202,
-        "Plot": 30233
+        "title": 30303,
+        "cast": ["Holger Kreymeier"],
+        "country": 30202,
+        "plot": 30233
     },
     "banner": "banner-massengeschmack-20160220.png",
     "fanart": "fanart-massengeschmack-20160220.jpg",
@@ -15,42 +15,41 @@
             "name": "all",
             "ids": [1, 2, 3, 4, 5],
             "metadata": {
-                "Title": 30300,
-                "Plot": 30361
+                "title": 30300,
+                "plot": 30361
             }
         },
         {
             "name": "studio",
             "ids": [2],
             "metadata": {
-                "Title": 30360,
-                "Plot": 30362,
-                "Genre": 30231,
-                "Premiered": "2013-08-05"
+                "title": "Das Studio",
+                "plot": "„Das Studio“ ist die Massengeschmack-Reality-Show. Sie ist garantiert gefaked und gescripted!",
+                "premiered": "2013-08-05"
             }
         },
         {
             "name": "direkt",
             "ids": [3],
             "metadata": {
-                "Title": 30365,
-                "Plot": 30366
+                "title": "MG Direkt",
+                "plot": "Postecke und Live-Talk für Abonnenten."
             }
         },
         {
             "name": "internal",
             "ids": [1],
             "metadata": {
-                "Title": 30363,
-                "Plot": 30364
+                "title": 30363,
+                "plot": 30364
             }
         },
         {
            "name":  "Spendennacht",
             "ids": [5],
             "metadata": {
-                "Title": 30377,
-                "Plot": 30378
+                "title": "Spendennacht",
+                "plot": "Spendennacht zum Supernanny-Prozess"
             }
         }
     ]

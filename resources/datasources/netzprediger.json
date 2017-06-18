@@ -2,12 +2,11 @@
     "id": 5,
     "order": 5,
     "metadata": {
-        "Title": 30250,
-        "Director": "Adam Wolke, Nero",
-        "Genre": 30251,
-        "Country": 30202,
-        "Plot": 30253,
-        "Premiered": "2013-10-10"
+        "title": "Netzprediger",
+        "cast": ["Adam Wolke"],
+        "country": 30202,
+        "plot": "Aktuelles und Skurriles aus dem Netz bietet unsere Live-Show Netzprediger – moderiert von Adam Wolke. Immer den aktuellen Trends im World Wide Web auf der Spur – und dabei gnadenlos direkt.",
+        "premiered": "2013-10-10"
     },
     "fanart": "fanart-netzprediger-20160221.jpg",
     "qualities": ["best", "hd", "mobile", "audio"],
@@ -16,24 +15,24 @@
             "name": "all",
             "ids": [1, 2],
             "metadata": {
-                "Title": 30300,
-                "Plot": 30254
+                "title": 30300,
+                "plot": 30254
             }
         },
         {
             "name": "episodes",
             "ids": [1],
             "metadata": {
-                "Title": 30301,
-                "Plot": 30255
+                "title": 30301,
+                "plot": 30255
             }
         },
         {
             "name": "interviews",
             "ids": [2],
             "metadata": {
-                "Title": 30302,
-                "Plot": 30354
+                "title": 30302,
+                "plot": 30354
             }
         }
     ]

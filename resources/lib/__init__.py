@@ -351,15 +351,8 @@ def getPluginBaseURL():
     
     @return the URL string
     """
-    
-    url = 'plugin://'
-    
-    if IS_XBOX:
-        url += 'video/' + ADDON_NAME
-    else:
-        url += ADDON_ID
-    
-    return url
+
+    return 'plugin://' + ADDON_ID
 
 
 def assembleListURL(module=None, submodule=None, **kwargs):
@@ -389,7 +382,7 @@ def assembleListURL(module=None, submodule=None, **kwargs):
     return url
     
 
-def assemblePlayURL(url, name='', iconImage='', metaData=None, streamInfo=None):
+def assemblePlayURL(url, name='', art=None, streamInfo=None):
     """
     Assemble a plugin:// URL with a play command for a given URL.
     
@@ -397,28 +390,28 @@ def assemblePlayURL(url, name='', iconImage='', metaData=None, streamInfo=None):
     @param url: the real URL of the media file
     @type name: str
     @param name: a nice human-readable name
-    @type iconImage: str
-    @param iconImage: a URL to a thumbnail image
-    @type metaData: dict
-    @param metaData: metaData for the media file
+    @type art: dict
+    @param art: dictionary as expected by xbmcgui.ListItem.setArt()
+    @type streamInfo: dict
+    @param streamInfo: streamInfo for the media file
     @type streamInfo: dict
     @param: streamInfo: technical info about the stream (such as the duration or resolution)
     """
     if streamInfo is None:
         streamInfo = {}
-    if metaData is None:
-        metaData = {}
+    if art is None:
+        art = {}
 
     if '#' == url or '' == url:
         return '#'
     
     return getPluginBaseURL() + '/?cmd=play&url=' + urllib.quote(url) + \
-          '&name=' + urllib.quote(name) + '&iconimage=' + urllib.quote(iconImage) + \
-          '&metadata=' + dictUrlEncode(metaData) + \
+          '&name=' + urllib.quote(name) + \
+          '&art=' + dictUrlEncode(art) + \
           '&streaminfo=' + dictUrlEncode(streamInfo)
 
 
-def playVideoStream(url, name='', iconImage='', metaData=None, streamInfo=None):
+def playVideoStream(url, name='', art=None, streamInfo=None):
     """
     Create media player and open given stream URL.
 
@@ -426,17 +419,17 @@ def playVideoStream(url, name='', iconImage='', metaData=None, streamInfo=None):
     @param url: the URL of the media file
     @type name: str
     @param name: a nice human-readable name
-    @type iconImage: str
-    @param iconImage: a URL to a thumbnail image
-    @type metaData: dict
-    @param metaData: metaData for the media file
+    @type art: dict
+    @param art: dictionary as expected by xbmcgui.ListItem.setArt()
+    @type streamInfo: dict
+    @param streamInfo: metaData for the media file
     @type streamInfo: dict
     @param: streamInfo: technical info about the stream (such as the duration or resolution)
     """
-    listitem = xbmcgui.ListItem(name, iconImage=iconImage, thumbnailImage=iconImage)
-    listitem.setInfo('video', metaData)
-    if not IS_XBOX:
-        listitem.addStreamInfo('video', streamInfo)
+    listitem = xbmcgui.ListItem(name)
+    listitem.setInfo('video', streamInfo)
+    if art is not None:
+        listitem.setArt(art)
 
     playlist = xbmc.PlayList(1)
     playlist.clear()

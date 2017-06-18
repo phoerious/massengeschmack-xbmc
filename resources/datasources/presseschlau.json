@@ -2,12 +2,11 @@
     "id": 3,
     "order": 3,
     "metadata": {
-        "Title": 30220,
-        "Director": "Lars Golenia    ",
-        "Genre": 30221,
-        "Country": 30202,
-        "Plot": 30223,
-        "Premiered": "2013-08-01"
+        "title": "Pressesch(l)au",
+        "cast": ["Lars Golenia"],
+        "country": 30202,
+        "plot": "Pressesch(l)au taucht ein in die skurrilen Abgründe der Printmedien. Lars Golenia rezensiert Artikel, zeigt unglaubliche Zeitschriften und spottet über Falschmeldungen und schlecht recherchierte Inhalte. Alles garniert mit kabarettistischen Kommentaren. Ein satirischer Rundumschlag mit Comedy-Elementen.",
+        "premiered": "2013-08-01"
     },
     "fanart": "fanart-presseschlau-20160221.jpg",
     "qualities": ["best", "hd", "mobile", "audio"],
@@ -16,24 +15,24 @@
             "name": "all",
             "ids": [1, 2],
             "metadata": {
-                "Title": 30300,
-                "Plot": 30224
+                "title": 30300,
+                "plot": 30224
             }
         },
         {
             "name": "episodes",
             "ids": [1],
             "metadata": {
-                "Title": 30301,
-                "Plot": 30225
+                "title": 30301,
+                "plot": 30225
             }
         },
         {
             "name": "interviews",
             "ids": [2],
             "metadata": {
-                "Title": 30302,
-                "Plot": 30354
+                "title": 30302,
+                "plot": 30354
             }
         }
     ]
