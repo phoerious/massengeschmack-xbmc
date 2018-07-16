@@ -1,3 +1,6 @@
+2.4.1
+ - Add setting to disable ViewModes
+
 2.4.0
  - Add Offensio, Achtung Spoiler and Veto
  - Update view modes for estuary skin
