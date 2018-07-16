@@ -66,6 +66,9 @@ class Listing(object):
         @type id: int
         @param id: the view mode ID from the current skin
         """
+        if 'false' == ADDON.getSetting('advanced.adjustViewModes'):
+            return
+
         xbmcplugin.setContent(ADDON_HANDLE, self.__source.getContentMode())
         xbmc.executebuiltin('Container.SetViewMode(' + str(id) + ')')
 
