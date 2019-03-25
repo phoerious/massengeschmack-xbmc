@@ -1,3 +1,9 @@
+2.5.0
+ - Add Trip, Die Mediatheke, Schatzkammer, Sonntagsfrühstück
+ - Updated flag of active/inactive shows
+ - Moved Das Studio to own section
+ - Renamed PantoffelTV to PantoffelKino
+
 2.4.1
  - Add setting to disable ViewModes
 
