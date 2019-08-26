@@ -1,3 +1,6 @@
+2.6.0
+ - Add Paddys Retrokosmos
+
 2.5.0
  - Add Trip, Die Mediatheke, Schatzkammer, Sonntagsfrühstück
  - Updated flag of active/inactive shows
