@@ -17,27 +17,26 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import xbmcgui
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 import time
 import re
 import json
 from datetime import datetime, tzinfo, timedelta
 from xml.dom import minidom
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
 from globalvars import *
-import listing
-import datasource
-
+from . import listing
+from . import datasource
 
 # enable non-GET HTTP requests using urllib2
-class PostRequest(urllib2.Request):
+class PostRequest(urllib.request.Request):
     def get_method(self):
         return 'POST'
 
 
-class HeadRequest(urllib2.Request):
+class HeadRequest(urllib.request.Request):
     def get_method(self):
         return 'HEAD'
 
@@ -69,7 +68,7 @@ def openHTTPConnection(uri, requestMethod='GET'):
     elif 'HEAD' == requestMethod:
         request = HeadRequest(uri)
     else:
-        request = urllib2.Request(uri)
+        request = urllib.request.Request(uri)
 
     request.add_header('User-Agent', HTTP_USER_AGENT)
 
@@ -80,11 +79,11 @@ def openHTTPConnection(uri, requestMethod='GET'):
     }
 
     try:
-        handle = urllib2.urlopen(request, None, HTTP_TIMEOUT)
-    except urllib2.HTTPError as e:
+        handle = urllib.request.urlopen(request, None, HTTP_TIMEOUT)
+    except urllib.error.HTTPError as e:
         response['code']   = e.code
         response['reason'] = e.reason
-    except urllib2.URLError as e:
+    except urllib.error.URLError as e:
         response['code']   = -1
         response['reason'] = e.reason
 
@@ -124,11 +123,11 @@ def installHTTPLoginData(username, password):
     @type username: str
     @type password: str
     """
-    passwordManager = urllib2.HTTPPasswordMgrWithDefaultRealm()
+    passwordManager = urllib.request.HTTPPasswordMgrWithDefaultRealm()
     passwordManager.add_password(None, HTTP_BASE_URI, username, password)
-    authHandler = urllib2.HTTPBasicAuthHandler(passwordManager)
-    opener      = urllib2.build_opener(authHandler)
-    urllib2.install_opener(opener)
+    authHandler = urllib.request.HTTPBasicAuthHandler(passwordManager)
+    opener      = urllib.request.build_opener(authHandler)
+    urllib.request.install_opener(opener)
 
 
 def probeLogin(showDialog=False):
@@ -260,10 +259,10 @@ def parseRSSFeed(feed, fetch=False):
         duration = 0
         fc = node.getElementsByTagName('itunes:duration')[0].firstChild
         if fc is not None:
-            h, m, s  = map(int, fc.nodeValue.split(':'))
+            h, m, s  = list(map(int, fc.nodeValue.split(':')))
             duration = timedelta(hours=h, minutes=m, seconds=s).seconds
 
-        description = parser.unescape(node.getElementsByTagName('description')[0].firstChild.nodeValue).encode('utf-8')
+        description = parser.unescape(node.getElementsByTagName('description')[0].firstChild.nodeValue)
 
         # get thumbnail URL
         thumbUrl = ''
@@ -283,17 +282,17 @@ def parseRSSFeed(feed, fetch=False):
 
         subtitle = ''
         if node.getElementsByTagName('itunes:subtitle'):
-            subtitle = parser.unescape(node.getElementsByTagName('itunes:subtitle')[0].firstChild.nodeValue).encode('utf-8')
+            subtitle = parser.unescape(node.getElementsByTagName('itunes:subtitle')[0].firstChild.nodeValue)
 
         data.append({
-            'title'       : parser.unescape(node.getElementsByTagName('title')[0].firstChild.nodeValue).encode('utf-8'),
+            'title'       : parser.unescape(node.getElementsByTagName('title')[0].firstChild.nodeValue),
             'subtitle'    : subtitle,
-            'pubdate'     : parser.unescape(node.getElementsByTagName('pubDate')[0].firstChild.nodeValue).encode('utf-8'),
+            'pubdate'     : parser.unescape(node.getElementsByTagName('pubDate')[0].firstChild.nodeValue),
             'description' : description,
-            'link'        : parser.unescape(node.getElementsByTagName('link')[0].firstChild.nodeValue).encode('utf-8'),
+            'link'        : parser.unescape(node.getElementsByTagName('link')[0].firstChild.nodeValue),
             'thumbUrl'    : thumbUrl,
-            'guid'        : parser.unescape(node.getElementsByTagName('guid')[0].firstChild.nodeValue).encode('utf-8'),
-            'url'         : parser.unescape(node.getElementsByTagName('enclosure')[0].getAttribute('url')).encode('utf-8'),
+            'guid'        : parser.unescape(node.getElementsByTagName('guid')[0].firstChild.nodeValue),
+            'url'         : parser.unescape(node.getElementsByTagName('enclosure')[0].getAttribute('url')),
             'duration'    : duration
         })
 
@@ -346,7 +345,7 @@ def dictUrlEncode(data):
     @param data: the data structure
     @return URL encoded string
     """
-    return urllib.quote(json.dumps(data, separators=(',', ':')))
+    return urllib.parse.quote(json.dumps(data, separators=(',', ':')))
 
 
 def getPluginBaseURL():
@@ -376,12 +375,12 @@ def assembleListURL(module=None, submodule=None, **kwargs):
     if module is None:
         return url
 
-    url += '&module=' + urllib.quote(module)
+    url += '&module=' + urllib.parse.quote(module)
     if submodule is not None:
-        url += '&submodule=' + urllib.quote(submodule)
+        url += '&submodule=' + urllib.parse.quote(submodule)
 
     for p in kwargs:
-        url += '&' + urllib.quote(p) + '=' + urllib.quote(str(kwargs[p]))
+        url += '&' + urllib.parse.quote(p) + '=' + urllib.parse.quote(str(kwargs[p]))
 
     return url
 
@@ -409,8 +408,8 @@ def assemblePlayURL(url, name='', art=None, streamInfo=None):
     if '#' == url or '' == url:
         return '#'
 
-    return getPluginBaseURL() + '/?cmd=play&url=' + urllib.quote(url) + \
-          '&name=' + urllib.quote(name) + \
+    return getPluginBaseURL() + '/?cmd=play&url=' + urllib.parse.quote(url) + \
+          '&name=' + urllib.parse.quote(name) + \
           '&art=' + dictUrlEncode(art) + \
           '&streaminfo=' + dictUrlEncode(streamInfo)
 

@@ -18,7 +18,7 @@
 
 import xbmcaddon
 import xbmc
-import urlparse
+import urllib.parse
 
 import os
 import sys
@@ -29,10 +29,10 @@ ADDON                = xbmcaddon.Addon()
 ADDON_NAME           = ADDON.getAddonInfo('name')
 ADDON_ICON           = ADDON.getAddonInfo('icon')
 ADDON_VERSION        = ADDON.getAddonInfo('version')
-ADDON_BASE_PATH      = xbmc.translatePath(ADDON.getAddonInfo('path')).decode('utf-8')
+ADDON_BASE_PATH      = xbmc.translatePath(ADDON.getAddonInfo('path'))
 ADDON_BOOTSTRAP_PATH = os.path.join(ADDON_BASE_PATH, 'resources', 'datasources')
 ADDON_HANDLE         = int(sys.argv[1])
-ADDON_ARGS           = dict(urlparse.parse_qsl(sys.argv[2][1:]))
+ADDON_ARGS           = dict(urllib.parse.parse_qsl(sys.argv[2][1:]))
 
 HTTP_USER_AGENT      = 'Massengeschmack Kodi add-on v' + ADDON_VERSION
 HTTP_TIMEOUT         = 20
