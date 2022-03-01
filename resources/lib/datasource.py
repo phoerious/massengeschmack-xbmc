@@ -130,8 +130,8 @@ class DataSource(object):
                 d[k] = ADDON.getLocalizedString(d[k]) if type(d[k]) is int else d[k]
             return d
 
-        with open(jsonFile, 'r') as f:
-            jd = json.load(f, 'utf-8')
+        with open(jsonFile, 'r', encoding='utf-8') as f:
+            jd = json.load(f)
 
         ds            = cls()
         ds.moduleName = os.path.basename(jsonFile).replace('.json', '')
