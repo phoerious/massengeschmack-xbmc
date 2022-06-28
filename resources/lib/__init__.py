@@ -24,7 +24,7 @@ import re
 import json
 from datetime import datetime, tzinfo, timedelta
 from xml.dom import minidom
-from html.parser import HTMLParser
+import html
 
 from globalvars import *
 from . import listing
@@ -253,7 +253,6 @@ def parseRSSFeed(feed, fetch=False):
     dom = minidom.parseString(feed)
 
     data   = []
-    parser = HTMLParser()
     for node in dom.getElementsByTagName('item'):
         # convert duration string to seconds
         duration = 0
@@ -262,7 +261,7 @@ def parseRSSFeed(feed, fetch=False):
             h, m, s  = list(map(int, fc.nodeValue.split(':')))
             duration = timedelta(hours=h, minutes=m, seconds=s).seconds
 
-        description = parser.unescape(node.getElementsByTagName('description')[0].firstChild.nodeValue)
+        description = html.unescape(node.getElementsByTagName('description')[0].firstChild.nodeValue)
 
         # get thumbnail URL
         thumbUrl = ''
@@ -282,17 +281,17 @@ def parseRSSFeed(feed, fetch=False):
 
         subtitle = ''
         if node.getElementsByTagName('itunes:subtitle'):
-            subtitle = parser.unescape(node.getElementsByTagName('itunes:subtitle')[0].firstChild.nodeValue)
+            subtitle = html.unescape(node.getElementsByTagName('itunes:subtitle')[0].firstChild.nodeValue)
 
         data.append({
-            'title'       : parser.unescape(node.getElementsByTagName('title')[0].firstChild.nodeValue),
+            'title'       : html.unescape(node.getElementsByTagName('title')[0].firstChild.nodeValue),
             'subtitle'    : subtitle,
-            'pubdate'     : parser.unescape(node.getElementsByTagName('pubDate')[0].firstChild.nodeValue),
+            'pubdate'     : html.unescape(node.getElementsByTagName('pubDate')[0].firstChild.nodeValue),
             'description' : description,
-            'link'        : parser.unescape(node.getElementsByTagName('link')[0].firstChild.nodeValue),
+            'link'        : html.unescape(node.getElementsByTagName('link')[0].firstChild.nodeValue),
             'thumbUrl'    : thumbUrl,
-            'guid'        : parser.unescape(node.getElementsByTagName('guid')[0].firstChild.nodeValue),
-            'url'         : parser.unescape(node.getElementsByTagName('enclosure')[0].getAttribute('url')),
+            'guid'        : html.unescape(node.getElementsByTagName('guid')[0].firstChild.nodeValue),
+            'url'         : html.unescape(node.getElementsByTagName('enclosure')[0].getAttribute('url')),
             'duration'    : duration
         })
 
