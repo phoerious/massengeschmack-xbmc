@@ -17,7 +17,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import xbmcaddon
-import xbmc
+import xbmcvfs
 import urllib.parse
 
 import os
@@ -29,7 +29,7 @@ ADDON                = xbmcaddon.Addon()
 ADDON_NAME           = ADDON.getAddonInfo('name')
 ADDON_ICON           = ADDON.getAddonInfo('icon')
 ADDON_VERSION        = ADDON.getAddonInfo('version')
-ADDON_BASE_PATH      = xbmc.translatePath(ADDON.getAddonInfo('path'))
+ADDON_BASE_PATH      = xbmcvfs.translatePath(ADDON.getAddonInfo('path'))
 ADDON_BOOTSTRAP_PATH = os.path.join(ADDON_BASE_PATH, 'resources', 'datasources')
 ADDON_HANDLE         = int(sys.argv[1])
 ADDON_ARGS           = dict(urllib.parse.parse_qsl(sys.argv[2][1:]))
