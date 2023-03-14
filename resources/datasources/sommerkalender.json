@@ -1,0 +1,20 @@
+{
+    "id": 35,
+    "order": 35,
+    "metadata": {
+        "title": "Sommerkalender",
+        "cast": ["MG-Team"],
+        "country": 30202,
+        "plot": "Jeden Tag eine neue Aufgabe für das MG-Team.",
+        "premiered": "2022-07-17"
+    },
+    "fanart": "fanart-sommerkalender.jpg",
+    "banner": "banner-sommerkalender.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}

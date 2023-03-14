@@ -1,0 +1,20 @@
+{
+    "id": 38,
+    "order": 38,
+    "metadata": {
+        "title": "iMGespräch",
+        "cast": ["Nina Ramershoven"],
+        "country": 30202,
+        "plot": "Der Talk mit Nina Ramershoven. Sie begrüßt Gäste, die sich engagieren, die besondere Dinge tun, die einfach ein interessantes Leben haben.",
+        "premiered": "2022-08-23"
+    },
+    "fanart": "fanart-imgespraech.jpg",
+    "banner": "banner-imgespraech.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}

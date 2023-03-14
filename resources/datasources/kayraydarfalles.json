@@ -1,0 +1,20 @@
+{
+    "id": 32,
+    "order": 32,
+    "metadata": {
+        "title": "Kay Ray Darf Alles",
+        "cast": ["Kay Ray"],
+        "country": 30202,
+        "plot": "Comedian Kay Ray nimmt kein Blatt vor den Mund, nicht ohne Grund wurde er von einem Hamburger Theater wegen zu harter Sprüche gefeuert. Aber unser Sender bleibt eine Enklave des freien Wortes - bei uns darf Kay Ray alles.",
+        "premiered": "2021-02-22"
+    },
+    "fanart": "fanart-kayraydarfalles.jpg",
+    "banner": "banner-kayraydarfalles.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
