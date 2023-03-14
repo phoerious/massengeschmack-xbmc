@@ -1,0 +1,20 @@
+{
+    "id": 33,
+    "order": 33,
+    "metadata": {
+        "title": "Wort(e) zum Montag",
+        "cast": ["Gerd J. Pohl"],
+        "country": 30202,
+        "plot": "Der Rezitator und Puppenspieler Gerd J. Pohl wird alle 14 Tage eine kleine Lesung abhalten - mit Sagen, Märchen und anderen kleinen Geschichten. Lehnt Euch ein paar Minuten zurück und hört einfach nur zu.",
+        "premiered": "2021-02-15"
+    },
+    "fanart": "fanart-wortezummontag.jpg",
+    "banner": "banner-wortezummontag.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}

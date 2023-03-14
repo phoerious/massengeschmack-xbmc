@@ -1,0 +1,20 @@
+{
+    "id": 37,
+    "order": 37,
+    "metadata": {
+        "title": "Der gelbe Sessel",
+        "cast": ["Julian Schlichting und Dean"],
+        "country": 30202,
+        "plot": "Der Telefonalk mit Julian und Dean.",
+        "premiered": "2022-08-02"
+    },
+    "fanart": "fanart-gelbesessel.jpg",
+    "banner": "banner-gelbesessel.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}

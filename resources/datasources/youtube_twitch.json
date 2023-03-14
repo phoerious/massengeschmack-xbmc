@@ -1,0 +1,20 @@
+{
+    "id": 39,
+    "order": 39,
+    "metadata": {
+        "title": "YouTube & Twitch",
+        "cast": ["Holger Kreymeier"],
+        "country": 30202,
+        "plot": "Betreutes Gucken LIVE",
+        "premiered": "2022-10-01"
+    },
+    "fanart": "fanart-youtube_twitch.jpg",
+    "banner": "banner-youtube_twitch.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "id": 34,
+    "order": 34,
+    "metadata": {
+        "title": "XStream",
+        "cast": ["Serdar Somuncu"],
+        "country": 30202,
+        "plot": "XStream ist ein tabuloser, gnadenloser und vor allem moderner interaktiver Talk.",
+        "premiered": "2022-02-27"
+    },
+    "fanart": "fanart-xstream.jpg",
+    "banner": "banner-xstream.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}

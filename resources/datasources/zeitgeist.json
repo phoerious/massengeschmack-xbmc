@@ -1,0 +1,20 @@
+{
+    "id": 36,
+    "order": 36,
+    "metadata": {
+        "title": "ZeitGeist",
+        "cast": ["Hans-Martin Esser"],
+        "country": 30202,
+        "plot": "Der kulturphilosophische Talk mit Hans-Martin Esser.",
+        "premiered": "2022-08-02"
+    },
+    "fanart": "fanart-zeitgeist.jpg",
+    "banner": "banner-zeitgeist.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
