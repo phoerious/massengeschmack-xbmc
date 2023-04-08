@@ -1,0 +1,20 @@
+{
+    "id": 29,
+    "order": 29,
+    "metadata": {
+        "title": "Massengeschnack",
+        "cast": ["Das MG-TV Team."],
+        "country": 30202,
+        "plot": "Massengeschnack ist ein kostenloser, wöchentlicher Podcast.",
+        "premiered": "2020-03-30"
+    },
+    "fanart": "fanart-massengeschnack.jpg",
+    "banner": "banner-massengeschnack.jpg",
+    "qualities": ["audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
