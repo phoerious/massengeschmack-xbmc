@@ -1,0 +1,20 @@
+{
+    "id": 30,
+    "order": 30,
+    "metadata": {
+        "title": "Livekommentar",
+        "cast": ["Holger Kreymeier und andere des MG-TV Teams."],
+        "country": 30202,
+        "plot": "Live-Kommentar zu von Zuschauern gewünschten Themen und Sendungen.",
+        "premiered": "2018-02-23"
+    },
+    "fanart": "fanart-livekommentar.jpg",
+    "banner": "banner-livekommentar.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
