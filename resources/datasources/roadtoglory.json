@@ -1,0 +1,20 @@
+{
+    "id": 41,
+    "order": 41,
+    "metadata": {
+        "title": "Road to Glory",
+        "cast": ["Alexander Nebe"],
+        "country": 30202,
+        "plot": "Alexander Nebe im Zweiergespräch mit Stars und Promis",
+        "premiered": "2023-05-09"
+    },
+    "fanart": "fanart-roadtoglory.jpg",
+    "banner": "banner-roadtoglory.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
