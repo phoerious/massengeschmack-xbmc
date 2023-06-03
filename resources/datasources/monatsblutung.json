@@ -1,0 +1,20 @@
+{
+    "id": 42,
+    "order": 42,
+    "metadata": {
+        "title": "Monatsblutung",
+        "cast": ["Serdar Somuncu"],
+        "country": 30202,
+        "plot": "",
+        "premiered": "2023-06-05"
+    },
+    "fanart": "fanart-monatsblutung.jpg",
+    "banner": "banner-monatsblutung.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
