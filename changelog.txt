@@ -1,3 +1,24 @@
+2.7.3
+ - Add MG Aufnahmestudio
+
+2.7.2
+ - Add Monatsblutung
+ - Updated flag of active/inactive shows
+
+2.7.1
+ - Add Road to Glory
+ - Updated flag of active/inactive shows
+
+2.7.0
+ - Fix for Kodi Nexus
+ - Add Adventskalender
+ - Livekommentar
+ - Massengeschnack
+ - Das Studio (Plus)
+
+2.7.0
+ - Fix for Kodi Nexus
+
 2.6.0
  - Add Paddys Retrokosmos
 
