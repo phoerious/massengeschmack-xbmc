@@ -1,0 +1,20 @@
+{
+    "id": 43,
+    "order": 43,
+    "metadata": {
+        "title": "MG Aufnahmestudio",
+        "cast": ["Holger Kreymeier, Oliver Kutzner, Frank Battermann"],
+        "country": 30202,
+        "plot": "Holger, Olli und Frank präsentieren ausgewählte Fälle aus Aktenzeichen XY.",
+        "premiered": "2023-08-17"
+    },
+    "fanart": "fanart-aufnahmestudio.jpg",
+    "banner": "banner-aufnahmestudio.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
