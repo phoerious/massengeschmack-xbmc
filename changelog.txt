@@ -1,3 +1,7 @@
+2.7.4
+ - Updated flag of active/inactive shows
+ - Add Jetzt kommt ein Karton
+
 2.7.3
  - Add MG Aufnahmestudio
 
