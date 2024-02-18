@@ -1,0 +1,20 @@
+{
+    "id": 44,
+    "order": 44,
+    "metadata": {
+        "title": "Jetzt kommt ein Karton",
+        "cast": ["MG-Team"],
+        "country": 30202,
+        "plot": "Massengeschmack Unboxing - erscheint unregelmäßig",
+        "premiered": "2024-02-18"
+    },
+    "fanart": "fanart-karton.jpg",
+    "banner": "banner-karton.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
