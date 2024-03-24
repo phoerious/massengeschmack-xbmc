@@ -1,3 +1,6 @@
+2.7.5
+ - Add Top 10
+
 2.7.4
  - Updated flag of active/inactive shows
  - Add Jetzt kommt ein Karton
