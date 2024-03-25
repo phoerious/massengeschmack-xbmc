@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <addon id="plugin.video.massengeschmack" name="Massengeschmack" version="2.7.5" provider-name="phoerious">
-=======
-<addon id="plugin.video.massengeschmack" name="Massengeschmack" version="2.7.4" provider-name="phoerious">
->>>>>>> 9dc4f331b566a688bd87795e085bf778e356342f
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
