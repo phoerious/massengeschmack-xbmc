@@ -1,0 +1,20 @@
+{
+    "id": 45,
+    "order": 45,
+    "metadata": {
+        "title": "Top 10",
+        "cast": ["MG-Team"],
+        "country": 30202,
+        "plot": "Mitglieder des MG-Teams stellen ihre persönlichen Top 10-Listen vor",
+        "premiered": "2024-03-18"
+    },
+    "fanart": "fanart-top10.jpg",
+    "banner": "banner-top10.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
