@@ -1,3 +1,6 @@
+2.7.6
+ - Add MAXimal Musik
+
 2.7.5
  - Add Top 10
 
