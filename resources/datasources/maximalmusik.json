@@ -1,0 +1,20 @@
+{
+    "id": 46,
+    "order": 46,
+    "metadata": {
+        "title": "MAXimal Musik",
+        "cast": ["Max Stascheit"],
+        "country": 30202,
+        "plot": "MAXimal Musik - erscheint unregelmäßig",
+        "premiered": "2025-05-05"
+    },
+    "fanart": "fanart-maximalmusik.jpg",
+    "banner": "banner-maximalmusik.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
