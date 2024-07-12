@@ -1,5 +1,6 @@
 2.7.7
  - Add Kay Rays Schnittshow
+ - Updated flag of active/inactive shows
 
 2.7.6
  - Add MAXimal Musik
