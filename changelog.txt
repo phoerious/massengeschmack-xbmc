@@ -1,3 +1,6 @@
+2.7.7
+ - Add Kay Rays Schnittshow
+
 2.7.6
  - Add MAXimal Musik
 
