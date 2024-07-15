@@ -1,0 +1,20 @@
+{
+    "id": 47,
+    "order": 47,
+    "metadata": {
+        "title": "Schnittshow",
+        "cast": ["Kay Ray"],
+        "country": 30202,
+        "plot": "Deutschlands tabulosester Comedian, eigentlich gelernter Friseur, empfängt Gäste um mit ihnen zu talken, zu spielen und um ihnen die Haare zu machen - erscheint unregelmäßig",
+        "premiered": "2024-07-11"
+    },
+    "fanart": "fanart-schnittshow.jpg",
+    "banner": "banner-schnittshow.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
