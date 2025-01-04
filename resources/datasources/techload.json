@@ -1,0 +1,20 @@
+{
+    "id": 48,
+    "order": 48,
+    "metadata": {
+        "title": "TechLoad",
+        "cast": ["Étienne, Jano Kaltenbach"],
+        "country": 30202,
+        "plot": "In Techload informieren Etienne und Jano über aktuelle technische Trends und Entwicklungen.",
+        "premiered": "2025-01-01"
+    },
+    "fanart": "fanart-techload.jpg",
+    "banner": "banner-techload.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
