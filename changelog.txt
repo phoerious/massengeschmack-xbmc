@@ -1,3 +1,7 @@
+2.7.9
+ - Add Zurückgespult, Olli vs James
+ - Fixed some cast in json
+
 2.7.8
  - Add TechLoad
  - Updated flag of active/inactive shows

@@ -1,0 +1,20 @@
+{
+    "id": 50,
+    "order": 50,
+    "metadata": {
+        "title": "Olli vs James",
+        "cast": ["Oliver Kutzner", "James Pond"],
+        "country": 30202,
+        "plot": "",
+        "premiered": "2025-08-30"
+    },
+    "fanart": "fanart-ollivsjames.jpg",
+    "banner": "banner-ollivsjames.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
