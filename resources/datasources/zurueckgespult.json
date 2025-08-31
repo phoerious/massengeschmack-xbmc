@@ -1,0 +1,20 @@
+{
+    "id": 49,
+    "order": 49,
+    "metadata": {
+        "title": "Zurückgespult",
+        "cast": ["Das MG-TV Team."],
+        "country": 30202,
+        "plot": "Exklusiv für Premium-Abonnenten: Das Alsterfilm-Team reagiert auf alte MG-Sendungen - mal mit Freude und mal mit blankem Entsetzen.",
+        "premiered": "2025-04-08"
+    },
+    "fanart": "fanart-zurueckgespult.jpg",
+    "banner": "banner-zurueckgespult.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
