@@ -1,3 +1,7 @@
+2.8.0
+ - Add Kalter Schauer
+ - Updated flag of active/inactive shows
+
 2.7.9
  - Add Zurückgespult, Olli vs James
  - Fixed some cast in json

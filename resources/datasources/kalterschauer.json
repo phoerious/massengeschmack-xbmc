@@ -1,0 +1,20 @@
+{
+    "id": 51,
+    "order": 51,
+    "metadata": {
+        "title": "Kalter Schauer",
+        "cast": ["Max Stascheit"],
+        "country": 30202,
+        "plot": "",
+        "premiered": "2025-10-31"
+    },
+    "fanart": "fanart-kalterschauer.jpg",
+    "banner": "banner-kalterschauer.jpg",
+    "qualities": ["best", "hd", "mobile", "audio"],
+    "submodules": [
+        {
+            "name": "all",
+            "ids": [1]
+        }
+    ]
+}
